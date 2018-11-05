@@ -15,13 +15,12 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 
-
-	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO) 
-	@Column(name = "user_id") 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
 	private Long userid;
 
-	@Column(name = "role", length = 20) 
+	@Column(name = "role", length = 20)
 	private String role;
 
 	@Column(name = "email", length = 25)
@@ -37,7 +36,7 @@ public class User {
 	private String password;
 
 	@Column(name = "active", length = 1)
-	private int active;
+	private boolean active;
 
 	@Column(name = "token", length = 300)
 	private String token;
@@ -46,105 +45,80 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
 	private List<Order> Oder;
 
-	
 	public User() {
-	super();
-}
-
+		super();
+	}
 
 	public Long getUserid() {
 		return userid;
 	}
 
-
 	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
-
 
 	public String getRole() {
 		return role;
 	}
 
-
 	public void setRole(String role) {
 		this.role = role;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getFullname() {
 		return fullname;
 	}
 
-
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-
 
 	public String getFristname() {
 		return fristname;
 	}
 
-
 	public void setFristname(String fristname) {
 		this.fristname = fristname;
 	}
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
-	public int getActive() {
+	public boolean isActive() {
 		return active;
 	}
 
-
-	public void setActive(int active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
-
 
 	public String getToken() {
 		return token;
 	}
 
-
 	public void setToken(String token) {
 		this.token = token;
 	}
-
 
 	public List<Order> getOder() {
 		return Oder;
 	}
 
-
 	public void setOder(List<Order> oder) {
 		Oder = oder;
 	}
-
-
-	
-
-
-	
 
 }
