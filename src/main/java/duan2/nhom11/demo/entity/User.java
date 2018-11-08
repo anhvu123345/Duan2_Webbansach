@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "user")
@@ -32,7 +33,7 @@ public class User {
 	@Column(name = "fristname", length = 20)
 	private String fristname;
 
-	@Column(name = "password", length = 30)
+	@Column(name = "password", length = 300)
 	private String password;
 
 	@Column(name = "active", length = 1)
@@ -88,7 +89,8 @@ public class User {
 	public void setFristname(String fristname) {
 		this.fristname = fristname;
 	}
-
+	
+	@Transient
 	public String getPassword() {
 		return password;
 	}

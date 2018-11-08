@@ -7,14 +7,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import duan2.nhom11.demo.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	private UserDetailsService userDetailsService;
+	private UserDetailsServiceImpl userDetailsServiceImpl;
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -24,15 +25,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 			http.authorizeRequests()
-			.antMatchers("/login").permitAll()
-			.antMatchers("/admin/**","/manager/**").hasRole("ADMIN")
-			.antMatchers("/manager/**").hasRole("MANAGER")
-			.antMatchers("/user/**").hasRole("USER")
+//			.antMatchers("/login").permitAll()
+//			.antMatchers("/user/registrantion","/user/sign").permitAll()
+//			.antMatchers("/admin/**","/manager/**").hasRole("ADMIN")
+//			.antMatchers("/manager/**").hasRole("MANAGER")
+//			.antMatchers("/user/**").hasRole("USER")
+			
 		.and()
 		.formLogin()
 		.loginPage("/login")
-		.defaultSuccessUrl("/")
-		.failureUrl("/login?error")
+		.defaultSuccessUrl("/welcome")		
+		.usernameParameter("email")
+		.passwordParameter("password")
 		.and()
 		.logout().permitAll()
 		.and()
@@ -42,6 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(bCryptPasswordEncoder());
 	}
 }

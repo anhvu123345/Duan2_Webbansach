@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Form  sách</title>
+</head>
+<body>
+<form action="#" th:action="@{/manager/product/save}" th:object="${product}" method="POST">
+	                    	 <input type="hidden" th:field="*{productid}"/>
+	                        <div class="form-group">
+	                            <label>Tên sách<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{bookName}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                        <div class="form-group">
+							  <label for="name" class="col-xs-4 control-label">Loại sách</label>
+							<div class="col-xs-8">
+								<select  th:field="*{catagory}" class="form-control" id="exampleFormControlSelect1">
+								
+					            <option th:each="pblist : ${catagory}" th:value="${{pblist.catagoryid}}" th:text="${pblist.catagoryName}" ></option>
+									     
+							    </select>
+							</div>
+						</div>
+	                        <div class="form-group">
+	                            <label>Giá<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{price}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                         <div class="form-group">
+	                            <label>Số lượng<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{quantity}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                         <div class="form-group">
+	                            <label>Ảnh<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{image}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                         <div class="form-group">
+	                            <label>Tác giả<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{author}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                         <div class="form-group">
+	                            <label>Nhà xuất bản<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{publisher}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                         <div class="form-group">
+	                            <label>Mô tả<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{description}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                         <div class="form-group">
+	                            <label>Ngày xuất bản<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{datePublished}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                         
+	                        
+	                        
+	                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Lưu</button>
+	                    </form>
+</body>
+</html>

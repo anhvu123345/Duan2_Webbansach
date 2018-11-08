@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Form danh mục</title>
+</head>
+<body>
+<form action="#" th:action="@{/manager/catagory/save}" th:object="${catagory}" method="POST">
+	                    	 <input type="hidden" th:field="*{catagoryid}"/>
+	                        <div class="form-group">
+	                            <label>Loại sách<span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{catagoryName}"/> 
+						        <span  class="error"></span>
+	                        </div>
+	                        
+	                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Lưu</button>
+	                    </form>
+</body>
+</html>
