@@ -90,8 +90,7 @@ public class FogotPasswordController {
 		ModelAndView model = new ModelAndView();
 		Optional<User>  user = userService.findByToken(requestParams.get("token"));
 		
-		System.out.println(user.get().getEmail());
-		/*if(user.get().getEmail() !=null ){	
+		if(user.isPresent() ){	
 			User restUser = user.get();	
 			System.out.println(restUser.getEmail());
 			restUser.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
@@ -103,7 +102,7 @@ public class FogotPasswordController {
 		}else {
 			redir.addFlashAttribute("error", "Đương link của bạn không đúng");
 			model.setViewName("/fogot-password");
-		}*/
+		}
 		
 		
 		return model;
