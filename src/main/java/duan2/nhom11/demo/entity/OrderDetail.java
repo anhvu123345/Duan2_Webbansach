@@ -34,7 +34,10 @@ public class OrderDetail{
 	@ManyToOne
 	@JoinColumn(name = "product_id", referencedColumnName="product_id")
 	private Product product;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id",referencedColumnName="user_id" )
+	private User user;
 	// getter and setter
 	public Long getId() {
 		return id;

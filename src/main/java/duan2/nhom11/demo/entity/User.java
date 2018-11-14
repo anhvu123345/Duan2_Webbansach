@@ -46,6 +46,10 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
 	private List<Order> Oder;
 
+//	quan he 1-n, noi bang user vs bang order
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
+	private List<OrderDetail> OrderDetail;
+	
 	public User() {
 		super();
 	}
@@ -121,6 +125,14 @@ public class User {
 
 	public void setOder(List<Order> oder) {
 		Oder = oder;
+	}
+
+	public List<OrderDetail> getOrderDetail() {
+		return OrderDetail;
+	}
+
+	public void setOrderDetail(List<OrderDetail> orderDetail) {
+		OrderDetail = orderDetail;
 	}
 
 }

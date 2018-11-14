@@ -8,7 +8,9 @@ import java.nio.file.Files;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +27,11 @@ public class UploadFileController {
 	
 	private String saveDirectory = "C:\\upload\\";
 	
+	@GetMapping(value="/manager/{id}/upload")
+	public String uploadImgae(Model model,@PathVariable Long id) {
+		model.addAttribute("product", productService.findById(id) );
+		return "employee/UploadImage";
+	}
 	@PostMapping(value="/manager/upload")
 	public String upload(@RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes, Product product) {
 		try {

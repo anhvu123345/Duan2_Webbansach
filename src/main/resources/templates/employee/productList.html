@@ -34,12 +34,16 @@
 				<td th:text="${products.datePublished}"></td>
 				<td th:text="${products.orderDetail}"></td>
 				<td>
-				<li><a
+					<li><a
 						th:href="@{/manager/product/{id}/edit(id=${products.productid})}">
 
 							Sửa </a></li>
 					<li><a
 						th:href="@{/manager/product/{id}/delete(id=${products.productid})}">
+
+							Xóa </a></li>
+							<li><a
+						th:href="@{/manager/{id}/upload(id=${products.productid})}">
 
 							Xóa </a></li>
 				</td>
