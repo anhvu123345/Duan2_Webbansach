@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Danh sách tài khoản</title>
+<head th:replace="employee/layout :: head">
+<style type="text/css">
+</style>
 </head>
 <body>
-   <table th:unless="${#lists.isEmpty(users)}" width="100%" class="table table-striped table-bordered" 
+	<div id="wrapper">
+
+		<nav th:replace="employee/layout :: sidebar"></nav>
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header">Quản Lý Tài Khoản</h3>
+				</div>
+				<!-- /.col-sm-12 -->
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<div th:if="${success}"
+						class="row alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert">
+							<span>&times;</span>
+						</button>
+						<span th:text="${success}"></span>
+					</div>
+
+					<div class="panel panel-primary">
+						<div class="panel-heading">Danh Sách Tài Khoản</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<h4 th:if="${#lists.isEmpty(users)}"></h4>
+
+							<table th:unless="${#lists.isEmpty(users)}" width="100%" class="table table-striped table-bordered" 
 	                    	id="dataTables-example">
 	                        <thead>
 	                            <tr>
 	                                <th width="">MÃ</th>
-	                                <th width="">Địa Chỉ</th>
-	                                <th width="">Thành Phố</th>
-                                    <th width="">Dài</th>
-                                    <th width="">Rộng</th>
-                                    <th width="">Giá</th>
-                                    <th width="">Pháp Lí</th>
-                                    <th width="">Hiện trạng</th>
-                                    <th width="">Action</th>
+	                                <th width="">Email</th>
+	                                <th width="">Quyền</th>
+                                    <th width="">Họ</th>
+                                    <th width="">Tên</th>
+                                    <th width="">Tùy chọn</th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -38,5 +63,19 @@
 	                            </tr>
 	                        </tbody>
 	                    </table>
+							<!-- /.table-responsive -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-sm-12 -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /#page-wrapper -->
+
+	</div>
+   
 </body>
 </html>

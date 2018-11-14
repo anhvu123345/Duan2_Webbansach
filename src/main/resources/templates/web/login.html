@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Đăng Nhập</title>
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" />
 </head>
 <body>
+<div class="container" style="width: 400px;">
+<h1 class="text-center">LOGIN</h1>
 <form action="#" th:action="@{/login}" method="POST">
 		<div class="form-group">
 			<input type="email" name="email" class="form-control" placeholder="Email" />
@@ -16,5 +20,6 @@
 		
 		<button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
 	</form>
+	</div>
 </body>
 </html>

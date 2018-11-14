@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Form danh mục</title>
-</head>
+<head th:replace="employee/layout :: head"></head>
+<meta charset="utf-8" />
 <body>
-<form action="#" th:action="@{/manager/catagory/save}" th:object="${catagory}" method="POST">
-	                    	 <input type="hidden" th:field="*{catagoryid}"/>
-	                        <div class="form-group">
-	                            <label>Loại sách<span class="required">*</span></label>
-	                            <input type="text" class="form-control" th:field="*{catagoryName}"/> 
-						        <span  class="error"></span>
-	                        </div>
-	                        
-	                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Lưu</button>
-	                    </form>
+
+	<div id="wrapper">
+
+		<nav th:replace="employee/layout :: sidebar"></nav>
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header">Quản Lí Loại Sách</h3>
+				</div>
+				<!-- /.col-sm-12 -->
+			</div>
+			<!-- /.row -->
+
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Form Loại Sách</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<form action="#" th:action="@{/manager/catagory/save}"
+								th:object="${catagory}" method="POST">
+								<input type="hidden" th:field="*{catagoryid}" />
+								<div class="form-group">
+									<label>Loại sách<span class="required">*</span></label> <input
+										type="text" class="form-control" th:field="*{catagoryName}" />
+									<span class="error"></span>
+								</div>
+
+								<button type="submit" class="btn btn-primary">
+									<i class="fa fa-save"></i>Lưu
+								</button>
+							</form>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</div>
+
 </body>
 </html>

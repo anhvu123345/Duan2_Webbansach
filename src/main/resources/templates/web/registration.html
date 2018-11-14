@@ -2,9 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Registrantion</title>
+<title>Đăng kí tài khoản</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
 </head>
 <body>
+<div class="container" style="width: 600px; padding: 50px">
 <form action="#" th:action="@{/user/sign}" th:object="${user}" method="POST">
 	                    	 <input type="hidden" th:field="*{userid}"/>
 	                        <div class="form-group">
@@ -30,5 +33,6 @@
 	                        </div>
 	                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Đăng Kí</button>
 	                    </form>
+	                    </div>
 </body>
 </html>
