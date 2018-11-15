@@ -87,6 +87,16 @@
 			<artifactId>font-awesome</artifactId>
 			<version>4.7.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>metisMenu</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>datatables</artifactId>
+			<version>1.10.15</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -25,7 +25,7 @@ public class UploadFileController {
 	@Autowired
 	private ProductService productService;
 	
-	private String saveDirectory = "C:\\upload\\";
+	private String saveDirectory = "C:\\Users\\anhvu\\eclipse-workspace\\Duan2_Webbansach\\src\\main\\resources\\static\\upload\\";
 	
 	@GetMapping(value="/manager/{id}/upload")
 	public String uploadImgae(Model model,@PathVariable Long id) {

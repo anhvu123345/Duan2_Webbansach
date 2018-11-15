@@ -17,7 +17,7 @@
 				<!-- /.col-sm-12 -->
 			</div>
 			<!-- /.row -->
-			<a style="margin: 5px" th:href="@{/user/category/add}"
+			<a style="margin: 5px" th:href="@{/manager/catagory/add}"
 				class="btn btn-success">Thêm loại sách</a>
 			<div class="row">
 				<div class="col-sm-12">
@@ -42,7 +42,8 @@
 									<tr>
 										<th width="">Mã</th>
 										<th width="">Tên sách</th>
-
+										<th>Sửa</th>
+										<th>Xóa</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -51,15 +52,20 @@
 										<td th:text="${catagorys.catagoryName}"></td>
 
 										<td>
-											<li><a
-												th:href="@{/manager/catagory/{id}/edit(id=${catagorys.catagoryid})}">
+											<ul>
+												<li style="list-style: none"><a class="btn btn-danger"
+													th:href="@{/manager/catagory/{id}/edit(id=${catagorys.catagoryid})}">
 
-													Sửa </a></li>
-											<li><a
-												th:href="@{/admin/user/{id}/delete(id=${catagorys.catagoryid})}">
+														Sửa </a></li>
 
-													Xóa </a></li>
+											</ul>
 										</td>
+										<td><ul>
+												<li style="list-style: none"><a class="btn btn-danger"
+													th:href="@{/manager/catagory/{id}/delete(id=${catagorys.catagoryid})}">
+
+														Xóa </a></li>
+											</ul></td>
 									</tr>
 								</tbody>
 							</table>

@@ -50,6 +50,7 @@
 										<th width="">Nhà xuất bản</th>
 										<th width="">Mô tả</th>
 										<th width="">Ngày xuất bản</th>
+										<th>Tùy chọn</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -59,13 +60,13 @@
 										<td th:text="${products.bookName}"></td>
 										<td th:text="${products.price}"></td>
 										<td th:text="${products.quantity}"></td>
-										<td th:text="${products.image}"></td>
+										<td ><img th:src="@{/upload/{img}(img=${products.image})}" height="100px" ></img></td>
 										<td th:text="${products.author}"></td>
 										<td th:text="${products.publisher}"></td>
 										<td th:text="${products.description}"></td>
-										<td th:text="${products.datePublished}"></td>
-										<td th:text="${products.orderDetail}"></td>
-										<td>
+										<td th:text="${#dates.format(products.datePublished, 'dd/MM/YYYY')}"></td>
+										
+										<!-- <td>
 											<li><a
 												th:href="@{/manager/product/{id}/edit(id=${products.productid})}">
 
@@ -77,7 +78,27 @@
 											<li><a
 												th:href="@{/manager/{id}/upload(id=${products.productid})}">
 
-													Xóa </a></li>
+													 Upload </a></li>
+										</td> -->
+										<td>
+											<div class="dropdown">
+												<button class="btn btn-danger dropdown-toggle"
+													data-toggle="dropdown">
+													Tùy chọn <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu" style="min-width: 91px !important;">
+													<li><a th:href="@{/manager/product/{id}/edit(id=${products.productid})}"
+														
+														class="btn btn-default"> Sửa </a></li>
+													<li><a th:href="@{/manager/product/{id}/delete(id=${products.productid})}"
+														
+														class="btn btn-default"> Xóa </a></li>
+													<li><a th:href="@{/manager/{id}/upload(id=${products.productid})}"
+														
+														class="btn btn-default">Upload</a></li>
+												</ul>
+											</div>
+
 										</td>
 									</tr>
 								</tbody>

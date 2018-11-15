@@ -20,15 +20,7 @@ public class UserController {
 	@Autowired
 	private UserSerive userSerive;
 
-	@GetMapping(value = "/welcome")
-	public ModelAndView welcome() {
-		ModelAndView model = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userSerive.findByUsername(auth.getName());
-		model.addObject("userName", user.getFristname() + "");
-		model.setViewName("user/welcome");
-		return model;
-	}
+	
 
 	@GetMapping(value = "/admin/userlist")
 	public ModelAndView userList() {
