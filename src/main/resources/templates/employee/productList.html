@@ -1,6 +1,8 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="employee/layout :: head">
+<meta charset="UTF-8">
 <style type="text/css">
 </style>
 </head>
@@ -12,13 +14,13 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header">Quản Lý Sách</h3>
+					<h3 class="page-header">Quản lý sách</h3>
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
 			<!-- /.row -->
 			<a style="margin: 5px" th:href="@{/manager/product/add}"
-				class="btn btn-success">Thêm sách</a>
+				class="btn btn-success">Thêm Sách</a>
 			<div class="row">
 				<div class="col-sm-12">
 					<div th:if="${success}"
@@ -30,7 +32,7 @@
 					</div>
 
 					<div class="panel panel-primary">
-						<div class="panel-heading">Danh Sách  Sách</div>
+						<div class="panel-heading">Danh sách sách</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<h4 th:if="${#lists.isEmpty(users)}"></h4>
@@ -40,7 +42,7 @@
 								id="dataTables-example">
 								<thead>
 									<tr>
-										<th width="">MÃ</th>
+										<th width="">Mã</th>
 										<th width="">Loại sách</th>
 										<th width="">Tên sách</th>
 										<th width="">Giá</th>
@@ -50,31 +52,35 @@
 										<th width="">Nhà xuất bản</th>
 										<th width="">Mô tả</th>
 										<th width="">Ngày xuất bản</th>
+										<th width="">Ngày đăng tải</th>
 										<th>Tùy chọn</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="products : ${products}">
 										<td th:text="${products.productid}"></td>
-										<td th:text="${products.catagory.catagoryid}"></td>
+										<td th:text="${products.catagory.catagoryName}"></td>
 										<td th:text="${products.bookName}"></td>
-										<td th:text="${products.price}"></td>
+										<td th:text="${#numbers.formatDecimal(products.price, 0, 'COMMA', 0, 'POINT')}" ></td>
 										<td th:text="${products.quantity}"></td>
-										<td ><img th:src="@{/upload/{img}(img=${products.image})}" height="100px" ></img></td>
+										<td><img th:src="@{/upload/{img}(img=${products.image})}"
+											height="100px"></img></td>
 										<td th:text="${products.author}"></td>
 										<td th:text="${products.publisher}"></td>
 										<td th:text="${products.description}"></td>
-										<td th:text="${#dates.format(products.datePublished, 'dd/MM/YYYY')}"></td>
-										
+										<td
+											th:text="${#dates.format(products.datePublished, 'dd/MM/yyyy')}"></td>
+										<td
+											th:text="${#dates.format(products.dateUpload, 'dd/MM/yyyy HH:mm:ss')}"></td>
 										<!-- <td>
 											<li><a
 												th:href="@{/manager/product/{id}/edit(id=${products.productid})}">
 
-													Sửa </a></li>
+													Sá»­a </a></li>
 											<li><a
 												th:href="@{/manager/product/{id}/delete(id=${products.productid})}">
 
-													Xóa </a></li>
+													XÃ³a </a></li>
 											<li><a
 												th:href="@{/manager/{id}/upload(id=${products.productid})}">
 
@@ -86,15 +92,16 @@
 													data-toggle="dropdown">
 													Tùy chọn <span class="caret"></span>
 												</button>
-												<ul class="dropdown-menu" style="min-width: 91px !important;">
-													<li><a th:href="@{/manager/product/{id}/edit(id=${products.productid})}"
-														
+												<ul class="dropdown-menu"
+													style="min-width: 91px !important;">
+													<li><a
+														th:href="@{/manager/product/{id}/edit(id=${products.productid})}"
 														class="btn btn-default"> Sửa </a></li>
-													<li><a th:href="@{/manager/product/{id}/delete(id=${products.productid})}"
-														
+													<li><a
+														th:href="@{/manager/product/{id}/delete(id=${products.productid})}"
 														class="btn btn-default"> Xóa </a></li>
-													<li><a th:href="@{/manager/{id}/upload(id=${products.productid})}"
-														
+													<li><a
+														th:href="@{/manager/{id}/upload(id=${products.productid})}"
 														class="btn btn-default">Upload</a></li>
 												</ul>
 											</div>

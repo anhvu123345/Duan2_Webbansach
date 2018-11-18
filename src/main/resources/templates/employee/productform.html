@@ -11,7 +11,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header">Quản Lí  Sách</h3>
+					<h3 class="page-header">Quản Lí Sách</h3>
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="panel panel-primary">
-						<div class="panel-heading">Form  Sách</div>
+						<div class="panel-heading">Form Sách</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<form action="#" th:action="@{/manager/product/save}"
@@ -32,8 +32,7 @@
 										class="error"></span>
 								</div>
 								<div class="form-group">
-									<label for="name" >Loại
-										sách</label>
+									<label for="name">Loại sách</label>
 									<div class="form-group">
 										<select th:field="*{catagory}" class="form-control"
 											id="exampleFormControlSelect1">
@@ -71,13 +70,13 @@
 										class="error"></span>
 								</div>
 								<div class="form-group">
-									<label>Mô tả<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{description}" />
+									<label>Mô tả<span class="required">*</span></label>
+									<textarea class="form-control" th:field="*{description}"></textarea>
 									<span class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Ngày xuất bản<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{datePublished}" />
+										type="date" class="form-control" th:field="*{datePublished}" />
 									<span class="error"></span>
 								</div>
 
