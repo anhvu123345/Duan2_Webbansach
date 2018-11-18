@@ -36,23 +36,23 @@ public class UploadFileController {
 	@PostMapping(value="/manager/upload")
 	public String upload(@RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes, Product product) {
 		try {
-		byte[] bytes = file.getBytes();
-		File dir = new File(saveDirectory); 
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		String filename = file.getOriginalFilename();
-		String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-		String newFileName = System.currentTimeMillis() + fileExtension;
-		
-		String fileSource = dir.getAbsolutePath() + File.separator + newFileName;		
-		File serverFile = new File(fileSource);
-		BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-		stream.write(bytes);
-		stream.close();
-		product.setImage(newFileName);
-		productService.save(product);
-		}catch (Exception e) {
+			byte[] bytes = file.getBytes();
+			File dir = new File(saveDirectory);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			String filename = file.getOriginalFilename();
+			String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
+			String newFileName = System.currentTimeMillis() + fileExtension;
+
+			String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
+			File serverFile = new File(fileSource);
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+			stream.write(bytes);
+			stream.close();
+			product.setImage(newFileName);
+			productService.save(product);
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return "redirect:/manager/product/list";

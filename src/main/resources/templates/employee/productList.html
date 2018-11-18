@@ -60,10 +60,12 @@
 										<td th:text="${products.productid}"></td>
 										<td th:text="${products.catagory.catagoryName}"></td>
 										<td th:text="${products.bookName}"></td>
-										<td th:text="${#numbers.formatDecimal(products.price, 0, 'COMMA', 0, 'POINT')}" ></td>
+										<td
+											th:text="${#numbers.formatDecimal(products.price, 0, 'COMMA', 0, 'POINT')}"></td>
 										<td th:text="${products.quantity}"></td>
-										<td><img th:src="@{~/images/{img}(img=${products.image})}"
-											height="100px" width="100px" ></img></td>
+										<td><img
+											th:src="@{~/images/{img}(img=${products.image})}"
+											height="100px" width="100px"></img></td>
 										<td th:text="${products.author}"></td>
 										<td th:text="${products.publisher}"></td>
 										<td th:text="${products.description}"></td>
