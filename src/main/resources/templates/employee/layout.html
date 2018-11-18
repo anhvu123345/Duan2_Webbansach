@@ -58,7 +58,7 @@
 </head>
 
 <body>
-
+	
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -78,12 +78,13 @@
 
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#" th:inline="text"> Xin chào <i
+					data-toggle="dropdown" href="#" th:inline="text"> <span th:utext="${#request.userPrincipal.name}"></span>
+ <i
 						class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
 						
-						<li><a th:href="@{/logout}"> <i
+						<li><a th:href="@{logout}"> <i
 								class="fa fa-sign-out fa-fw"></i> Đăng xuất
 						</a></li>
 					</ul> <!-- /.dropdown-user --></li>
