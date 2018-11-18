@@ -25,7 +25,8 @@ public class UploadFileController {
 	@Autowired
 	private ProductService productService;
 	
-	private String saveDirectory = "C:\\Users\\anhvu\\eclipse-workspace\\Duan2_Webbansach\\src\\main\\resources\\static\\upload\\";
+
+	private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
 	
 	@GetMapping(value="/manager/{id}/upload")
 	public String uploadImgae(Model model,@PathVariable Long id) {
@@ -36,13 +37,14 @@ public class UploadFileController {
 	public String upload(@RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes, Product product) {
 		try {
 		byte[] bytes = file.getBytes();
-		File dir = new File(saveDirectory);
+		File dir = new File(saveDirectory); 
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 		String filename = file.getOriginalFilename();
 		String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
 		String newFileName = System.currentTimeMillis() + fileExtension;
+		
 		String fileSource = dir.getAbsolutePath() + File.separator + newFileName;		
 		File serverFile = new File(fileSource);
 		BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
