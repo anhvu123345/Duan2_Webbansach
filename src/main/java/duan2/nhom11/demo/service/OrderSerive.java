@@ -1,5 +1,18 @@
 package duan2.nhom11.demo.service;
 
-public class OrderSerive {
+import java.util.Optional;
 
+import duan2.nhom11.demo.entity.Order;
+
+public interface OrderSerive {
+	void save(Order order);
+
+	Iterable<Order> findAll();
+
+	Long count();
+
+	Optional<Order> findById(Long id);
+
+	void delete(Long id);
 }
+

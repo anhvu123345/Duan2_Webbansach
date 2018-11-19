@@ -1,23 +1,26 @@
 package duan2.nhom11.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import duan2.nhom11.demo.entity.Order;
+import duan2.nhom11.demo.service.OrderSerive;
 
 @Controller
 public class PageOderController {
 
-	/*@GetMapping(value="/custormer/add")
-	public String add(Model model) {
-		model.addAttribute("order", new Order());
-		return "";
+	@Autowired
+	private OrderSerive orderservice;
+	
+	
+	@GetMapping(value = "/manager/order/list")
+	public ModelAndView orderList() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("orders", orderservice.findAll());
+		model.setViewName("employee/orderList");
+		return model;
 	}
 	
-	@PostMapping(value="/custormer/save")
-	public String save() {
-		return "";
-	}*/
+
 }

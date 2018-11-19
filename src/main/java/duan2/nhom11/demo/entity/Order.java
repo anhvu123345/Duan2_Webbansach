@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,8 +43,8 @@ public class Order {
 	@Column(name = "address", length = 50)
 	private String address;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "date")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date", columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
 	private Date date;
 
 	@Column(name = "note")

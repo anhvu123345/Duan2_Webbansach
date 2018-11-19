@@ -68,7 +68,7 @@ public class ProductController {
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 			stream.write(bytes);
 			stream.close();
-			product.setImage(newFileName);
+			product.setImage(newFileName);		
 			productService.save(product);
 		} catch (Exception e) {
 			System.out.println(e);
