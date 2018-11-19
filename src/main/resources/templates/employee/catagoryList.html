@@ -42,6 +42,7 @@
 									<tr>
 										<th width="">Mã</th>
 										<th width="">Tên sách</th>
+									
 										<th>Sửa</th>
 										<th>Xóa</th>
 									</tr>
@@ -50,7 +51,7 @@
 									<tr th:each="catagorys : ${catagorys}">
 										<td th:text="${catagorys.catagoryid}"></td>
 										<td th:text="${catagorys.catagoryName}"></td>
-
+									
 										<td>
 											<ul>
 												<li style="list-style: none"><a class="btn btn-danger"

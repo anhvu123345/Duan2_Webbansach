@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "OrderDetail")
+@Table(name = "orderDetail")
 public class OrderDetail{
 
 	
@@ -23,7 +23,7 @@ public class OrderDetail{
 
 	@ManyToOne
 	@JoinColumn(name = "order_id",referencedColumnName="order_id" )
-	private Order Oder;
+	private Order order;
 
 	@Column(name = "quantity")
 	private int quantity;
@@ -39,9 +39,42 @@ public class OrderDetail{
 	@JoinColumn(name = "user_id",referencedColumnName="user_id" )
 	private User user;
 	// getter and setter
+	
+	
 	public Long getId() {
 		return id;
 	}
+
+	
+
+
+	public Order getOrder() {
+		return order;
+	}
+
+
+
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
 
 	public void setId(Long id) {
 		this.id = id;
@@ -49,11 +82,11 @@ public class OrderDetail{
 
 	
 	public Order getOder() {
-		return Oder;
+		return order;
 	}
 
-	public void setOder(Order oder) {
-		Oder = oder;
+	public void setOder(Order order) {
+		this.order = order;
 	}
 
 	public Product getProduct() {

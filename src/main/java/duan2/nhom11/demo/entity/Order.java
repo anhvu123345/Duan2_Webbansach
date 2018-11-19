@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,16 +18,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Oder")
+@Table(name = "orders")
 public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "order_id")
 	private Long orderid;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName="user_id")
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
 
 	@Column(name = "custormer_name", length = 30)
@@ -42,17 +43,15 @@ public class Order {
 	private String address;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "date", columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
+	@Column(name = "date", columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
 	private Date date;
 
 	@Column(name = "note")
 	private String note;
 
-	@OneToMany(mappedBy = "Oder", cascade = { CascadeType.ALL })
-	private List<OrderDetail> orderDatail;
+	@OneToMany(mappedBy = "order", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	private List<OrderDetail> OrderDetail;
 
-	
-	
 	public Order() {
 		super();
 	}
@@ -113,12 +112,12 @@ public class Order {
 		this.note = note;
 	}
 
-	public List<OrderDetail> getOrderDatail() {
-		return orderDatail;
+	public List<OrderDetail> getOrderDetail() {
+		return OrderDetail;
 	}
 
-	public void setOrderDatail(List<OrderDetail> orderDatail) {
-		this.orderDatail = orderDatail;
+	public void setOrderDetail(List<OrderDetail> orderDetail) {
+		OrderDetail = orderDetail;
 	}
 
 	public User getUser() {
