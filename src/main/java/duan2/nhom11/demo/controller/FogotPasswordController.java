@@ -29,7 +29,7 @@ public class FogotPasswordController {
 	private UserSerive userService;
 	
 	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
 	private Emailservice emailService;
