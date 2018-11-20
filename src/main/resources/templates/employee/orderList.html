@@ -56,11 +56,11 @@
 										<td th:text="${order.custormerEmail}"></td>
 										<td th:text="${order.custormerName}"></td>
 										<td
-											th:text="${#date.format(orders.date, 'dd/MM/yyyy HH:mm:ss')}"></td>
+											th:text="${#dates.format(order.date, 'dd/MM/yyyy HH:mm:ss')}"></td>
 										<td th:text="${order.note}"></td>
 										<td th:text="${order.phone}"></td>
 										<td th:text="${order.address}"></td>
-										<td th:text="${order.orderDetail}"></td>
+										<td th:text="${order.orderDetail.id}"></td>
 										</tr>
 								</tbody>
 							</table>

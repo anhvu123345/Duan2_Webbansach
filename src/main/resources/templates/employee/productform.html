@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="employee/layout :: head"></head>
 <meta charset="utf-8" />
+
 <body>
 
 	<div id="wrapper">
@@ -15,14 +16,22 @@
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
-
+		
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="panel panel-primary">
 						<div class="panel-heading">Form Sách</div>
+						
+						
+						<script type="text/javascript">
+						function abc(){
+							alert('Thêm thành công');
+						}
+						</script>
+						
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<form action="#"  th:action="@{/manager/product/save}"
+							<form action="#" th:action="@{/manager/product/save}"
 								th:object="${product}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{productid}" />
@@ -79,10 +88,7 @@
 										type="date" class="form-control" th:field="*{datePublished}" />
 									<span class="error"></span>
 								</div>
-
-
-
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" onclick="abc()" class="btn btn-primary">
 									<i class="fa fa-save"></i>Lưu
 								</button>
 							</form>

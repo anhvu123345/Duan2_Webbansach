@@ -49,9 +49,12 @@ public class Order {
 	@Column(name = "note")
 	private String note;
 
-	@OneToMany(mappedBy = "order", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-	private List<OrderDetail> OrderDetail;
 
+	@ManyToOne
+	@JoinColumn(name = "id",referencedColumnName="id" )
+	private OrderDetail orderDetail;
+
+	
 	public Order() {
 		super();
 	}
@@ -112,12 +115,14 @@ public class Order {
 		this.note = note;
 	}
 
-	public List<OrderDetail> getOrderDetail() {
-		return OrderDetail;
+	
+
+	public OrderDetail getOrderDetail() {
+		return orderDetail;
 	}
 
-	public void setOrderDetail(List<OrderDetail> orderDetail) {
-		OrderDetail = orderDetail;
+	public void setOrderDetail(OrderDetail orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 	public User getUser() {

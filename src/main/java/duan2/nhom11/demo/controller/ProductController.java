@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +52,7 @@ public class ProductController {
 	}
 
 	@PostMapping(value = "/manager/product/save")
-	public String productSave(@Valid Product product, Model model, @RequestParam("file") MultipartFile file,
+	public String productSave(@Valid Product product, @RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		try {
 			byte[] bytes = file.getBytes();
@@ -70,10 +71,11 @@ public class ProductController {
 			stream.close();
 			product.setImage(newFileName);		
 			productService.save(product);
+			redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "redirect:/manager/product/list";
+		return "redirect:/manager/product/add";
 	}
 
 	@GetMapping(value = "/manager/product/{id}/edit")

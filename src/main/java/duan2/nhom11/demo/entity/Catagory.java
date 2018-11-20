@@ -3,7 +3,6 @@ package duan2.nhom11.demo.entity;
 
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "catagory")
@@ -23,6 +23,7 @@ public class Catagory  {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "catagory_id")
 	private Long catagoryid;
+	
 
 	@Column(name = "catagory_name")
 	private String catagoryName;

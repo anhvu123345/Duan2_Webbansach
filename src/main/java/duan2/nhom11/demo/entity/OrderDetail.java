@@ -1,29 +1,30 @@
 package duan2.nhom11.demo.entity;
 
+import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "orderDetail")
-public class OrderDetail{
+public class OrderDetail {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "order_id",referencedColumnName="order_id" )
-	private Order order;
+	@OneToMany(mappedBy = "orderDetail", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	private List<Order> Order;
 
 	@Column(name = "quantity")
 	private int quantity;
@@ -32,61 +33,38 @@ public class OrderDetail{
 	private double intoMoney;
 
 	@ManyToOne
-	@JoinColumn(name = "product_id", referencedColumnName="product_id")
+	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	private Product product;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "user_id",referencedColumnName="user_id" )
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
 	// getter and setter
-	
-	
+
 	public Long getId() {
 		return id;
 	}
-
-	
-
-
-	public Order getOrder() {
-		return order;
-	}
-
-
-
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-
-
 
 	public User getUser() {
 		return user;
 	}
 
-
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	
-	public Order getOder() {
-		return order;
+
+	public List<Order> getOrder() {
+		return Order;
 	}
 
-	public void setOder(Order order) {
-		this.order = order;
+	public void setOrder(List<Order> order) {
+		Order = order;
 	}
 
 	public Product getProduct() {
