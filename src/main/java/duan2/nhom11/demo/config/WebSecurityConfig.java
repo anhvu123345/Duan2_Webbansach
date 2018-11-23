@@ -2,27 +2,31 @@ package duan2.nhom11.demo.config;
 
 import javax.sql.DataSource;
 
-import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import duan2.nhom11.demo.service.UserDetailsServiceImpl;
 
 @Configuration
+
+
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
-	
+
 	@Autowired
 	private DataSource dataSource;
 
@@ -35,8 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
 		http.authorizeRequests()
-				.antMatchers("/welcome", "/manager/catagory/list", "/manager/order/list", "/manager/product/list", "/manager/catagory/add",
-							 "/manager/product/add", "/manager/{?}/upload", "/manager/product/{?}/edit")
+				.antMatchers("/welcome", "/manager/catagory/list", "/manager/order/list", "/manager/product/list",
+						"/manager/catagory/add", "/manager/product/add", "/manager/{?}/upload",
+						"/manager/product/{?}/edit")
 				.access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 		http.authorizeRequests().antMatchers("/admin/userlist").access("hasRole('ROLE_ADMIN')");
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/login");
@@ -63,6 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		db.setDataSource(dataSource);
 		return db;
 	}
-	 
-
+	
+	
 }
