@@ -63,7 +63,6 @@ public class ProductController {
 			String filename = file.getOriginalFilename();
 			String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
 			String newFileName = System.currentTimeMillis() + fileExtension;
-
 			String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
 			File serverFile = new File(fileSource);
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));

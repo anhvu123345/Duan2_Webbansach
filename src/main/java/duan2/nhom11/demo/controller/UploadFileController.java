@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +26,7 @@ public class UploadFileController {
 	private ProductService productService;
 	
 
-	private String saveDirectory = ".\\src\\main\\resources\\static\\";
+	private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
 	
 	@GetMapping(value="/manager/{id}/upload")
 	public String uploadImgae(Model model,@PathVariable Long id) {
@@ -36,11 +34,10 @@ public class UploadFileController {
 		return "employee/UploadImage";
 	}
 	@PostMapping(value="/manager/upload")
-	public String upload(@RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes, Product product, HttpServletRequest request) {
+	public String upload(@RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes, Product product) {
 		try {
-			String abc = request.getServletContext().getRealPath("images");
 			byte[] bytes = file.getBytes();
-			File dir = new File(saveDirectory+abc);
+			File dir = new File(saveDirectory);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
