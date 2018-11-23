@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<title>Single Product</title>
+<title>Contact Us</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" th:href="@{styles/bootstrap4/bootstrap.min.css}"/>
-<link th:href="@{plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/OwlCarousel2-2.2.1/owl.carousel.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/OwlCarousel2-2.2.1/owl.theme.default.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/OwlCarousel2-2.2.1/animate.css}"/>
-<link rel="stylesheet" th:href="@{plugins/themify-icons/themify-icons.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/jquery-ui-1.12.1.custom/jquery-ui.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{styles/single_styles.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{styles/single_responsive.css}"/>
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="styles/contact_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/contact_responsive.css">
 </head>
 
 <body>
@@ -27,7 +27,6 @@
 
 		<!-- Top Navigation -->
 
-		
 		<div class="top_nav">
 			<div class="container">
 				<div class="row">
@@ -88,15 +87,14 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="#">KHANG VIET<span>Book</span></a>
+							<a href="#">KHANG VIỆT <span>Book</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="#">Trang Chủ</a></li>
+								<li><a href="index.html">Trang Chủ</a></li>
 								<li><a href="categories.html">Mua Sắm</a></li>
-								
-								
 								<li><a href="#">Tin Tức</a></li>
+								
 								<li><a href="contact.html">Liên Hệ</a></li>
 							</ul>
 							<ul class="navbar_user">
@@ -121,54 +119,6 @@
 	</header>
 
 	<div class="fs_menu_overlay"></div>
-	<div class="hamburger_menu">
-		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-		<div class="hamburger_menu_content text-right">
-			<ul class="menu_top_nav">
-				<li class="menu_item has-children">
-					<a href="#">
-						usd
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">cad</a></li>
-						<li><a href="#">aud</a></li>
-						<li><a href="#">eur</a></li>
-						<li><a href="#">gbp</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						Tiếng Việt
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">English</a></li>
-						<li><a href="#">Italian</a></li>
-						<li><a href="#">German</a></li>
-						<li><a href="#">Spanish</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						Tài Khoản
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Nhập</a></li>
-						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Ký</a></li>
-					</ul>
-				</li>
-				<li class="menu_item"><a href="#">home</a></li>
-				<li class="menu_item"><a href="#">shop</a></li>
-				<li class="menu_item"><a href="#">promotion</a></li>
-				<li class="menu_item"><a href="#">pages</a></li>
-				<li class="menu_item"><a href="#">blog</a></li>
-				<li class="menu_item"><a href="#">contact</a></li>
-			</ul>
-		</div>
-	</div>
-
 
 	<!-- Hamburger Menu -->
 
@@ -202,7 +152,7 @@
 				</li>
 				<li class="menu_item has-children">
 					<a href="#">
-						Tài Khoản
+						Tài Khoản Của Tôi
 						<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="menu_selection">
@@ -219,7 +169,7 @@
 		</div>
 	</div>
 
-	<div class="container single_product_container">
+	<div class="container contact_container">
 		<div class="row">
 			<div class="col">
 
@@ -228,138 +178,79 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="index.html">Trang Chủ</a></li>
-						<li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản Phẩm</a></li>
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Chi Tiết Sản Phẩm</a></li>
+						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Liên Hệ</a></li>
 					</ul>
 				</div>
 
 			</div>
 		</div>
+
+		<!-- Map Container -->
 
 		<div class="row">
-			<div class="col-lg-7">
-				<div class="single_product_pics">
-					<div class="row">
-						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
-							<div class="single_product_thumbnails">
-								<ul>
-									<li><img src="images/single_1_thumb.jpg" alt="" data-image="images/single_1.jpg"></li>
-									<li class="active"><img src="images/single_2_thumb.jpg" alt="" data-image="images/single_2.jpg"></li>
-									<li><img src="images/single_3_thumb.jpg" alt="" data-image="images/single_3.jpg"></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-9 image_col order-lg-2 order-1">
-							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(images/single_2.jpg)"></div>
-							</div>
-						</div>
+			<div class="col">
+				<div id="google_map">
+					<div class="map_container">
+						<div id="map"></div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5">
-				<div class="product_details">
-					<div class="product_details_title">
-						<h2>Ôn Thi Toán THPT</h2>
-						<p>Một cuốn sách vô cùng hữu ích cho các bạn Lớp 12 !</p>
+		</div>
+
+		<!-- Contact Us -->
+
+		<div class="row">
+
+			<div class="col-lg-6 contact_col">
+				<div class="contact_contents">
+					<h1>Liên Hệ Với Chúng Tôi</h1>
+					<p>Bạn có thể liên hệ qua SĐT, Email. Hãy chọn điều phù hợp với bạn!</p>
+					<div>
+						<p>1800 8080</p>
+						<p>khangvietbook@gmail.com</p>
 					</div>
-					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
-						<span class="ti-truck"></span><span>Giao Hàng Miễn Phí</span>
+					
+					<div>
+						<p>Mở Cửa: 8:00 am - 20:00 pm</p>
+						<p>Đóng Cửa Chủ Nhật</p>
 					</div>
-					<div class="original_price">100.00đ</div>
-					<div class="product_price">95.000đ</div>
-					<ul class="star_rating">
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+				</div>
+
+				<!-- Follow Us -->
+
+				<div class="follow_us_contents">
+					<h1>Theo Giõi Chúng Tôi</h1>
+					<ul class="social d-flex flex-row">
+						<li><a href="#" style="background-color: #3a61c9"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a href="#" style="background-color: #41a1f6"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a href="#" style="background-color: #fb4343"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+						<li><a href="#" style="background-color: #8f6247"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 					</ul>
-					
-					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<span>Số Lượng:</span>
-						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							<span id="quantity_value">1</span>
-							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+				</div>
+
+			</div>
+
+			<div class="col-lg-6 get_in_touch_col">
+				<div class="get_in_touch_contents">
+					<h1>Liên Lạc Với Chúng Tôi</h1>
+					<p>Điên Vào Mẫu Dưới</p>
+					<form action="post">
+						<div>
+							<input id="input_name" class="form_input input_name input_ph" type="text" name="name" placeholder="Họ Tên" required="required" data-error="Name is required.">
+							<input id="input_email" class="form_input input_email input_ph" type="email" name="email" placeholder="Email" required="required" data-error="Valid email is required.">
+							<input id="input_website" class="form_input input_website input_ph" type="url" name="name" placeholder="Địa Chỉ" required="required" data-error="Name is required.">
+							<textarea id="input_message" class="input_ph input_message" name="message"  placeholder="Nhập Tin Nhắn" rows="3" required data-error="Please, write us a message."></textarea>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="#">Thêm Vào Giỏ Hàng</a></div>
-						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
-					</div>
+						<div>
+							<button id="review_submit" type="submit" class="red_button message_submit_btn trans_300" value="Submit">Gửi</button>
+						</div>
+					</form>
 				</div>
 			</div>
-		</div>
 
-	</div>
-
-	<!-- Tabs -->
-
-	
-
-					<!-- Tab Description -->
-
-					
-
-					<!-- Tab Additional Info -->
-
-
-					<!-- Tab Reviews -->
-
-
-								<!-- User Review -->
-
-								
-
-								<!-- User Review -->
-
-								
-
-							<!-- Add Review -->
-
-
-	<!-- Benefit -->
-<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Miễn Phí Vận Chuyển</h6>
-							<p>Bị thay đổi trong một số hình thức</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Thanh Toán Khi Giao Hàng</h6>
-							<p>Bạn có thể thanh toán trước</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Đổi Trả Trong 30 Ngày</h6>
-							<p>Nếu sản phẩm là lỗi của nhà sản xuất</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Mở Cửa Cả Tuần</h6>
-							<p>8AM - 09PM</p>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
+
 	<!-- Newsletter -->
 
 	<div class="newsletter">
@@ -374,7 +265,7 @@
 				<div class="col-lg-6">
 					<form action="post">
 						<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-							<input id="newsletter_email" type="email" placeholder="Emai của bạn" required="required" data-error="Valid email is required.">
+							<input id="newsletter_email" type="email" placeholder="Email của bạn" required="required" data-error="Valid email is required.">
 							<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Theo Giõi</button>
 						</div>
 					</form>
@@ -384,7 +275,8 @@
 	</div>
 
 	<!-- Footer -->
-<footer class="footer">
+
+	<footer class="footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
@@ -426,8 +318,9 @@
 <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
 <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="plugins/easing/easing.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
 <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="js/single_custom.js"></script>
+<script src="js/contact_custom.js"></script>
 </body>
 
 </html>

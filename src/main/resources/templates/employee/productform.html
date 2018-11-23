@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="employee/layout :: head"></head>
 <meta charset="utf-8" />
+
 <body>
 
 	<div id="wrapper">
@@ -11,31 +12,32 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header">Quản Lí  Sách</h3>
+					<h3 class="page-header">Quản Lí Sách</h3>
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
-			<!-- /.row -->
-
+		
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="panel panel-primary">
-						<div class="panel-heading">Form  Sách</div>
+						<div class="panel-heading">Form Sách: 
+							<blink style="color: red; font-size: 20px;" th:utext="${message}"></blink>
+						</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<form action="#" th:action="@{/manager/product/save}"
-								th:object="${product}" method="POST">
+								th:object="${product}" enctype="multipart/form-data"
+								method="POST">
 								<input type="hidden" th:field="*{productid}" />
 								<div class="form-group">
 									<label>Tên sách<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{bookName}" /> <span
+										type="text" class="form-control" th:field="*{bookName}" required="required"/> <span
 										class="error"></span>
 								</div>
 								<div class="form-group">
-									<label for="name" >Loại
-										sách</label>
+									<label for="name">Loại sách</label>
 									<div class="form-group">
-										<select th:field="*{catagory}" class="form-control"
+										<select th:field="*{catagory}" class="form-control" 
 											id="exampleFormControlSelect1">
 
 											<option th:each="pblist : ${catagory}"
@@ -47,43 +49,41 @@
 								</div>
 								<div class="form-group">
 									<label>Giá<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{price}" /> <span
+										type="text" class="form-control" th:field="*{price}" required="required" /> <span
 										class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Số lượng<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{quantity}" /> <span
+										type="text" class="form-control" th:field="*{quantity}" required="required"/> <span
 										class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Ảnh<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{image}" /> <span
+										type="file" class="form-control" name="file" required="required"/> <span
 										class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Tác giả<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{author}" /> <span
+										type="text" class="form-control" th:field="*{author}" required="required"/> <span
 										class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Nhà xuất bản<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{publisher}" /> <span
+										type="text" class="form-control" th:field="*{publisher}" required="required"/> <span
 										class="error"></span>
 								</div>
 								<div class="form-group">
-									<label>Mô tả<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{description}" />
+									<label>Mô tả<span class="required">*</span></label>
+									<textarea class="form-control" th:field="*{description}" required="required"></textarea>
 									<span class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Ngày xuất bản<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{datePublished}" />
+										type="date" class="form-control" th:field="*{datePublished}" required="required"/>
 									<span class="error"></span>
 								</div>
-
-
-
-								<button type="submit" class="btn btn-primary">
+								
+								<button type="submit"  class="btn btn-primary">
 									<i class="fa fa-save"></i>Lưu
 								</button>
 							</form>
@@ -102,4 +102,3 @@
 
 </body>
 </html>
-

@@ -20,7 +20,7 @@
 						<div class="panel-heading">Form Sản Phẩm</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<form th:action="@{/manager/upload}" enctype="multipart/form-data" th:object="${product}"
+							<form th:action="@{/manager/product/save}" enctype="multipart/form-data" th:object="${product}"
 								method="POST" >
 
 								<input type="hidden" th:field="*{productid}" /> 

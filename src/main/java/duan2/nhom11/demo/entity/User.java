@@ -44,7 +44,7 @@ public class User {
 
 //	quan he 1-n, noi bang user vs bang order
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
-	private List<Order> Oder;
+	private List<Order> Order;
 
 //	quan he 1-n, noi bang user vs bang order
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
@@ -120,11 +120,11 @@ public class User {
 	}
 
 	public List<Order> getOder() {
-		return Oder;
+		return Order;
 	}
 
-	public void setOder(List<Order> oder) {
-		Oder = oder;
+	public void setOder(List<Order> Order) {
+		this.Order = Order;
 	}
 
 	public List<OrderDetail> getOrderDetail() {

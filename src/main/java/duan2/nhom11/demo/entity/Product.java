@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -51,9 +53,15 @@ public class Product{
 	@Column(name = "description", length = 500)
 	private String description;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_published")
 	private Date datePublished;
+	
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_upload", columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
+	private Date dateUpload;
 
 	@OneToMany(mappedBy = "product", cascade = { CascadeType.ALL })
 	private List<OrderDetail> orderDetail;
@@ -140,6 +148,14 @@ public class Product{
 
 	public void setDatePublished(Date datePublished) {
 		this.datePublished = datePublished;
+	}
+
+	public Date getDateUpload() {
+		return dateUpload;
+	}
+
+	public void setDateUpload(Date dateUpload) {
+		this.dateUpload = dateUpload;
 	}
 
 	public List<OrderDetail> getOrderDetail() {

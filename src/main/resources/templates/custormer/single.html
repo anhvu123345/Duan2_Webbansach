@@ -3,18 +3,17 @@
 <head>
 <title>Single Product</title>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" th:href="@{styles/bootstrap4/bootstrap.min.css}"/>
-<link th:href="@{plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/OwlCarousel2-2.2.1/owl.carousel.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/OwlCarousel2-2.2.1/owl.theme.default.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/OwlCarousel2-2.2.1/animate.css}"/>
-<link rel="stylesheet" th:href="@{plugins/themify-icons/themify-icons.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{plugins/jquery-ui-1.12.1.custom/jquery-ui.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{styles/single_styles.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{styles/single_responsive.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}"/>
+<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}"/>
+<link rel="stylesheet" th:href="@{/plugins/themify-icons/themify-icons.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/single_styles.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/styles/single_responsive.css}"/>
 </head>
 
 <body>
@@ -70,8 +69,8 @@
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Nhập</a></li>
-										<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Ký</a></li>
+										<li><a th:href="@{/login}"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Nhập</a></li>
+										<li><a th:href="@{/user/registrantion}"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Ký</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -97,7 +96,7 @@
 								
 								
 								<li><a href="#">Tin Tức</a></li>
-								<li><a href="contact.html">Liên Hệ</a></li>
+								<li><a th:href="@{/lien-he}">Liên Hệ</a></li>
 							</ul>
 							<ul class="navbar_user">
 								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -244,8 +243,8 @@
 							<div class="single_product_thumbnails">
 								<ul>
 									<li><img src="images/single_1_thumb.jpg" alt="" data-image="images/single_1.jpg"></li>
-									<li class="active"><img src="images/single_2_thumb.jpg" alt="" data-image="images/single_2.jpg"></li>
-									<li><img src="images/single_3_thumb.jpg" alt="" data-image="images/single_3.jpg"></li>
+									<li class="active"><img th:src="@{~/images/{img}(img=${product.image})}" alt="" data-image="images/single_2.jpg"></li>
+									<li><img th:src="@{~/images/{img}(img=${product.image})}" alt="" data-image="images/single_3.jpg"></li>
 								</ul>
 							</div>
 						</div>
@@ -260,14 +259,14 @@
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
-						<h2>Ôn Thi Toán THPT</h2>
-						<p>Một cuốn sách vô cùng hữu ích cho các bạn Lớp 12 !</p>
+						<h2 th:text="${product.bookName}">Ôn Thi Toán THPT</h2>
+						<p th:text="${product.description}">Một cuốn sách vô cùng hữu ích cho các bạn Lớp 12 !</p>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 						<span class="ti-truck"></span><span>Giao Hàng Miễn Phí</span>
 					</div>
-					<div class="original_price">100.00đ</div>
-					<div class="product_price">95.000đ</div>
+					<div class="original_price" th:text="${product.price} +50 +VNĐ"></div>
+					<div class="product_price" th:text="${product.price} +VNĐ"></div>
 					<ul class="star_rating">
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -420,14 +419,14 @@
 
 </div>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="js/single_custom.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="/js/single_custom.js"></script>
 </body>
 
 </html>

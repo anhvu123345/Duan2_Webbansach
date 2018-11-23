@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="employee/layout :: head">
-<style type="text/css">
-</style>
+<meta charset="UTF-8">
+
 </head>
 <body>
 	<div id="wrapper">
@@ -12,13 +12,12 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header">Quản Lý Loại Sách</h3>
+					<h3 class="page-header">Quản lý sách</h3>
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
 			<!-- /.row -->
-			<a style="margin: 5px" th:href="@{/manager/catagory/add}"
-				class="btn btn-success">Thêm loại sách</a>
+			
 			<div class="row">
 				<div class="col-sm-12">
 					<div th:if="${success}"
@@ -30,44 +29,39 @@
 					</div>
 
 					<div class="panel panel-primary">
-						<div class="panel-heading">Danh Sách Loại Sách</div>
+						<div class="panel-heading">Danh sách sách</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<h4 th:if="${#lists.isEmpty(catagorys)}"></h4>
+							<h4 th:if="${#lists.isEmpty(orders)}"></h4>
 
-							<table th:unless="${#lists.isEmpty(catagorys)}" width="100%"
+							<table th:unless="${#lists.isEmpty(orders)}" width="100%"
 								class="table table-striped table-bordered"
 								id="dataTables-example">
 								<thead>
 									<tr>
 										<th width="">Mã</th>
-										<th width="">Tên sách</th>
-									
-										<th>Sửa</th>
-										<th>Xóa</th>
+										<th width="">Email khách hàng</th>
+										<th width="">Tên khách hàng</th>
+										<th width="">Ngày mua</th>
+										<th width="">Ghi chú</th>
+										<th width="">Số điện thoại</th>
+										<th width="">Địa Chỉ</th>
+										<th width="">Mã mua hàng</th>
+										<th>Tùy chọn</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="catagorys : ${catagorys}">
-										<td th:text="${catagorys.catagoryid}"></td>
-										<td th:text="${catagorys.catagoryName}"></td>
-									
-										<td>
-											<ul>
-												<li style="list-style: none"><a class="btn btn-danger"
-													th:href="@{/manager/catagory/{id}/edit(id=${catagorys.catagoryid})}">
-
-														Sửa </a></li>
-
-											</ul>
-										</td>
-										<td><ul>
-												<li style="list-style: none"><a class="btn btn-danger"
-													th:href="@{/manager/catagory/{id}/delete(id=${catagorys.catagoryid})}">
-
-														Xóa </a></li>
-											</ul></td>
-									</tr>
+									<tr th:each="order : ${orders}">
+										<td th:text="${order.orderid}"></td>
+										<td th:text="${order.custormerEmail}"></td>
+										<td th:text="${order.custormerName}"></td>
+										<td
+											th:text="${#dates.format(order.date, 'dd/MM/yyyy HH:mm:ss')}"></td>
+										<td th:text="${order.note}"></td>
+										<td th:text="${order.phone}"></td>
+										<td th:text="${order.address}"></td>
+										<td th:text="${order.orderDetail.id}"></td>
+										</tr>
 								</tbody>
 							</table>
 							<!-- /.table-responsive -->
@@ -83,5 +77,8 @@
 		<!-- /#page-wrapper -->
 
 	</div>
+
 </body>
 </html>
+
+

@@ -86,25 +86,21 @@ public class FogotPasswordController {
 	}
 	
 	@PostMapping(value="/reset")
-	public ModelAndView setNewPassword( @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+	public ModelAndView setNewPassword(@RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
 		ModelAndView model = new ModelAndView();
 		Optional<User>  user = userService.findByToken(requestParams.get("token"));
-		
 		if(user.isPresent() ){	
 			User restUser = user.get();	
 			System.out.println(restUser.getEmail());
-			restUser.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
+			restUser.setPassword(requestParams.get("password"));
 			restUser.setToken(null);
 			userService.save(restUser);
 			redir.addFlashAttribute("thanhcong", "Bạn đã mật khẩu, có thể đăng nhập bây giờ");
 			model.setViewName("redirect:/login");
-			
 		}else {
 			redir.addFlashAttribute("error", "Đương link của bạn không đúng");
 			model.setViewName("/fogot-password");
 		}
-		
-		
 		return model;
 	}
 }

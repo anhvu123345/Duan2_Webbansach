@@ -3,7 +3,6 @@ package duan2.nhom11.demo.entity;
 
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catagory")
@@ -23,8 +24,11 @@ public class Catagory  {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "catagory_id")
 	private Long catagoryid;
+	
+	
+	@NotNull(message="không được để trống")
+	@Size(max=20, message="Không vượt quá 20 kí tự")
 
-	@Column(name = "catagory_name")
 	private String catagoryName;
 
 	@OneToMany(mappedBy = "catagory", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
@@ -61,3 +65,5 @@ public class Catagory  {
 	
 	
 }
+
+

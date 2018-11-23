@@ -8,4 +8,5 @@ import duan2.nhom11.demo.entity.Catagory;
 @Repository
 public interface CatagoryRepository extends CrudRepository<Catagory, Long>{
 
+	boolean existsByCatagoryName(String name);
 }

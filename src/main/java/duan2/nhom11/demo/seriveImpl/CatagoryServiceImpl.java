@@ -45,5 +45,11 @@ public class CatagoryServiceImpl implements CatagoryService {
 		catagoryRepository.deleteById(id);
 
 	}
+	
+	@Override
+	public boolean existsByCatagoryName(String name) {
+		return catagoryRepository.existsByCatagoryName(name);
+		
+	}
 
 }

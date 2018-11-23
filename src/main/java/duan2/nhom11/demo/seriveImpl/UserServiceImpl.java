@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.seriveImpl;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserSerive {
 
 	@Override
 	public void save(User user) {
-		
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 
 	}

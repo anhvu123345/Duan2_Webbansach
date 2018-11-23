@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="panel panel-primary">
-						<div class="panel-heading">Form Loại Sách</div>
+						<div class="panel-heading">Form Loại Sách </blink></div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<form action="#" th:action="@{/manager/catagory/save}"
@@ -28,11 +28,13 @@
 								<input type="hidden" th:field="*{catagoryid}" />
 								<div class="form-group">
 									<label>Loại sách<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{catagoryName}" />
-									<span class="error"></span>
+										type="text" class="form-control" th:field="*{catagoryName}" minlength="3" maxlength="20"  required="required"/>
+							  <span style="color: red" th:if="${#fields.hasErrors('catagoryName')}" th:errors="*{catagoryName}">Name Error</span>
+							  <blink style="color: red; font-size: 20px;" th:utext="${errorname}">
 								</div>
+								
 
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" id="submit" class="btn btn-primary">
 									<i class="fa fa-save"></i>Lưu
 								</button>
 							</form>
