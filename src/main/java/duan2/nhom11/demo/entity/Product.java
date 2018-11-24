@@ -66,6 +66,31 @@ public class Product{
 	@OneToMany(mappedBy = "product", cascade = { CascadeType.ALL })
 	private List<OrderDetail> orderDetail;
 
+	
+	public Product(Long productid, String image) {
+		super();
+		this.productid = productid;
+		this.image = image;
+	}
+
+	public Product(Long productid, Catagory catagory, String bookName, double price, int quantity, String image,
+			String author, String publisher, String description, Date datePublished, Date dateUpload,
+			List<OrderDetail> orderDetail) {
+		super();
+		this.productid = productid;
+		this.catagory = catagory;
+		this.bookName = bookName;
+		this.price = price;
+		this.quantity = quantity;
+		this.image = image;
+		this.author = author;
+		this.publisher = publisher;
+		this.description = description;
+		this.datePublished = datePublished;
+		this.dateUpload = dateUpload;
+		this.orderDetail = orderDetail;
+	}
+
 	public Product() {
 		super();
 	}

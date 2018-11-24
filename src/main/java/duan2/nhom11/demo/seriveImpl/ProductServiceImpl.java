@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.seriveImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import duan2.nhom11.demo.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
 	@Autowired
 	private ProductRepository productRepository;
 
@@ -45,5 +45,7 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.deleteById(id);
 
 	}
+
+	
 
 }

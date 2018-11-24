@@ -22,7 +22,6 @@
 						<div class="panel-body">
 							<form th:action="@{/manager/upload}" enctype="multipart/form-data" th:object="${product}"
 								method="POST" >
-
 								<input type="hidden" th:field="*{productid}" /> 
 								<input type="hidden" class="form-control" th:field="*{bookName}" /> 
 								<input type="hidden" th:field="*{catagory}"> 
@@ -33,10 +32,10 @@
 								<input type="hidden" class="form-control" th:field="*{description}" /> 
 								<input type="hidden" class="form-control" th:field="*{datePublished}" />
 								<div class="form-group">
+								<input type="hidden" class="form-control" th:field="*{image}" />
 								<blink style="color: red; font-size: 20px;" th:utext="${message}"></blink>
 									<label for="name" class="col-xs-4 control-label">Upload
 										image</label>
-
 									<div class="col-xs-8">
 										<input type="file" name="file" class="form-control"
 											placeholder="Select-image" required="required" />
