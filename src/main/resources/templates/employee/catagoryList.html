@@ -5,7 +5,7 @@
 <style type="text/css">
 </style>
 </head>
-<body>
+<body onclick="myFunction()">
 	<div id="wrapper">
 
 		<nav th:replace="employee/layout :: sidebar"></nav>
@@ -77,10 +77,10 @@
 
 				</div>
 				<!-- /.modal -->
-				<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 
-					<div class="modal-dialog">
+					<div class="modal-dialog" style="padding-top: 15%">
 						<div class="modal-content">
 
 
@@ -107,10 +107,16 @@
 							var span = document.getElementById("myspan");
 							span.textContent = "Tên loại sách " + b
 									+ " đã tồn tại!";
+							$('#myModal').modal({
+								keyboard : true
+							});
 							$('#myModal1').modal({
 								keyboard : true
 							});
 						}
+					};
+					function myFunction() {
+						$('#myModal1').modal('hide');
 					}
 				</script>
 				<div class="panel panel-primary">
