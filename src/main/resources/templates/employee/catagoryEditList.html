@@ -112,6 +112,9 @@
 							});
 						}
 					}
+					$(function () { $('#myModal').modal({
+					      keyboard: true
+					   })});
 				</script>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Danh sách loại sách</div>
@@ -136,7 +139,7 @@
 									<td><a class="btn btn-danger"
 										th:href="@{/manager/catagory/{id}/edit(id=${catagorys.catagoryid})}">
 											Sửa </a> | <a class="btn btn-danger"
-										th:href="@{/manager/catagory/{id}/delete(id=${catagorys.catagoryid})}"  onclick="return confirm('Bạn có chắc chắn xóa không?')">
+										th:href="@{/manager/catagory/{id}/delete(id=${catagorys.catagoryid})}">
 											Xóa </a></td>
 								</tr>
 							</tbody>
