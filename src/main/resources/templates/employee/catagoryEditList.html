@@ -5,7 +5,7 @@
 <style type="text/css">
 </style>
 </head>
-<body>
+<body onload="myLoad()">
 	<div id="wrapper">
 
 		<nav th:replace="employee/layout :: sidebar"></nav>
@@ -19,8 +19,8 @@
 			</div>
 
 			<!-- /.row -->
-			<a style="margin: 5px" class="btn btn-success" data-toggle="modal"
-				data-target="#myModal"> Thêm loại sách </a>
+			<a style="margin: 5px" class="btn btn-success"
+				th:href="@{/manager/catagory/list}"> Thêm loại sách </a>
 			<div class="row">
 				<div class="col-sm-12">
 					<div th:if="${success}"
@@ -46,21 +46,21 @@
 										aria-hidden="true">×</button>
 
 									<h4 class="modal-title" id="myModalLabel"
-										style="text-align: center;">Nhập tên loại sách</h4>
+										style="text-align: center;">Nhập tên sách mới</h4>
 								</div>
 
-								<form action="#" th:action="@{/manager/catagory/save}"
+								<form action="#" th:action="@{/manager/catagory/edit}"
 									th:object="${catagory}" method="POST">
 									<input type="hidden" th:field="*{catagoryid}" />
 									<div class="form-group" align="center">
 										<label>Loại sách<span class="required">*</span></label><label>
 											<input type="text" class="form-control" style="width: 500px;"
-											th:field="*{catagoryName}" minlength="3" maxlength="20"
-											required="required" /> <input
-											type="hidden" id="errorname"
-											style="color: red; font-size: 20px;" th:value="${errorname}" />
-										</label>
+											th:field="*{catagoryName}" minlength="3"
+											onkeyup="myFunction()" maxlength="20" required="required" />
+										</label> <span style="font-style: italic; color: gray">*Nhập
+											tên loại sách có độ dài 3-10 kí tự!</span>
 									</div>
+
 									<div align="center">
 										<button type="submit" id="submit" class="btn btn-primary">
 											<i class="fa fa-save"></i>Lưu
@@ -76,39 +76,34 @@
 
 				</div>
 				<!-- /.modal -->
-				<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel" aria-hidden="true">
 
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body" align="center">
-								<Strong id="myspan" style="color: red;"></Strong>
-
-							</div>
-						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-
-				</div>
-				<!-- /.modal -->
 				<script>
-					window.onload = function() {
-						var a = document.getElementById("errorname").value.length;
-						var b = document.getElementById("errorname").value;
-						if (a > 2) {
-							var span = document.getElementById("myspan");
-							span.textContent = "Tên loại sách " + b
-									+ " đã tồn tại!";
-							$('#myModal1').modal({
-								keyboard : true
-								
-							});
+					$(function() {
+						$('#myModal').modal({
+							keyboard : true
+						})
+					});
+
+					function myFunction(event) {
+						// Declare variables 
+						var input, filter, table, tr, td, i;
+						input = document.getElementById("catagoryName");
+						filter = input.value.toUpperCase();
+						table = document.getElementById("dataTables-example");
+						tr = table.getElementsByTagName("tr");
+						// Loop through all table rows, and hide those who don't match the search query
+						for (i = 0; i <= tr.length; i++) {
+							td = table.rows[i].cells[1].innerHTML;
+							if (input.value == td.slice(0)) {
+								swal({
+									text : 'Tên loại này đã tồn tại! mời bạn nhập lại!',
+									buttons : false,
+									showCancelButton : false,
+									showConfirmButton : false,
+								})
+							}
 						}
 					}
-					$(function () { $('#myModal').modal({
-					      keyboard: true
-					   })});
 				</script>
 				<div class="panel panel-primary">
 					<div class="panel-heading">Danh sách loại sách</div>

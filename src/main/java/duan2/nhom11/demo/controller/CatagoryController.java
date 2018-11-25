@@ -66,7 +66,30 @@ public class CatagoryController {
 		model.addAttribute("catagorys", catagoryService.findAll());
 		return "employee/catagoryEditList";
 	}
+	
+	@PostMapping(value = "/manager/catagory/edit")
+	public String CataEdit(@ModelAttribute @Valid Catagory catagory, RedirectAttributes redirectAttributes , BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			System.out.println("BINDING RESULT ERROR");
+			return "employee/catagoryEditList";
+		} 
+		if(catagoryService.existsByCatagoryName(catagory.getCatagoryName())) {
+			redirectAttributes.addFlashAttribute("errorname", catagory.getCatagoryName().toUpperCase());
+			model.addAttribute("catagorys", catagoryService.findAll());
+			return "employee/catagoryEditList";
+		}
+		else {
 
+			model.addAttribute("student", catagory);
+			
+			if (catagory.getCatagoryName() != null) {
+				model.addAttribute("thanhcong", true);
+				catagoryService.save(catagory);
+			}
+			return "redirect:/manager/catagory/list";
+		}
+	}
+	
 	@GetMapping(value = "/manager/catagory/{id}/delete")
 	public String cataDelete(@PathVariable Long id) {
 		catagoryService.delete(id);
