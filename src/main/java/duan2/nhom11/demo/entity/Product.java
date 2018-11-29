@@ -41,9 +41,6 @@ public class Product{
 	@Column(name = "quantity")
 	private int quantity;
 
-	@Column(name = "image", length = 100)
-	private String image;
-
 	@Column(name = "author", length = 50)
 	private String author;
 
@@ -67,13 +64,8 @@ public class Product{
 	private List<OrderDetail> orderDetail;
 
 	
-	public Product(Long productid, String image) {
-		super();
-		this.productid = productid;
-		this.image = image;
-	}
 
-	public Product(Long productid, Catagory catagory, String bookName, double price, int quantity, String image,
+	public Product(Long productid, Catagory catagory, String bookName, double price, int quantity,
 			String author, String publisher, String description, Date datePublished, Date dateUpload,
 			List<OrderDetail> orderDetail) {
 		super();
@@ -82,7 +74,7 @@ public class Product{
 		this.bookName = bookName;
 		this.price = price;
 		this.quantity = quantity;
-		this.image = image;
+
 		this.author = author;
 		this.publisher = publisher;
 		this.description = description;
@@ -135,13 +127,7 @@ public class Product{
 		this.quantity = quantity;
 	}
 
-	public String getImage() {
-		return image;
-	}
 
-	public void setImage(String image) {
-		this.image = image;
-	}
 
 	public String getAuthor() {
 		return author;

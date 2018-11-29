@@ -21,14 +21,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import duan2.nhom11.demo.entity.ImageProduct;
 import duan2.nhom11.demo.entity.Product;
 import duan2.nhom11.demo.service.CatagoryService;
+import duan2.nhom11.demo.service.ImageProductService;
 import duan2.nhom11.demo.service.ProductService;
 
 @Controller
 public class ProductController {
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private ImageProductService imageProductService;
 
 	private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
 
@@ -40,7 +45,6 @@ public class ProductController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("products", productService.findAll());
 		model.setViewName("employee/productList");
-
 		return model;
 	}
 
@@ -53,7 +57,7 @@ public class ProductController {
 
 	@PostMapping(value = "/manager/product/save")
 	public String productSave(@Valid Product product, @RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, ImageProduct imageProduct) {
 		try {
 			byte[] bytes = file.getBytes();
 			File dir = new File(saveDirectory);
@@ -68,8 +72,10 @@ public class ProductController {
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 			stream.write(bytes);
 			stream.close();
-			product.setImage(newFileName);		
+			imageProduct.setImage1(newFileName);
+			imageProduct.setProduct(product);
 			productService.save(product);
+			imageProductService.saveAndFlush(imageProduct);
 			redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
 		} catch (Exception e) {
 			System.out.println(e);
