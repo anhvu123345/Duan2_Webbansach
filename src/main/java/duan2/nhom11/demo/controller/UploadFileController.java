@@ -5,10 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import duan2.nhom11.demo.entity.ImageProduct;
 import duan2.nhom11.demo.entity.Multipartfile;
-import duan2.nhom11.demo.entity.Product;
 import duan2.nhom11.demo.service.ImageProductService;
 import duan2.nhom11.demo.service.ProductService;
-import javassist.expr.NewArray;
 
 @Controller
 public class UploadFileController {

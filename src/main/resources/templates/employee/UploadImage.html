@@ -112,32 +112,41 @@
 																	});
 												});
 							</script>
-							<!-- <script type="text/javascript">
-								function myFunction() {
-									if (document.getElementById("image[1]").value != "") {
-										document.getElementById("submit1")
-												.click();
+							<script type="text/javascript">
+								function Mychange1() {
+									if (document.getElementById("filea[0]").value != "") {
+										document.getElementById("submit1").style.display = 'block';
+										
 									}
 
-									if (document.getElementById("image[2]").value != "") {
-										document.getElementById("submit2")
-												.click();
+									 if (document.getElementById("fileb[0]").value != "") {
+										document.getElementById("submit2").style.display = 'block';
 									}
 
-									if (document.getElementById("image[3]").value != "") {
-										document.getElementById("submit3")
-												.click();
+									if (document.getElementById("filec[0]").value != "") {
+										document.getElementById("submit3").style.display = 'block';
 									}
-
-									if (document.getElementById("image[4]").value != "") {
-										document.getElementById("submit4")
-												.click();
+									if (document.getElementById("filed[0]").value != "") {
+										document.getElementById("submit4").style.display = 'block';
 									}
-
-									window.location = "http://localhost:8080/manager/product/list";
+							
+									
+									
+									if (document.getElementById("filea[0]").value === "") {
+										document.getElementById("submit1").style.display = 'none';
+									}
+									if (document.getElementById("fileb[0]").value === "") {
+										document.getElementById("submit2").style.display = 'none';
+									}
+									if (document.getElementById("filec[0]").value === "") {
+										document.getElementById("submit3").style.display = 'none';
+									}
+									if (document.getElementById("filed[0]").value === "") {
+										document.getElementById("submit4").style.display = 'none';
+									}
+									
 								}
 							</script>
- -->
 							<script type="text/javascript">
 								$(document)
 										.ready(
@@ -163,9 +172,10 @@
 								
 								
 							</script>
-							<form action="#" th:action="@{/manager/upload1}"
-								th:object="${imageproducts}" enctype="multipart/form-data"
-								method="POST">
+						
+							
+							<form
+								th:object="${imageproducts}" id="formanh1"  enctype="multipart/form-data" th:action="@{/manager/upload1}" method="POST" >
 								<input type="hidden" th:field="*{image_id}" /> <input
 									type="hidden" id="product.productid" name="product.productid"
 									th:value="${idproduct}" /> <input type="hidden"
@@ -174,10 +184,10 @@
 									th:field="*{image3}" /> <input type="hidden"
 									th:field="*{image4}" />
 								<div class="col-sm-3">
-									<input type="file" name="filea[0]" class="form-control"
-										placeholder="Select-image"
+									<input type="file" name="filea[0]" id="filea[0]" class="form-control"
+										placeholder="Select-image"  onchange="Mychange1()" 
 										accept="image/gif, image/jpeg, image/png" />
-									<button type="submit" class="btn btn-primary" id="submit1">
+									<button type="submit" class="btn btn-primary"   style="display: none;" id="submit1">
 										<i class="fa fa-save"></i>Lưu ảnh 1
 									</button>
 
@@ -186,20 +196,17 @@
 											<div class="col-xs-6 col-sm-3">
 												<a href="#" class="thumbnail" data-toggle="modal"
 													data-target="#lightbox"> <img
-													th:src="@{~/images/{img}(img=${imageproducts.image1})}"
-													style="height: 300px; width: 300px;" alt="...">
+												alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image1})}"
+													style="height: 300px; width: 300px; text-align: center;" >
 												</a>
 											</div>
 										</div>
 									</div>
-
-
-
 								</div>
 
 							</form>
 
-							<form action="#" th:action="@{/manager/upload2}"
+							<form action="#" th:action="@{/manager/upload2}" id="formanh2"
 								th:object="${imageproducts}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{image_id}" /> <input
@@ -210,10 +217,10 @@
 									th:field="*{image3}" /> <input type="hidden"
 									th:field="*{image4}" />
 								<div class="col-sm-3">
-									<input type="file" name="fileb[0]" class="form-control"
-										placeholder="Select-image"
+									<input type="file" name="fileb[0]" id="fileb[0]" class="form-control"
+										placeholder="Select-image" onchange="Mychange1()"
 										accept="image/gif, image/jpeg, image/png" />
-									<button type="submit" class="btn btn-primary" id="submit1">
+									<button type="submit" class="btn btn-primary"  style="display: none;" id="submit2">
 										<i class="fa fa-save"></i>Lưu ảnh 2
 									</button>
 
@@ -221,20 +228,16 @@
 										<div class="container">
 											<div class="col-xs-6 col-sm-3">
 												<a href="#" class="thumbnail" data-toggle="modal"
-													data-target="#lightbox"> <img
-													th:src="@{~/images/{img}(img=${imageproducts.image2})}"
-													style="height: 300px; width: 300px;" alt="...">
+													data-target="#lightbox"> <img class="rounded "
+													alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image2})}"
+													style="height: 300px; width: 300px;  text-align: center;" >
 												</a>
 											</div>
 										</div>
-
-
-
-
 									</div>
 								</div>
 							</form>
-							<form action="#" th:action="@{/manager/upload3}"
+							<form action="#" th:action="@{/manager/upload3}" id="formanh3"
 								th:object="${imageproducts}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{image_id}" /> <input
@@ -244,11 +247,11 @@
 									th:field="*{image2}" /> <input type="hidden"
 									th:field="*{image3}" /> <input type="hidden"
 									th:field="*{image4}" />
-								<div class="col-sm-3">
-									<input type="file" name="filec[0]" class="form-control"
-										placeholder="Select-image"
+								<div class="col-sm-3"  >
+									<input type="file" name="filec[0]" id="filec[0]" class="form-control"
+										placeholder="Select-image" onchange="Mychange1()" 
 										accept="image/gif, image/jpeg, image/png" />
-									<button type="submit" class="btn btn-primary" id="submit1">
+									<button type="submit" class="btn btn-primary" style="display: none;" id="submit3">
 										<i class="fa fa-save"></i>Lưu ảnh 3
 									</button>
 							
@@ -257,19 +260,15 @@
 										<div class="col-xs-6 col-sm-3">
 											<a href="#" class="thumbnail" data-toggle="modal"
 												data-target="#lightbox"> <img
-												th:src="@{~/images/{img}(img=${imageproducts.image3})}"
-												style="height: 300px; width: 300px;" alt="...">
+												alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image3})}"
+													style="height: 300px; width: 300px;   text-align: center;" >
 											</a>
 										</div>
 									</div>
-
-
-
-
 								</div>
-</div>
+							</div>
 							</form>
-							<form action="#" th:action="@{/manager/upload4}"
+							<form action="#" th:action="@{/manager/upload4}" id="formanh4"
 								th:object="${imageproducts}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{image_id}" /> <input
@@ -280,10 +279,10 @@
 									th:field="*{image3}" /> <input type="hidden"
 									th:field="*{image4}" />
 								<div class="col-sm-3">
-									<input type="file" name="filed[0]" class="form-control"
-										placeholder="Select-image"
+									<input type="file" name="filed[0]" id="filed[0]" class="form-control"
+										placeholder="Select-image" onchange="Mychange1()" 
 										accept="image/gif, image/jpeg, image/png" />
-									<button type="submit" class="btn btn-primary" id="submit1">
+									<button type="submit" class="btn btn-primary"  style="display: none;" id="submit4">
 										<i class="fa fa-save"></i>Lưu ảnh 4
 									</button>
 
@@ -292,19 +291,14 @@
 											<div class="col-xs-6 col-sm-3">
 												<a href="#" class="thumbnail" data-toggle="modal"
 													data-target="#lightbox"> <img
-													th:src="@{~/images/{img}(img=${imageproducts.image4})}"
-													style="height: 300px; width: 300px;" alt="...">
+													alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image4})}"
+													style="height: 300px; width: 300px; text-align: center;" >
 												</a>
 											</div>
 										</div>
-
-
-
-
 									</div>
 								</div>
 							</form>
-
 							<div id="lightbox" class="modal fade" tabindex="-1" role="dialog"
 								aria-labelledby="myLargeModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
@@ -323,12 +317,11 @@
 					</div>
 					<!-- /.col-sm-12 -->
 				</div>
-				<button class="btn btn-primary" onclick="myFunction()">upload
+				<button class="btn btn-primary" onclick="myClickButton()">upload
 					file</button>
 				<!-- /.row -->
 			</div>
 			<!-- /#page-wrapper -->
-
 		</div>
 	</div>
 </body>
