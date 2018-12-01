@@ -1,17 +1,20 @@
 package duan2.nhom11.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import duan2.nhom11.demo.entity.ListRoleUser;
 import duan2.nhom11.demo.entity.User;
 import duan2.nhom11.demo.service.UserSerive;
 
@@ -20,12 +23,12 @@ public class UserController {
 	@Autowired
 	private UserSerive userSerive;
 
-	
-
 	@GetMapping(value = "/admin/userlist")
 	public ModelAndView userList() {
 		ModelAndView model = new ModelAndView();
-		model.addObject("users", userSerive.findAll());
+		List<User> us = userSerive.findAll();
+		model.addObject("users", us);
+		model.addObject("userRole", new User());
 		model.setViewName("admin/listUser");
 		return model;
 	}
@@ -70,7 +73,38 @@ public class UserController {
 	public ModelAndView userDelete(@PathVariable Long id) {
 		ModelAndView model = new ModelAndView();
 		userSerive.delete(id);
-		model.setViewName("");
+		model.setViewName("redirect:/admin/userlist");
 		return model;
 	}
+
+	/*===========================Lấy user từ list để thêm lần lượt===========================*/
+	@PostMapping(value = "/user/setrole")
+	public ModelAndView setRole(@ModelAttribute("listtt") ListRoleUser listtt) {
+		ModelAndView model = new ModelAndView();
+
+		for (User usa : listtt.getListuser()) {
+			userSerive.saverole(usa);
+		}
+		model.setViewName("redirect:/admin/userlist");
+		return model;
+	}
+	/*========================================================================================*/
+	
+	/*	=======================Dùng vòng lặp đếm và  những user hiện có add vào list==========*/
+	@ModelAttribute("listtt")
+	public ListRoleUser thanhtich() {
+		User us = new User();
+		us.setRole("");
+		ListRoleUser listtt = new ListRoleUser();
+		List<User> listrole = new ArrayList<User>();
+
+		for (int i = 0; i < listrole.size(); i++) {
+
+			listrole.add(us);
+		}
+		listtt.setListuser(listrole);
+		return listtt;
+	}
+	/*========================================================================================*/
+	
 }

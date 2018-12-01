@@ -41,7 +41,7 @@
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
-			<artifactId>nekohtml</artifactId>	
+			<artifactId>nekohtml</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>
@@ -115,6 +115,22 @@
 			<artifactId>datatables</artifactId>
 			<version>1.10.15</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-core</artifactId>
+			 <version>1.1.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-config</artifactId>
+			 <version>1.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RC1</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
