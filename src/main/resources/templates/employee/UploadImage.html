@@ -15,52 +15,304 @@
 			<!-- /.row -->
 
 			<div class="row">
-				<div class="col-sm-10">
+				<div class="col-sm-12">
 					<div class="panel panel-primary">
-						<div class="panel-heading">Form Sản Phẩm</div>
+						<div class="panel-heading">Upload hình ảnh</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<form th:action="@{/manager/product/save}" enctype="multipart/form-data" th:object="${product}"
+							<!-- <form th:action="@{/manager/upload}" enctype="multipart/form-data" th:object="${product}"
 								method="POST" >
-
-								<input type="hidden" th:field="*{productid}" /> 
-								<input type="hidden" class="form-control" th:field="*{bookName}" /> 
-								<input type="hidden" th:field="*{catagory}"> 
-								<input type="hidden" class="form-control" th:field="*{price}" /> 
-								<input type="hidden" class="form-control" th:field="*{quantity}" /> 
-								<input type="hidden" class="form-control" th:field="*{author}" /> 
-								<input type="hidden" class="form-control" th:field="*{publisher}" />
-								<input type="hidden" class="form-control" th:field="*{description}" /> 
-								<input type="hidden" class="form-control" th:field="*{datePublished}" />
+								<input type="hidden" th:field="imageid" /> 
 								<div class="form-group">
+								<blink style="color: red; font-size: 20px;" th:utext="${message}"></blink>
 									<label for="name" class="col-xs-4 control-label">Upload
 										image</label>
-
 									<div class="col-xs-8">
 										<input type="file" name="file" class="form-control"
 											placeholder="Select-image" required="required" />
 									</div>
+								</div>
+								<button type="submit" class="btn btn-primary">
+									<i class="fa fa-save"></i>LÆ°u
+								</button>
+							</form> -->
+							<script type="text/javascript">
+								$(document)
+										.ready(
+												function() {
+													var $lightbox = $('#lightbox');
+													$(
+															'[data-target="#lightbox"]')
+															.on(
+																	'click',
+																	function(
+																			event) {
+																		var $img = $(
+																				this)
+																				.find(
+																						'img'), src = $img
+																				.attr('src'), alt = $img
+																				.attr('alt'), css = {
+																			'maxWidth' : $(
+																					window)
+																					.width() - 100,
+																			'maxHeight' : $(
+																					window)
+																					.height() - 100
+																		};
+																		$lightbox
+																				.find(
+																						'.close')
+																				.addClass(
+																						'hidden');
+																		$lightbox
+																				.find(
+																						'img')
+																				.attr(
+																						'src',
+																						src);
+																		$lightbox
+																				.find(
+																						'img')
+																				.attr(
+																						'alt',
+																						alt);
+																		$lightbox
+																				.find(
+																						'img')
+																				.css(
+																						css);
+																	});
+													$lightbox
+															.on(
+																	'shown.bs.modal',
+																	function(e) {
+																		var $img = $lightbox
+																				.find('img');
+																		$lightbox
+																				.find(
+																						'.modal-dialog')
+																				.css(
+																						{
+																							'width' : $img
+																									.width()
+																						});
+																		$lightbox
+																				.find(
+																						'.close')
+																				.removeClass(
+																						'hidden');
+																	});
+												});
+							</script>
+							<script type="text/javascript">
+								function Mychange1() {
+									if (document.getElementById("filea[0]").value != "") {
+										document.getElementById("submit1").style.display = 'block';
+										
+									}
+									 if (document.getElementById("fileb[0]").value != "") {
+										document.getElementById("submit2").style.display = 'block';
+									}
+									if (document.getElementById("filec[0]").value != "") {
+										document.getElementById("submit3").style.display = 'block';
+									}
+									if (document.getElementById("filed[0]").value != "") {
+										document.getElementById("submit4").style.display = 'block';
+									}
+							
+									
+									
+									if (document.getElementById("filea[0]").value === "") {
+										document.getElementById("submit1").style.display = 'none';
+									}
+									if (document.getElementById("fileb[0]").value === "") {
+										document.getElementById("submit2").style.display = 'none';
+									}
+									if (document.getElementById("filec[0]").value === "") {
+										document.getElementById("submit3").style.display = 'none';
+									}
+									if (document.getElementById("filed[0]").value === "") {
+										document.getElementById("submit4").style.display = 'none';
+									}
+									
+								}
+							</script>
+							<script type="text/javascript">
+								$(document)
+										.ready(
+												function() {
+													$('input[type="file"]')
+															.change(
+																	function(e) {
+																		var fileName = e.target.files[0].type;
+																		if (fileName !== "image/gif"
+																				&& fileName !== "image/jpeg"
+																				&& fileName !== "image/png") {
+																			swal({
+																				text : 'Định dạng ảnh không đúng *(Vui lòng chọn ảnh định dạng image/gif, image/jpeg, image/png)!',
+																				buttons : false,
+																				showCancelButton : false,
+																				showConfirmButton : false,
+																			});
+																			e.target.value = '';
+																		}
+																	});
+												});
+								
+								
+							</script>
+						
+							
+							<form
+								th:object="${imageproducts}" id="formanh1"  enctype="multipart/form-data" th:action="@{/manager/upload1}" method="POST" >
+								<input type="hidden" th:field="*{image_id}" /> <input
+									type="hidden" id="product.productid" name="product.productid"
+									th:value="${idproduct}" /> <input type="hidden"
+									th:field="*{image1}" /> <input type="hidden"
+									th:field="*{image2}" /> <input type="hidden"
+									th:field="*{image3}" /> <input type="hidden"
+									th:field="*{image4}" />
+								<div class="col-sm-3">
+									<input type="file" name="filea[0]" id="filea[0]" class="form-control"
+										placeholder="Select-image"  onchange="Mychange1()" 
+										accept="image/gif, image/jpeg, image/png" />
+									<button type="submit" class="btn btn-primary"   style="display: none;" id="submit1">
+										<i class="fa fa-save"></i>Lưu ảnh 1
+									</button>
 
+									<div th:each="imageproducts : ${imageproduct}" >
+										<div class="container">
+											<div class="col-xs-6 col-sm-3">
+												<a href="#" class="thumbnail" data-toggle="modal"
+													data-target="#lightbox"> <img
+												alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image1})}"
+													style="height: 300px; width: 300px; text-align: center;" >
+												</a>
+											</div>
+										</div>
+									</div>
 								</div>
 
-
-								<button type="submit" class="btn btn-primary">
-									<i class="fa fa-save"></i>Lưu
-								</button>
 							</form>
+
+							<form action="#" th:action="@{/manager/upload2}" id="formanh2"
+								th:object="${imageproducts}" enctype="multipart/form-data"
+								method="POST">
+								<input type="hidden" th:field="*{image_id}" /> <input
+									type="hidden" id="product.productid" name="product.productid"
+									th:value="${idproduct}" /> <input type="hidden"
+									th:field="*{image1}" /> <input type="hidden"
+									th:field="*{image2}" /> <input type="hidden"
+									th:field="*{image3}" /> <input type="hidden"
+									th:field="*{image4}" />
+								<div class="col-sm-3">
+									<input type="file" name="fileb[0]" id="fileb[0]" class="form-control"
+										placeholder="Select-image" onchange="Mychange1()"
+										accept="image/gif, image/jpeg, image/png" />
+									<button type="submit" class="btn btn-primary"  style="display: none;" id="submit2">
+										<i class="fa fa-save"></i>Lưu ảnh 2
+									</button>
+
+									<div th:each="imageproducts : ${imageproduct}" >
+										<div class="container">
+											<div class="col-xs-6 col-sm-3">
+												<a href="#" class="thumbnail" data-toggle="modal"
+													data-target="#lightbox"> <img class="rounded "
+													alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image2})}"
+													style="height: 300px; width: 300px;  text-align: center;" >
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<form action="#" th:action="@{/manager/upload3}" id="formanh3"
+								th:object="${imageproducts}" enctype="multipart/form-data"
+								method="POST">
+								<input type="hidden" th:field="*{image_id}" /> <input
+									type="hidden" id="product.productid" name="product.productid"
+									th:value="${idproduct}" /> <input type="hidden"
+									th:field="*{image1}" /> <input type="hidden"
+									th:field="*{image2}" /> <input type="hidden"
+									th:field="*{image3}" /> <input type="hidden"
+									th:field="*{image4}" />
+								<div class="col-sm-3"  >
+									<input type="file" name="filec[0]" id="filec[0]" class="form-control"
+										placeholder="Select-image" onchange="Mychange1()" 
+										accept="image/gif, image/jpeg, image/png" />
+									<button type="submit" class="btn btn-primary" style="display: none;" id="submit3">
+										<i class="fa fa-save"></i>Lưu ảnh 3
+									</button>
+							
+								<div th:each="imageproducts : ${imageproduct}">
+									<div class="container">
+										<div class="col-xs-6 col-sm-3">
+											<a href="#" class="thumbnail" data-toggle="modal"
+												data-target="#lightbox"> <img
+												alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image3})}"
+													style="height: 300px; width: 300px;   text-align: center;" >
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							</form>
+							<form action="#" th:action="@{/manager/upload4}" id="formanh4"
+								th:object="${imageproducts}" enctype="multipart/form-data"
+								method="POST">
+								<input type="hidden" th:field="*{image_id}" /> <input
+									type="hidden" id="product.productid" name="product.productid"
+									th:value="${idproduct}" /> <input type="hidden"
+									th:field="*{image1}" /> <input type="hidden"
+									th:field="*{image2}" /> <input type="hidden"
+									th:field="*{image3}" /> <input type="hidden"
+									th:field="*{image4}" />
+								<div class="col-sm-3">
+									<input type="file" name="filed[0]" id="filed[0]" class="form-control"
+										placeholder="Select-image" onchange="Mychange1()" 
+										accept="image/gif, image/jpeg, image/png" />
+									<button type="submit" class="btn btn-primary"  style="display: none;" id="submit4">
+										<i class="fa fa-save"></i>Lưu ảnh 4
+									</button>
+
+									<div th:each="imageproducts : ${imageproduct}">
+										<div class="container">
+											<div class="col-xs-6 col-sm-3">
+												<a href="#" class="thumbnail" data-toggle="modal"
+													data-target="#lightbox"> <img
+													alt="Chưa có dữ liệu ảnh!"	th:src="@{~/images/{img}(img=${imageproducts.image4})}"
+													style="height: 300px; width: 300px; text-align: center;" >
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div id="lightbox" class="modal fade" tabindex="-1" role="dialog"
+								aria-labelledby="myLargeModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<button type="button" class="close hidden" data-dismiss="modal"
+										aria-hidden="true">×</button>
+									<div class="modal-content">
+										<div class="modal-body">
+											<img src="" alt="" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.panel-body -->
 						</div>
-						<!-- /.panel-body -->
+						<!-- /.panel -->
 					</div>
-					<!-- /.panel -->
+					<!-- /.col-sm-12 -->
 				</div>
-				<!-- /.col-sm-12 -->
+				<button class="btn btn-primary" onclick="myClickButton()">upload
+					file</button>
+				<!-- /.row -->
 			</div>
-			<!-- /.row -->
+			<!-- /#page-wrapper -->
 		</div>
-		<!-- /#page-wrapper -->
-
 	</div>
-
 </body>
 </html>
-

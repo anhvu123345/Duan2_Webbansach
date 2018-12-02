@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="employee/layout :: head">
+<meta charset="utf-8" />
 <style type="text/css">
 </style>
 </head>
-<body>
+<body onclick="myFunction()">
 	<div id="wrapper">
 
 		<nav th:replace="employee/layout :: sidebar"></nav>
@@ -12,13 +13,14 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header">Quản Lý Loại Sách</h3>
+					<h3 class="page-header">Quản Lý loại Sách</h3>
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
+
 			<!-- /.row -->
-			<a style="margin: 5px" th:href="@{/manager/catagory/add}"
-				class="btn btn-success">Thêm loại sách</a>
+			<a style="margin: 5px" class="btn btn-success" data-toggle="modal"
+				data-target="#myModal"> Thêm loại sách </a>
 			<div class="row">
 				<div class="col-sm-12">
 					<div th:if="${success}"
@@ -28,60 +30,138 @@
 						</button>
 						<span th:text="${success}"></span>
 					</div>
+					<!-- Button trigger modal -->
 
-					<div class="panel panel-primary">
-						<div class="panel-heading">Danh Sách Loại Sách</div>
-						<!-- /.panel-heading -->
-						<div class="panel-body">
-							<h4 th:if="${#lists.isEmpty(catagorys)}"></h4>
 
-							<table th:unless="${#lists.isEmpty(catagorys)}" width="100%"
-								class="table table-striped table-bordered"
-								id="dataTables-example">
-								<thead>
-									<tr>
-										<th width="">Mã</th>
-										<th width="">Tên sách</th>
-									
-										<th>Sửa</th>
-										<th>Xóa</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="catagorys : ${catagorys}">
-										<td th:text="${catagorys.catagoryid}"></td>
-										<td th:text="${catagorys.catagoryName}"></td>
-									
-										<td>
-											<ul>
-												<li style="list-style: none"><a class="btn btn-danger"
-													th:href="@{/manager/catagory/{id}/edit(id=${catagorys.catagoryid})}">
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
 
-														Sửa </a></li>
 
-											</ul>
-										</td>
-										<td><ul>
-												<li style="list-style: none"><a class="btn btn-danger"
-													th:href="@{/manager/catagory/{id}/delete(id=${catagorys.catagoryid})}">
+						<div class="modal-dialog">
+							<div class="modal-content">
 
-														Xóa </a></li>
-											</ul></td>
-									</tr>
-								</tbody>
-							</table>
-							<!-- /.table-responsive -->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+
+									<h4 class="modal-title" id="myModalLabel"
+										style="text-align: center;">Nhập tên loại sách muốn thêm</h4>
+								</div>
+
+								<form action="#" th:action="@{/manager/catagory/save}"
+									th:object="${catagory}" method="POST">
+									<input type="hidden" th:field="*{catagoryid}" />
+									<div class="form-group" align="center">
+										<label>Loại sách<span class="required">*</span></label><label>
+											<input type="text" class="form-control" style="width: 500px;"
+											th:field="*{catagoryName}" minlength="3" maxlength="20"
+											required="required"
+											data-errormessage-value-missing="dsvdsvdsvdvdvs" /> <input
+											type="hidden" id="errorname"
+											style="color: red; font-size: 20px;" th:value="${errorname}" />
+										</label>
+										<span style="font-style: italic; color: gray">*Nhập
+											tên loại sách có độ dài 3-10 kí tự!</span>
+									</div>
+									<div align="center">
+										<button type="submit" id="submit" class="btn btn-primary">
+											<i class="fa fa-save"></i>Lưu
+										</button>
+									</div>
+								</form>
+							</div>
+
 						</div>
-						<!-- /.panel-body -->
+						<!-- /.modal-content -->
 					</div>
-					<!-- /.panel -->
-				</div>
-				<!-- /.col-sm-12 -->
-			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /#page-wrapper -->
+					<!-- /.modal-dialog -->
 
+				</div>
+				<!-- /.modal -->
+				<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+
+					<div class="modal-dialog" style="padding-top: 15%">
+						<div class="modal-content">
+
+
+
+							<div class="modal-body" align="center">
+								<Strong id="myspan" style="color: red;"></Strong>
+
+							</div>
+
+
+
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+
+				</div>
+				<!-- /.modal -->
+				<script>
+					window.onload = function() {
+						$('#myModal').modal({
+							keyboard : true
+						});
+						var a = document.getElementById("errorname").value.length;
+						var b = document.getElementById("errorname").value;
+						if (a > 2) {
+							var span = document.getElementById("myspan");
+							span.textContent = "Tên loại sách " + b
+									+ " đã tồn tại!";
+							$('#myModal').modal({
+								keyboard : true
+							});
+							$('#myModal1').modal({
+								keyboard : true
+							});
+						}
+					};
+				</script>
+				<div class="panel panel-primary">
+					<div class="panel-heading">Danh sách loại sách</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<h4 th:if="${#lists.isEmpty(catagorys)}"></h4>
+
+						<table th:unless="${#lists.isEmpty(catagorys)}"
+							class="table table-striped table-bordered"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th width="">Mã</th>
+									<th width="">Tên Sách</th>
+									<th>Tùy chọn</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="catagorys : ${catagorys}">
+									<td th:text="${catagorys.catagoryid}"></td>
+									<td th:text="${catagorys.catagoryName}"></td>
+									<td><a class="btn btn-danger"
+										th:href="@{/manager/catagory/{id}/edit(id=${catagorys.catagoryid})}">
+											Sửa </a> | <a class="btn btn-danger"
+										th:href="@{/manager/catagory/{id}/delete(id=${catagorys.catagoryid})}"
+										onclick="return confirm('Bạn có chắc chắn xóa không?')">
+											Xóa </a></td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-sm-12 -->
+		</div>
+		<!-- /.row -->
 	</div>
+	<!-- /#page-wrapper -->
+
+
 </body>
 </html>

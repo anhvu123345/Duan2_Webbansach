@@ -5,13 +5,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,80 +22,181 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import duan2.nhom11.demo.entity.ImageProduct;
 import duan2.nhom11.demo.entity.Product;
 import duan2.nhom11.demo.service.CatagoryService;
+import duan2.nhom11.demo.service.ImageProductService;
 import duan2.nhom11.demo.service.ProductService;
 
 @Controller
 public class ProductController {
-	@Autowired
-	private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
-	private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
+    @Autowired
+    private ImageProductService imageProductService;
 
-	@Autowired
-	private CatagoryService catagoryService;
+    private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
 
-	@GetMapping(value = "/manager/product/list")
-	public ModelAndView productList() {
-		ModelAndView model = new ModelAndView();
-		model.addObject("products", productService.findAll());
-		model.setViewName("employee/productList");
+    @Autowired
+    private CatagoryService catagoryService;
 
-		return model;
+    @GetMapping(value = "/manager/product/list")
+    public ModelAndView productList() {
+	ModelAndView model = new ModelAndView();
+	model.addObject("products", productService.findAll());
+	model.setViewName("employee/productList");
+	return model;
+    }
+
+    @GetMapping(value = "/manager/product/add")
+    public String productAdd(Model model) {
+	model.addAttribute("catagory", catagoryService.findAll());
+	model.addAttribute("product", new Product());
+	return "employee/productform";
+    }
+
+    @PostMapping(value = "/manager/product/save")
+    public String productSave(@Valid Product product, @RequestParam("pro-image") MultipartFile[] files,
+	    RedirectAttributes redirectAttributes, ImageProduct imageProduct) throws IOException {
+	List<String> listname = new ArrayList<String>();
+	byte[] bytes;
+	BufferedOutputStream stream;
+	String newFileName;
+	String fileExtension;
+	String filename;
+	String fileSource;
+	if (files[0].isEmpty() == true) {
+	    System.out.println("them tc");
+	    productService.save(product);
+	    redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
 	}
 
-	@GetMapping(value = "/manager/product/add")
-	public String productAdd(Model model) {
-		model.addAttribute("catagory", catagoryService.findAll());
-		model.addAttribute("product", new Product());
-		return "employee/productform";
+	File dir = new File(saveDirectory);
+	if (!dir.exists()) {
+	    dir.mkdirs();
 	}
+	if (files.length == 4) {
 
-	@PostMapping(value = "/manager/product/save")
-	public String productSave(@Valid Product product, @RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes) {
-		try {
-			byte[] bytes = file.getBytes();
-			File dir = new File(saveDirectory);
-			if (!dir.exists()) {
-				dir.mkdirs();
-			}
-			String filename = file.getOriginalFilename();
-			String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-			String newFileName = System.currentTimeMillis() + fileExtension;
-			String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-			File serverFile = new File(fileSource);
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-			stream.write(bytes);
-			stream.close();
-			product.setImage(newFileName);		
-			productService.save(product);
-			redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return "redirect:/manager/product/add";
-	}
+	    for (MultipartFile file : files) {
+		bytes = file.getBytes();
+		filename = file.getOriginalFilename();
+		fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
+		newFileName = System.currentTimeMillis() + fileExtension;
 
-	@GetMapping(value = "/manager/product/{id}/edit")
-	public String productEdit(Model model, @PathVariable Long id) {
-		model.addAttribute("catagory", catagoryService.findAll());
-		model.addAttribute("product", productService.findById(id));
-		return "employee/productform";
-	}
+		listname.add(newFileName);
+		fileSource = dir.getAbsolutePath() + File.separator + newFileName;
+		File serverFile = new File(fileSource);
+		stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+		stream.write(bytes);
+		stream.close();
+	    }
 
-	@GetMapping(value = "/manager/product/{id}/delete")
-	public String productDelete(@PathVariable Long id) {
-		productService.delete(id);
-		return "redirect:/manager/product/list";
-	}
+	    imageProduct.setImage1(listname.get(0));
+	    imageProduct.setImage2(listname.get(1));
+	    imageProduct.setImage3(listname.get(2));
+	    imageProduct.setImage4(listname.get(3));
 
-	@GetMapping(value = "/images")
-	@ResponseBody
-	public byte[] imageSystems(@RequestParam("img") String img) throws IOException {
-		File file = new File(saveDirectory + img);
-		return Files.readAllBytes(file.toPath());
+	    System.out.println(listname.size());
+	    imageProduct.setProduct(product);
+	    productService.save(product);
+	    imageProductService.saveAndFlush(imageProduct);
+	    redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
 	}
+	if (files.length == 3) {
+	    System.out.println("them loi");
+	    for (MultipartFile file : files) {
+		bytes = file.getBytes();
+		filename = file.getOriginalFilename();
+		fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
+		newFileName = System.currentTimeMillis() + fileExtension;
+
+		listname.add(newFileName);
+		fileSource = dir.getAbsolutePath() + File.separator + newFileName;
+		File serverFile = new File(fileSource);
+		stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+		stream.write(bytes);
+		stream.close();
+	    }
+
+	    imageProduct.setImage1(listname.get(0));
+	    imageProduct.setImage2(listname.get(1));
+	    imageProduct.setImage3(listname.get(2));
+	    imageProduct.setImage4(null);
+	    imageProduct.setProduct(product);
+	    productService.save(product);
+	    imageProductService.saveAndFlush(imageProduct);
+	    redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
+	}
+	if (files.length == 2) {
+	    System.out.println("them loi");
+	    for (MultipartFile file : files) {
+		bytes = file.getBytes();
+		filename = file.getOriginalFilename();
+		fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
+		newFileName = System.currentTimeMillis() + fileExtension;
+
+		listname.add(newFileName);
+		fileSource = dir.getAbsolutePath() + File.separator + newFileName;
+		File serverFile = new File(fileSource);
+		stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+		stream.write(bytes);
+		stream.close();
+	    }
+	    imageProduct.setImage1(listname.get(0));
+	    imageProduct.setImage2(listname.get(1));
+	    imageProduct.setImage3(null);
+	    imageProduct.setImage4(null);
+	    imageProduct.setProduct(product);
+	    productService.save(product);
+	    imageProductService.saveAndFlush(imageProduct);
+	    redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
+	}
+	if (files.length == 1) {
+	    System.out.println("them loi");
+	    for (MultipartFile file : files) {
+		bytes = file.getBytes();
+		filename = file.getOriginalFilename();
+		fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
+		newFileName = System.currentTimeMillis() + fileExtension;
+
+		listname.add(newFileName);
+		fileSource = dir.getAbsolutePath() + File.separator + newFileName;
+		File serverFile = new File(fileSource);
+		stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+		stream.write(bytes);
+		stream.close();
+	    }
+	    imageProduct.setImage1(listname.get(0));
+	    imageProduct.setImage2(null);
+	    imageProduct.setImage3(null);
+	    imageProduct.setImage4(null);
+	    imageProduct.setProduct(product);
+	    productService.save(product);
+	    imageProductService.saveAndFlush(imageProduct);
+	    redirectAttributes.addFlashAttribute("message", "Thêm thành công!");
+	}
+	return "redirect:/manager/product/add";
+    }
+
+    @GetMapping(value = "/manager/product/{id}/edit")
+    public String productEdit(Model model, @PathVariable Long id) {
+	model.addAttribute("catagory", catagoryService.findAll());
+	model.addAttribute("product", productService.findById(id));
+	return "employee/productform";
+    }
+
+    @GetMapping(value = "/manager/product/{id}/delete")
+    public String productDelete(@PathVariable Long id) {
+	productService.delete(id);
+	return "redirect:/manager/product/list";
+    }
+
+    @GetMapping(value = "/images")
+    @ResponseBody
+    public byte[] imageSystems(@RequestParam("img") String img) throws IOException {
+	File file = new File(saveDirectory + img);
+	return Files.readAllBytes(file.toPath());
+    }
 
 }

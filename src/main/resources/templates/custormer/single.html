@@ -14,6 +14,8 @@
 <link rel="stylesheet" type="text/css" th:href="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/single_styles.css}"/>
 <link rel="stylesheet" type="text/css" th:href="@{/styles/single_responsive.css}"/>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 </head>
 
 <body>
@@ -102,9 +104,10 @@
 								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 								<li class="checkout">
-									<a href="#">
-										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">2</span>
+									<a href="#" data-toggle="modal"
+		data-target="#exampleModal">
+										<i class="fa fa-shopping-cart" aria-hidden="true" ></i>
+										<span id="checkout_items" class="checkout_items"></span>
 									</a>
 								</li>
 							</ul>
@@ -242,15 +245,15 @@
 						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
 							<div class="single_product_thumbnails">
 								<ul>
-									<li><img src="images/single_1_thumb.jpg" alt="" data-image="images/single_1.jpg"></li>
-									<li class="active"><img th:src="@{~/images/{img}(img=${product.image})}" alt="" data-image="images/single_2.jpg"></li>
-									<li><img th:src="@{~/images/{img}(img=${product.image})}" alt="" data-image="images/single_3.jpg"></li>
+									<li><img th:src="@{~/images/{img}(img=${product.imageProduct.image1})}" alt="" data-image="images/single_1.jpg"></li>
+									<li class="active"><img th:src="@{~/images/{img}(img=${product.imageProduct.image2})}" alt="" data-image="images/single_2.jpg"></li>
+									<li><img th:src="@{~/images/{img}(img=${product.imageProduct.image3})}" alt="" data-image="images/single_3.jpg"></li>
 								</ul>
 							</div>
 						</div>
 						<div class="col-lg-9 image_col order-lg-2 order-1">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(images/single_2.jpg)"></div>
+								<div class="single_product_image_background"><img th:src="@{~/images/{img}(img=${product.imageProduct.image4})}" alt="" data-image="images/single_1.jpg" style="width: 400px; height: 532px"></div>
 							</div>
 						</div>
 					</div>
@@ -259,11 +262,11 @@
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
-						<h2 th:text="${product.bookName}">Ôn Thi Toán THPT</h2>
-						<p th:text="${product.description}">Một cuốn sách vô cùng hữu ích cho các bạn Lớp 12 !</p>
+						<h2 th:text="${product.bookName}"></h2>
+						<p th:text="${product.description}"></p>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
-						<span class="ti-truck"></span><span>Giao Hàng Miễn Phí</span>
+						<span class="ti-truck"></span><span th:text="${giohang}"></span>
 					</div>
 					<div class="original_price" th:text="${product.price} +50 +VNĐ"></div>
 					<div class="product_price" th:text="${product.price} +VNĐ"></div>
@@ -274,17 +277,47 @@
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 					</ul>
-					
-					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<span>Số Lượng:</span>
-						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							<span id="quantity_value">1</span>
-							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-						</div>
-						<div class="red_button add_to_cart_button"><a href="#">Thêm Vào Giỏ Hàng</a></div>
-						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
-					</div>
+				<form action="#" th:action="@{/save/cart}"
+								th:object="${cart}" method="POST">							
+								<div class="form-group">
+									<label>Số Lượng<span class="required">*</span></label> <input
+										type="number" class="form-control" th:field="*{quantity}" />
+							  
+								</div>
+								<div style="display: none">
+								<div class="form-group">
+										<select th:field="*{intoMoney}" class="form-control" 
+											id="exampleFormControlSelect1">
+											<option th:value="${product.price}" th:text="${product.price}"></option>
+										</select>
+									</div>
+									
+									<div class="form-group">
+										<select th:field="*{product}" class="form-control" 
+											id="exampleFormControlSelect1">
+											<option th:value="${product.productid}" th:text="${product.productid}"></option>
+										</select>
+									</div>
+									
+									<div class="form-group">
+										<select th:field="*{user}" class="form-control" 
+											id="exampleFormControlSelect1">
+											<option  th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}" th:value="${user.userid}" th:text="${#request.userPrincipal.name}" ></option>
+										</select>
+									</div>
+									
+									<div class="form-group">
+										<select  th:field="*{Order}" class="form-control" 
+											id="exampleFormControlSelect1">
+											<option   th:value="0"></option>
+										</select>
+									</div> 
+									</div>
+								<button type="submit" id="submit" class="btn btn-primary">
+									Thêm vào giỏ hàng
+								</button>
+								
+							</form>
 				</div>
 			</div>
 		</div>
@@ -427,6 +460,69 @@
 <script src="/plugins/easing/easing.js"></script>
 <script src="/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="/js/single_custom.js"></script>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<h2 class="modal-title" id="exampleModalLabel">Tìm kiếm</h2>
+					<button type="submit" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="get" th:action="@{/search-chothue}">
+						<div class="form-group" >
+
+							<select class="form-control" name="huong">
+								<option value="hg">Hướng</option>
+								<option>Đông</option>
+								<option>Tây</option>
+								<option>Nam</option>
+								<option>Bắc</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+
+							<select class="form-control" name="dientich">
+								<option value="0">Diện tích</option>
+								<option>100</option>
+								<option>200</option>
+							</select>
+						</div>
+						<div class="form-group">
+
+							<select class="form-control" name="giatri">
+								<option value="0">Giá Trị</option>
+								<option>10</option>
+								<option>100</option>
+								<option>1000</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="form-control" name="thanhpho">
+								<option value="th">Thành phố</option>
+								<option>Đà Nẵng</option>
+								<option>Tp.Hồ Chí Minh</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="form-control" name="quanhuyen">
+								<option value="qh">Quận huyện</option>
+								<option>Liên Chiểu</option>
+								<option>Hải Châu</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">Tìm kiếm</button>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

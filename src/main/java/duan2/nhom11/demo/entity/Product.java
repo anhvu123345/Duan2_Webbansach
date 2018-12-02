@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,8 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "product")
-public class Product{
-
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +29,7 @@ public class Product{
 	private Long productid;
 
 	@ManyToOne
-	@JoinColumn(name = "catagory_id", referencedColumnName="catagory_id")
+	@JoinColumn(name = "catagory_id", referencedColumnName = "catagory_id")
 	private Catagory catagory;
 
 	@Column(name = "book_name", length = 50)
@@ -41,9 +41,6 @@ public class Product{
 	@Column(name = "quantity")
 	private int quantity;
 
-	@Column(name = "image", length = 100)
-	private String image;
-
 	@Column(name = "author", length = 50)
 	private String author;
 
@@ -53,18 +50,38 @@ public class Product{
 	@Column(name = "description", length = 500)
 	private String description;
 
+	@OneToOne(mappedBy="product")
+	private ImageProduct imageProduct;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_published")
 	private Date datePublished;
-	
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "date_upload", columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
+	@Column(name = "date_upload", columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
 	private Date dateUpload;
 
 	@OneToMany(mappedBy = "product", cascade = { CascadeType.ALL })
 	private List<OrderDetail> orderDetail;
+
+	public Product(Long productid, Catagory catagory, String bookName, double price, int quantity, String author,
+			String publisher, String description, ImageProduct imageProduct, Date datePublished, Date dateUpload,
+			List<OrderDetail> orderDetail) {
+		super();
+		this.productid = productid;
+		this.catagory = catagory;
+		this.bookName = bookName;
+		this.price = price;
+		this.quantity = quantity;
+		this.author = author;
+		this.publisher = publisher;
+		this.description = description;
+		this.imageProduct = imageProduct;
+		this.datePublished = datePublished;
+		this.dateUpload = dateUpload;
+		this.orderDetail = orderDetail;
+	}
 
 	public Product() {
 		super();
@@ -108,14 +125,6 @@ public class Product{
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	public String getAuthor() {
@@ -166,5 +175,12 @@ public class Product{
 		this.orderDetail = orderDetail;
 	}
 
-	
+	public ImageProduct getImageProduct() {
+		return imageProduct;
+	}
+
+	public void setImageProduct(ImageProduct imageProduct) {
+		this.imageProduct = imageProduct;
+	}
+
 }

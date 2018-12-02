@@ -32,24 +32,21 @@ public class CatagoryController {
 	@GetMapping(value = "/manager/catagory/list")
 	public String CataList(Model model) {
 		model.addAttribute("catagorys", catagoryService.findAll());
+		model.addAttribute("catagory", new Catagory());
 		return "employee/catagoryList";
 	}
 
-	@GetMapping(value = "/manager/catagory/add")
-	public String CataAdd(Model model) {
-		model.addAttribute("catagory", new Catagory());
-		return "employee/catagoryform";
-	}
+
 
 	@PostMapping(value = "/manager/catagory/save")
 	public String CataSave(@ModelAttribute @Valid Catagory catagory, RedirectAttributes redirectAttributes , BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("BINDING RESULT ERROR");
-			return "employee/catagoryform";
+			return "employee/catagoryList";
 		} 
 		if(catagoryService.existsByCatagoryName(catagory.getCatagoryName())) {
-			redirectAttributes.addFlashAttribute("errorname", "Đã tồn tại!");
-			return "redirect:/manager/catagory/add";
+			redirectAttributes.addFlashAttribute("errorname", catagory.getCatagoryName().toUpperCase());
+			return "redirect:/manager/catagory/list";
 		}
 		else {
 
@@ -66,9 +63,33 @@ public class CatagoryController {
 	@GetMapping(value = "/manager/catagory/{id}/edit")
 	public String cataEdit(@PathVariable Long id, Model model) {
 		model.addAttribute("catagory", catagoryService.findById(id));
-		return "employee/catagoryform";
+		model.addAttribute("catagorys", catagoryService.findAll());
+		return "employee/catagoryEditList";
 	}
+	
+	@PostMapping(value = "/manager/catagory/edit")
+	public String CataEdit(@ModelAttribute @Valid Catagory catagory, RedirectAttributes redirectAttributes , BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			System.out.println("BINDING RESULT ERROR");
+			return "employee/catagoryEditList";
+		} 
+		if(catagoryService.existsByCatagoryName(catagory.getCatagoryName())) {
+			redirectAttributes.addFlashAttribute("errorname", catagory.getCatagoryName().toUpperCase());
+			model.addAttribute("catagorys", catagoryService.findAll());
+			return "employee/catagoryEditList";
+		}
+		else {
 
+			model.addAttribute("student", catagory);
+			
+			if (catagory.getCatagoryName() != null) {
+				model.addAttribute("thanhcong", true);
+				catagoryService.save(catagory);
+			}
+			return "redirect:/manager/catagory/list";
+		}
+	}
+	
 	@GetMapping(value = "/manager/catagory/{id}/delete")
 	public String cataDelete(@PathVariable Long id) {
 		catagoryService.delete(id);

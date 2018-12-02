@@ -16,28 +16,60 @@
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
-		
+
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="panel panel-primary">
-						<div class="panel-heading">Form Sách: 
+						<div class="panel-heading">
+							Form Sách:
 							<blink style="color: red; font-size: 20px;" th:utext="${message}"></blink>
 						</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
+							<script type="text/javascript">
+								 function myChange() {
+								        if (parseInt($('#pro-image').get(0).files.length)>4){
+								        	swal({
+												text : 'Chỉ được chọn tối đa 4 ảnh! vui lòng chọn lại',
+												buttons : false,
+												showCancelButton : false,
+												showConfirmButton : false,
+											});
+								        	
+								        	 $('#pro-image').val('');
+									         document.getElementById("xoa").innerHTML = "";}  
+								        var selection  = document.getElementById('pro-image');
+								        for (var i=0; i<selection.files.length; i++) {
+								        	var ext = selection.files[i].type;
+								        if (ext !== "image/gif"
+												&& ext !== "image/jpeg"
+												&& ext !== "image/png"){
+								        	swal({
+												text : 'Định dạng ảnh không đúng *(Vui lòng chọn ảnh định dạng image/gif, image/jpeg, image/png)!',
+												buttons : false,
+												showCancelButton : false,
+												showConfirmButton : false,
+											});
+								        	
+								         $('#pro-image').val('');
+								         document.getElementById("xoa").innerHTML = "";
+								        }
+								    };
+								 }
+							</script>
 							<form action="#" th:action="@{/manager/product/save}"
 								th:object="${product}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{productid}" />
 								<div class="form-group">
 									<label>Tên sách<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{bookName}" required="required"/> <span
-										class="error"></span>
+										type="text" class="form-control" th:field="*{bookName}"
+										required="required" /> <span class="error"></span>
 								</div>
 								<div class="form-group">
 									<label for="name">Loại sách</label>
 									<div class="form-group">
-										<select th:field="*{catagory}" class="form-control" 
+										<select th:field="*{catagory}" class="form-control"
 											id="exampleFormControlSelect1">
 
 											<option th:each="pblist : ${catagory}"
@@ -49,44 +81,51 @@
 								</div>
 								<div class="form-group">
 									<label>Giá<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{price}" required="required" /> <span
-										class="error"></span>
+										type="text" class="form-control" th:field="*{price}"
+										required="required" /> <span class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Số lượng<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{quantity}" required="required"/> <span
-										class="error"></span>
+										type="text" class="form-control" th:field="*{quantity}"
+										required="required" /> <span class="error"></span>
 								</div>
 								<div class="form-group">
-									<label>Ảnh<span class="required">*</span></label> <input
-										type="file" class="form-control" name="file" required="required"/> <span
-										class="error"></span>
-								</div>
+									<!-- <label>Ảnh<span class="required">*</span></label> <input
+										type="file" class="form-control" name="file" multiple="multiple"/> <span
+										class="error"></span> -->
+
+									<fieldset class="form-group">
+										 <input onchange="myChange()" type="file" class="btn btn-primary"  accept="image/gif, image/jpeg, image/png" id="pro-image" name="pro-image"
+											  multiple>
+									</fieldset>
+									</div>
 								<div class="form-group">
 									<label>Tác giả<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{author}" required="required"/> <span
-										class="error"></span>
+										type="text" class="form-control" th:field="*{author}"
+										required="required" /> <span class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Nhà xuất bản<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{publisher}" required="required"/> <span
-										class="error"></span>
+										type="text" class="form-control" th:field="*{publisher}"
+										required="required" /> <span class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Mô tả<span class="required">*</span></label>
-									<textarea class="form-control" th:field="*{description}" required="required"></textarea>
+									<textarea class="form-control" th:field="*{description}"
+										required="required"></textarea>
 									<span class="error"></span>
 								</div>
 								<div class="form-group">
 									<label>Ngày xuất bản<span class="required">*</span></label> <input
-										type="date" class="form-control" th:field="*{datePublished}" required="required"/>
-									<span class="error"></span>
+										type="date" class="form-control" th:field="*{datePublished}"
+										required="required" /> <span class="error"></span>
 								</div>
-								
-								<button type="submit"  class="btn btn-primary">
+
+								<button type="submit" class="btn btn-primary">
 									<i class="fa fa-save"></i>Lưu
 								</button>
 							</form>
+						<
 						</div>
 
 					</div>

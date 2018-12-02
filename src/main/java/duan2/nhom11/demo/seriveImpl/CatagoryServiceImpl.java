@@ -51,5 +51,4 @@ public class CatagoryServiceImpl implements CatagoryService {
 		return catagoryRepository.existsByCatagoryName(name);
 		
 	}
-
 }

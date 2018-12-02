@@ -1,6 +1,8 @@
 package duan2.nhom11.demo.service;
 
 
+import java.util.Optional;
+
 import duan2.nhom11.demo.entity.OrderDetail;
 
 public interface OrderDetailSerive {
@@ -11,7 +13,7 @@ public interface OrderDetailSerive {
 
 	Long count();
 
-	OrderDetail findById(Long id);
+	Optional<OrderDetail> findById(Long id);
 
 	void delete(Long id);
 }

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="employee/layout :: head">
+<meta charset="utf-8" />
+<style type="text/css">
+</style>
+</head>
+<body onload="myLoad()">
+	<div id="wrapper">
+
+		<nav th:replace="employee/layout :: sidebar"></nav>
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3 class="page-header">Quản Lý loại Sách</h3>
+				</div>
+				<!-- /.col-sm-12 -->
+			</div>
+
+			<!-- /.row -->
+			<a style="margin: 5px" class="btn btn-success"
+				th:href="@{/manager/catagory/list}"> Thêm loại sách </a>
+			<div class="row">
+				<div class="col-sm-12">
+					<div th:if="${success}"
+						class="row alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert">
+							<span>&times;</span>
+						</button>
+						<span th:text="${success}"></span>
+					</div>
+					<!-- Button trigger modal -->
+
+
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+
+									<h4 class="modal-title" id="myModalLabel"
+										style="text-align: center;">Nhập tên sách mới</h4>
+								</div>
+
+								<form action="#" th:action="@{/manager/catagory/edit}"
+									th:object="${catagory}" method="POST">
+									<input type="hidden" th:field="*{catagoryid}" />
+									<div class="form-group" align="center">
+										<label>Loại sách<span class="required">*</span></label><label>
+											<input type="text" class="form-control" style="width: 500px;"
+											th:field="*{catagoryName}" minlength="3"
+											onkeyup="myFunction()" maxlength="20" required="required" />
+										</label> <span style="font-style: italic; color: gray">*Nhập
+											tên loại sách có độ dài 3-10 kí tự!</span>
+									</div>
+
+									<div align="center">
+										<button type="submit" id="submit" class="btn btn-primary">
+											<i class="fa fa-save"></i>Lưu
+										</button>
+									</div>
+								</form>
+							</div>
+
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+
+				</div>
+				<!-- /.modal -->
+
+				<script>
+					$(function() {
+						$('#myModal').modal({
+							keyboard : true
+						})
+					});
+					function myFunction(event) {
+						// Declare variables 
+						var input, filter, table, tr, td, i;
+						input = document.getElementById("catagoryName");
+						filter = input.value.toUpperCase();
+						table = document.getElementById("dataTables-example");
+						tr = table.getElementsByTagName("tr");
+						// Loop through all table rows, and hide those who don't match the search query
+						for (i = 0; i <= tr.length; i++) {
+							td = table.rows[i].cells[1].innerHTML;
+							if (input.value == td.slice(0)) {
+								swal({
+									text : 'Tên loại này đã tồn tại! mời bạn nhập lại!',
+									buttons : false,
+									showCancelButton : false,
+									showConfirmButton : false,
+								})
+							}
+						}
+					}
+				</script>
+				<div class="panel panel-primary">
+					<div class="panel-heading">Danh sách loại sách</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<h4 th:if="${#lists.isEmpty(catagorys)}"></h4>
+
+						<table th:unless="${#lists.isEmpty(catagorys)}"
+							class="table table-striped table-bordered"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th width="">Mã</th>
+									<th width="">Tên Sách</th>
+									<th>Tùy chọn</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="catagorys : ${catagorys}">
+									<td th:text="${catagorys.catagoryid}"></td>
+									<td th:text="${catagorys.catagoryName}"></td>
+									<td><a class="btn btn-danger"
+										th:href="@{/manager/catagory/{id}/edit(id=${catagorys.catagoryid})}">
+											Sửa </a> | <a class="btn btn-danger"
+										th:href="@{/manager/catagory/{id}/delete(id=${catagorys.catagoryid})}">
+											Xóa </a></td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-sm-12 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+
+</body>
+</html>

@@ -11,7 +11,6 @@ import duan2.nhom11.demo.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
 	@Autowired
 	private ProductRepository productRepository;
 
@@ -44,6 +43,12 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		productRepository.deleteById(id);
 
+	}
+
+	@Override
+	public Long findByIdProduct(Long id) {
+		// TODO Auto-generated method stub
+		return productRepository.findByIdProduct(id);
 	}
 
 }

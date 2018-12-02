@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import duan2.nhom11.demo.entity.User;
@@ -9,7 +10,7 @@ public interface UserSerive {
 
 	User findByUsername(String email);
 
-	Iterable<User> findAll();
+	List<User> findAll();
 
 	Long count();
 
@@ -18,4 +19,6 @@ public interface UserSerive {
 	void delete(Long id);
 	
 	 Optional<User> findByToken(String token);
+	 
+	 void saverole(User user);
 }

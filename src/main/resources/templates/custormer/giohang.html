@@ -12,6 +12,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h3 class="page-header">Quản Lí Loại Sách</h3>
+					<h4 th:text="${giohang}"></h4>
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
@@ -23,14 +24,23 @@
 						<div class="panel-heading">Form Loại Sách </blink></div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<form action="#" th:action="@{/manager/catagory/save}"
-								th:object="${catagory}" method="POST">
-								<input type="hidden" th:field="*{catagoryid}" />
+							<form action="#" th:action="@{/save/cart}"
+								th:object="${cart}" method="POST">
+								<input type="hidden" th:field="*{id}" />
 								<div class="form-group">
 									<label>Loại sách<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{catagoryName}" minlength="3" maxlength="20"  required="required"/>
-							  <span style="color: red" th:if="${#fields.hasErrors('catagoryName')}" th:errors="*{catagoryName}">Name Error</span>
-							  <blink style="color: red; font-size: 20px;" th:utext="${errorname}">
+										type="text" class="form-control" th:field="*{user.userid}" />
+							  
+								</div>
+								<div class="form-group">
+									<label>Loại sách<span class="required">*</span></label> <input
+										type="text" class="form-control" th:field="*{intoMoney}" />
+							  
+								</div>
+								<div class="form-group">
+									<label>Loại sách<span class="required">*</span></label> <input
+										type="text" class="form-control" th:field="*{quantity}" />
+							  
 								</div>
 								
 
