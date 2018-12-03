@@ -18,7 +18,7 @@
 				<!-- /.col-sm-12 -->
 			</div>
 
-			<!-- /.row -->
+			<!-- tag <a> gọi tới <div>Modal</div> khi click vào -->
 			<a style="margin: 5px" class="btn btn-success" data-toggle="modal"
 				data-target="#myModal"> Thêm loại sách </a>
 			<div class="row">
@@ -33,7 +33,7 @@
 					<!-- Button trigger modal -->
 
 
-					<!-- Modal -->
+					<!-- Modal giúp hiển thị form thêm loại truyện -->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -55,11 +55,12 @@
 									<div class="form-group" align="center">
 										<label>Loại sách<span class="required">*</span></label><label>
 											<input type="text" class="form-control" style="width: 500px;"
-											th:field="*{catagoryName}" minlength="3" maxlength="20"
-											required="required"
-											data-errormessage-value-missing="dsvdsvdsvdvdvs" /> <input
+											th:field="*{catagoryName}"  maxlength="20"
+											 />
+											 <span style="color: red" th:if="${#fields.hasErrors('catagoryName')}" th:errors="*{catagoryName}">Name Error</span> <input
 											type="hidden" id="errorname"
 											style="color: red; font-size: 20px;" th:value="${errorname}" />
+											
 										</label>
 										<span style="font-style: italic; color: gray">*Nhập
 											tên loại sách có độ dài 3-10 kí tự!</span>
@@ -78,7 +79,7 @@
 					<!-- /.modal-dialog -->
 
 				</div>
-				<!-- /.modal -->
+				<!-- Modal1 giúp hiển thị thông báo lỗi trùng Từ JS chèn vào tag<Strong id="myspan"></Strong> -->
 				<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -100,7 +101,7 @@
 					<!-- /.modal-dialog -->
 
 				</div>
-				<!-- /.modal -->
+				<!-- Javascript giúp kiểm tra lỗi trùng cho form Modal và chèn lỗi(textContent) xuống Modal1-->
 				<script>
 					window.onload = function() {
 						$('#myModal').modal({
@@ -123,6 +124,8 @@
 
 					};
 				</script>
+				
+				<!-- List hiển thị danh sách loại truyện-->
 				<div class="panel panel-primary">
 					<div class="panel-heading">Danh sách loại sách</div>
 					<!-- /.panel-heading -->

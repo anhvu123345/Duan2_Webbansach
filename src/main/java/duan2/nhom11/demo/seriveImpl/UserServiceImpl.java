@@ -12,8 +12,11 @@ import duan2.nhom11.demo.repository.UserRepository;
 import duan2.nhom11.demo.service.UserSerive;
 
 @Service
+
 public class UserServiceImpl implements UserSerive {
 
+  
+    
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserSerive {
     }
 
     @Override
-    public List<User> findAll() {
+    public Iterable<User> findAll() {
 	// TODO Auto-generated method stub
 	return userRepository.findAll();
     }
@@ -68,4 +71,11 @@ public class UserServiceImpl implements UserSerive {
 
     }
 
+    @Override
+    public List<User> search(String q) {
+	// TODO Auto-generated method stub
+	return userRepository.findByEmailContaining(q);
+    }
+
+    
 }

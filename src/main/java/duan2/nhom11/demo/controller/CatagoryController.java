@@ -42,6 +42,8 @@ public class CatagoryController {
 	public String CataSave(@ModelAttribute @Valid Catagory catagory, RedirectAttributes redirectAttributes , BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("BINDING RESULT ERROR");
+			model.addAttribute("catagorys", catagoryService.findAll());
+			model.addAttribute("catagory", new Catagory());
 			return "employee/catagoryList";
 		} 
 		if(catagoryService.existsByCatagoryName(catagory.getCatagoryName())) {

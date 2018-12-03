@@ -6,19 +6,21 @@ import java.util.Optional;
 import duan2.nhom11.demo.entity.User;
 
 public interface UserSerive {
-	void save(User user);
+    void save(User user);
 
-	User findByUsername(String email);
+    User findByUsername(String email);
 
-	List<User> findAll();
+    Iterable<User> findAll();
 
-	Long count();
+    Long count();
 
-	Optional<User> findById(Long id);
+    Optional<User> findById(Long id);
 
-	void delete(Long id);
-	
-	 Optional<User> findByToken(String token);
-	 
-	 void saverole(User user);
+    void delete(Long id);
+
+    Optional<User> findByToken(String token);
+
+    void saverole(User user);
+
+    List<User> search(String q);
 }

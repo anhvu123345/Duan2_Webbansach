@@ -26,6 +26,7 @@
 						</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
+						<!--JS bắt lỗi hình ảnh-->
 							<script type="text/javascript">
 								 function myChange() {
 								        if (parseInt($('#pro-image').get(0).files.length)>4){
@@ -75,7 +76,6 @@
 											<option th:each="pblist : ${catagory}"
 												th:value="${{pblist.catagoryid}}"
 												th:text="${pblist.catagoryName}"></option>
-
 										</select>
 									</div>
 								</div>

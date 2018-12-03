@@ -1,4 +1,4 @@
-
+						/*	<==================Ajax gui du lieu tung form anh===============>*/
 							$(document).ready(function () {
 
 							    $("#formanh1").submit(function (event) {
@@ -116,10 +116,8 @@
 								        success:data
 								    });
 								}
-								
-								function myClickButton(){
-									
-								
+							/*	<==================JS lay gia tri de so sanh truong hop moi khi bam submit, va gui toi thong bao swal===============>*/
+								function myClickButton(){		
 									var productid = parseInt(document.getElementById("product.productid").value);
 									if (document.getElementById("filea[0]").value != "" ) {
 										$("#formanh1").submit();

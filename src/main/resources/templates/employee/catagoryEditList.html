@@ -18,7 +18,7 @@
 				<!-- /.col-sm-12 -->
 			</div>
 
-			<!-- /.row -->
+			<!-- tag <a> giúp chuyển sang trang thêm loại sách-->
 			<a style="margin: 5px" class="btn btn-success"
 				th:href="@{/manager/catagory/list}"> Thêm loại sách </a>
 			<div class="row">
@@ -33,7 +33,7 @@
 					<!-- Button trigger modal -->
 
 
-					<!-- Modal -->
+					<!-- Model hiển thị Form edit loại truyện-->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -76,7 +76,7 @@
 
 				</div>
 				<!-- /.modal -->
-
+				<!-- <======================>Hiển thị thông báo swal lỗi khi Tên loại truyện đã tồn tại<==============> -->
 				<script>
 					$(function() {
 						$('#myModal').modal({
@@ -105,6 +105,7 @@
 						}
 					}
 				</script>
+				<!-- <======================>List Loại truyện<==============> -->
 				<div class="panel panel-primary">
 					<div class="panel-heading">Danh sách loại sách</div>
 					<!-- /.panel-heading -->

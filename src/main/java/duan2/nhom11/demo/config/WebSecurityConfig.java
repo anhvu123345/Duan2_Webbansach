@@ -33,12 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
-		http.authorizeRequests()
-				.antMatchers("/welcome", "/manager/catagory/list", "/manager/order/list", "/manager/product/list",
+		http.authorizeRequests().antMatchers("/welcome", "/manager/catagory/list", "/manager/order/list", "/manager/product/list",
 						"/manager/catagory/add", "/manager/product/add", "/manager/{?}/upload",
-						"/manager/product/{?}/edit")
-				.access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
-		http.authorizeRequests().antMatchers("/admin/userlist").access("hasRole('ROLE_ADMIN')");
+						"/manager/product/{?}/edit").access("hasAnyRole('ROLE_EMPLOY', 'ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/admin/userlist/page/{?}").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_USER' ,'ROLE_ADMIN', 'ROLE_EMPLOY')");
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/login");
 		http.authorizeRequests().and().formLogin()//
 				// Submit URL của trang login
@@ -49,7 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.logoutSuccessUrl("/logoutSuccessful");
 		//
 		http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(1296000);
-
 	}
 
 	@Autowired
