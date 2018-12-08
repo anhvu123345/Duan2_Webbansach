@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "user")
@@ -24,15 +26,20 @@ public class User {
     @Column(name = "role", length = 20)
     private String role;
 
-    @Column(name = "email", length = 25)
+    @Email(message="Không đúng định dạng")
+    @NotEmpty(message= "Không được Trống")
+    @Column(name = "email", length = 100)
     private String email;
 
+    @NotEmpty(message= "Không được Trống")
     @Column(name = "fullname", length = 30)
     private String fullname;
 
+    @NotEmpty(message= "Không được Trống")
     @Column(name = "fristname", length = 20)
     private String fristname;
 
+    @NotEmpty(message= "Không được Trống")
     @Column(name = "password", length = 300)
     private String password;
 

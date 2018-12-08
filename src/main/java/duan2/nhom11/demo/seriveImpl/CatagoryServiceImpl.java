@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.seriveImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,17 @@ public class CatagoryServiceImpl implements CatagoryService {
 	public boolean existsByCatagoryName(String name) {
 		return catagoryRepository.existsByCatagoryName(name);
 		
+	}
+
+	@Override
+	public List<Catagory> search(String q) {
+	    // TODO Auto-generated method stub
+	    return catagoryRepository.findByCatagoryNameContaining(q);
+	}
+
+	@Override
+	public String findByCatagory(Long id) {
+		// TODO Auto-generated method stub
+		return catagoryRepository.findByIdCategory(id);
 	}
 }

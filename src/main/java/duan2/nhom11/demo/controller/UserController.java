@@ -71,12 +71,11 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/user/registrantion")
-	public ModelAndView useradd() {
-		ModelAndView model = new ModelAndView();
-		model.addObject("user", new User());
-		model.setViewName("web/registration");
+	public String useradd( Model model) {
+		
+		model.addAttribute("user", new User());
 
-		return model;
+		return "web/registration";
 	}
 
 	@GetMapping(value = "/admin/{id}/edit")
@@ -88,22 +87,22 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/user/sign")
-	public ModelAndView userSave(@Valid User user, BindingResult bindingResult) {
-		ModelAndView model = new ModelAndView();
+	public String userSave(@ModelAttribute @Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		User usercheck = userSerive.findByUsername(user.getEmail());
 
+		if (bindingResult.hasErrors()== true) {
+			return "web/registration";
+		}
+		
 		if (usercheck != null) {
-			model.addObject("error", "Email đã tồn tại");
+		    redirectAttributes.addFlashAttribute("emailerror", "Email đã tồn tại");
+			return "web/login";
 		}
-		if (bindingResult.hasErrors()) {
-			model.setViewName("/user/registrantion");
-		}
+		
 		user.setActive(true);
 		user.setRole("ROLE_USER");
 		userSerive.save(user);
-
-		model.setViewName("redirect:/login");
-		return model;
+		return "redirect:/login";
 	}
 
 	@GetMapping(value = "/admin/user/{id}/delete")

@@ -1,8 +1,10 @@
 package duan2.nhom11.demo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import duan2.nhom11.demo.entity.Catagory;
+import duan2.nhom11.demo.entity.User;
 
 
 public interface CatagoryService {
@@ -17,4 +19,7 @@ public interface CatagoryService {
 	void delete(Long id);
 
 	boolean existsByCatagoryName(String name);
+	
+	List<Catagory> search(String q);
+	String findByCatagory(Long id);
 }

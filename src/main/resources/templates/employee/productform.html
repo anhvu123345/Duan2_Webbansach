@@ -3,16 +3,18 @@
 <head th:replace="employee/layout :: head"></head>
 <meta charset="utf-8" />
 
-<body>
+<body onload="myLoad()">
 
 	<div id="wrapper">
 
 		<nav th:replace="employee/layout :: sidebar"></nav>
-
+		<nav th:replace="employee/layout :: quanly"></nav>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3 class="page-header">Quản Lí Sách</h3>
+				
+					<h3 class="page-header"><a style="margin: 3px" th:href="@{/manager/product/page/1}"
+					class="btn btn-success">Back</a>Quản Lí Sách</h3>
 				</div>
 				<!-- /.col-sm-12 -->
 			</div>
@@ -57,8 +59,53 @@
 								        }
 								    };
 								 }
+								 function myLoad(){
+									if( document.getElementById("productid").value !== "") {
+										
+										document.getElementById("upanh").style.display = "none";
+										document.getElementById("upanh").disabled = true;
+										document.getElementById("formedit").action = "/manager/product/edit";
+									}
+									
+								 };
+								
+								
 							</script>
-							<form action="#" th:action="@{/manager/product/save}"
+							<script type="text/javascript">
+							 function validate1(evt)
+							 {
+							     if(evt.keyCode!=8)
+							     {
+							         var theEvent = evt || window.event;
+							         var key = theEvent.keyCode || theEvent.which;
+							         key = String.fromCharCode(key);
+							         var regex = /[0-9]/;
+							         if (!regex.test(key))
+							         {
+							             theEvent.returnValue = false;
+							             if (theEvent.preventDefault)
+							                 theEvent.preventDefault();
+							             }
+							         }
+							     }
+							 function validate2(evt)
+							 {
+							     if(evt.keyCode!=8)
+							     {
+							         var theEvent = evt || window.event;
+							         var key = theEvent.keyCode || theEvent.which;
+							         key = String.fromCharCode(key);
+							         var regex = /[0-9]/;
+							         if (!regex.test(key))
+							         {
+							             theEvent.returnValue = false;
+							             if (theEvent.preventDefault)
+							                 theEvent.preventDefault();
+							             }
+							         }
+							     }
+							 </script>
+							<form th:action="@{/manager/product/save}" id="formedit"
 								th:object="${product}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{productid}" />
@@ -82,20 +129,16 @@
 								<div class="form-group">
 									<label>Giá<span class="required">*</span></label> <input
 										type="text" class="form-control" th:field="*{price}"
-										required="required" /> <span class="error"></span>
+										required="required" onkeypress="validate1(event)"/>
 								</div>
 								<div class="form-group">
 									<label>Số lượng<span class="required">*</span></label> <input
-										type="text" class="form-control" th:field="*{quantity}"
-										required="required" /> <span class="error"></span>
+										type="number" class="form-control" th:field="*{quantity}"
+										required="required" onkeypress="validate2(event)"/>
 								</div>
 								<div class="form-group">
-									<!-- <label>Ảnh<span class="required">*</span></label> <input
-										type="file" class="form-control" name="file" multiple="multiple"/> <span
-										class="error"></span> -->
-
-									<fieldset class="form-group">
-										 <input onchange="myChange()" type="file" class="btn btn-primary"  accept="image/gif, image/jpeg, image/png" id="pro-image" name="pro-image"
+									<fieldset class="form-group" id="upanh">
+										 <input onchange="myChange()" type="file" value="" class="btn btn-primary"  accept="image/gif, image/jpeg, image/png" id="pro-image" name="pro-image"
 											  multiple>
 									</fieldset>
 									</div>
@@ -105,10 +148,22 @@
 										required="required" /> <span class="error"></span>
 								</div>
 								<div class="form-group">
-									<label>Nhà xuất bản<span class="required">*</span></label> <input
+									<label>Nhà xuất bản<span class="required">*</span></label> <input list="browsers"
 										type="text" class="form-control" th:field="*{publisher}"
 										required="required" /> <span class="error"></span>
 								</div>
+								
+								<datalist id="browsers">
+										 <option value="Kim đồng">
+									    <option value="Văn Lang">
+									    <option value="Thanh Niên">
+									    <option value="Tuổi trẻ">
+									    <option value="Tổng hợp HCM">
+									    <option value="Lao Động">
+									    <option value="Hội nhà văn">
+									   
+									</datalist>
+								
 								<div class="form-group">
 									<label>Mô tả<span class="required">*</span></label>
 									<textarea class="form-control" th:field="*{description}"
@@ -125,7 +180,7 @@
 									<i class="fa fa-save"></i>Lưu
 								</button>
 							</form>
-						<
+						
 						</div>
 
 					</div>

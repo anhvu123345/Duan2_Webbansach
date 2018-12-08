@@ -1,10 +1,12 @@
 package duan2.nhom11.demo.seriveImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import duan2.nhom11.demo.entity.Catagory;
 import duan2.nhom11.demo.entity.Product;
 import duan2.nhom11.demo.repository.ProductRepository;
 import duan2.nhom11.demo.service.ProductService;
@@ -49,6 +51,12 @@ public class ProductServiceImpl implements ProductService {
 	public Long findByIdProduct(Long id) {
 		// TODO Auto-generated method stub
 		return productRepository.findByIdProduct(id);
+	}
+
+	@Override
+	public List<Product> search(String q) {
+	    // TODO Auto-generated method stub
+	    return productRepository.findByBookNameContaining(q);
 	}
 
 }

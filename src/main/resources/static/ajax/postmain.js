@@ -119,72 +119,77 @@
 							/*	<==================JS lay gia tri de so sanh truong hop moi khi bam submit, va gui toi thong bao swal===============>*/
 								function myClickButton(){		
 									var productid = parseInt(document.getElementById("product.productid").value);
-									if (document.getElementById("filea[0]").value != "" ) {
+									if (document.getElementById("filea[0]").value != "" && document.getElementById("fileb[0]").value == "" && document.getElementById("filec[0]").value == "" && document.getElementById("filed[0]").value == "") {
 										$("#formanh1").submit();
-									
 									}
-									 if (document.getElementById("fileb[0]").value != "") {
+									if (document.getElementById("filea[0]").value == "" && document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value == "" && document.getElementById("filed[0]").value == "") {
 								
-										$( "#formanh2").submit();
+										$("#formanh2").submit();
 									}
-									 if (document.getElementById("filec[0]").value != "" ) {
+									if (document.getElementById("filea[0]").value == "" && document.getElementById("fileb[0]").value == "" && document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value == "") {
 										$("#formanh3").submit();
 									
 									}
-									 if (document.getElementById("filed[0]").value != "") {
+									if (document.getElementById("filea[0]").value == "" && document.getElementById("fileb[0]").value == "" && document.getElementById("filec[0]").value == "" && document.getElementById("filed[0]").value != "") {
 										$("#formanh4").submit();
 									}
-									if (document.getElementById("filea[0]").value != "" && document.getElementById("filec[0]").value != "") {
+									if (document.getElementById("filea[0]").value != "" && document.getElementById("filec[0]").value != "" && document.getElementById("fileb[0]").value == "" && document.getElementById("filed[0]").value == "") {
 										$("#formanh1").submit();
-										$( "#formanh3").submit();
-									}
-									 if (document.getElementById("filea[0]").value != "" && document.getElementById("fileb[0]").value != "") {
-										$("#formanh1").submit();
-										$( "#formanh2").submit();
-									}
-									 if (document.getElementById("filea[0]").value != "" && document.getElementById("filed[0]").value != "") {
-										$("#formanh1").submit();
-										$( "#formanh4").submit();
-									}
-									 if (document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value != "") {
-										$("#formanh2").submit();
-										$( "#formanh3").submit();
-									}
-									 if (document.getElementById("fileb[0]").value != "" && document.getElementById("filed[0]").value != "") {
-										$("#formanh2").submit();
-										$("#formanh4").submit();
-									}
-									 if (document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value != "") {
 										$("#formanh3").submit();
+									}
+									 if (document.getElementById("filea[0]").value != "" && document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value == "" && document.getElementById("filed[0]").value == "") {
+										$("#formanh1").submit();
+										$("#formanh2").submit();
+									}
+									 if (document.getElementById("filea[0]").value != "" && document.getElementById("filed[0]").value != "" && document.getElementById("fileb[0]").value == "" && document.getElementById("filed[0]").value == "") {
+										$("#formanh1").submit();
 										$("#formanh4").submit();
 									}
-									 if (document.getElementById("filea[0]").value != "" && document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value != "") {
-										
-										$("#formanh1").submit();
+									 if (document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value != "" && document.getElementById("filea[0]").value == "" && document.getElementById("filed[0]").value == "") {
 										$("#formanh2").submit();
 										$("#formanh3").submit();
 									}
-									 if (document.getElementById("filea[0]").value != "" && document.getElementById("fileb[0]").value != "" && document.getElementById("filed[0]").value != "") {
+									 if (document.getElementById("fileb[0]").value != "" && document.getElementById("filed[0]").value != "" && document.getElementById("filea[0]").value == "" && document.getElementById("filec[0]").value == "") {
+									
+										$("#formanh2").submit();
+										$("#formanh4").submit();
+									}
+									 if (document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value != "" && document.getElementById("filea[0]").value == "" && document.getElementById("fileb[0]").value == "") {
+										$("#formanh3").submit();
+										$("#formanh4").submit();
+									}
+									 if (document.getElementById("filea[0]").value != "" && document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value != ""  && document.getElementById("filed[0]").value == "" ) {
+										$("#formanh1").submit();
+										$("#formanh2").submit();
+										$("#formanh3").submit();
+									}
+									 if (document.getElementById("filea[0]").value != "" && document.getElementById("fileb[0]").value != "" && document.getElementById("filed[0]").value != ""  && document.getElementById("filec[0]").value == "") {
 										$("#formanh1").submit();
 										
 										$("#formanh2").submit();
 									
 										$("#formanh4").submit();
 									}
-									 if (document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value != "") {
+									 if (document.getElementById("fileb[0]").value != "" && document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value != ""  && document.getElementById("filea[0]").value == "") {
 										$("#formanh2").submit();
 								
 										$("#formanh3").submit();
 										
 										$("#formanh4").submit();
 									}
-									 if (document.getElementById("filea[0]").value != "" && document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value != "") {
+									 if (document.getElementById("filea[0]").value != "" && document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value != ""  && document.getElementById("fileb[0]").value == "") {
 										$("#formanh1").submit();
 									
 										$("#formanh3").submit();
 									
 										$("#formanh4").submit();
 									}
+									 if (document.getElementById("filea[0]").value != "" && document.getElementById("filec[0]").value != "" && document.getElementById("filed[0]").value != ""  && document.getElementById("fileb[0]").value != "") {
+											$("#formanh1").submit();
+											$("#formanh2").submit();
+											$("#formanh3").submit();
+											$("#formanh4").submit();
+										}
 						/*			
 						 if (document.getElementById("fileb[0]").value != "") {
 										 $("#submit2").click();

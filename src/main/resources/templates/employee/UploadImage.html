@@ -6,7 +6,7 @@
 	<div id="wrapper">
 
 		<nav th:replace="employee/layout :: sidebar"></nav>
-
+		<nav th:replace="employee/layout :: quanly"></nav>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12"></div>
@@ -17,10 +17,10 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="panel panel-primary">
-						<div class="panel-heading">Upload hình ảnh</div>
+						<div class="panel-heading">Reupload Ảnh</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<!-- <======================>Js giúp phóng hình ảnh khi click vào ảnh muốn xem<==============> -->
+							<!-- <======================>Js giÃºp phÃ³ng hÃ¬nh áº£nh khi click vÃ o áº£nh muá»‘n xem<==============> -->
 							<script type="text/javascript">
 								$(document)
 										.ready(
@@ -94,8 +94,8 @@
 																	});
 												});
 							</script>
-							<!-- <======================>Js giúp ẩn hiển nút lưu ảnh khi ảnh có giá trị<==============> -->
-							<script type="text/javascript">
+							<!-- <======================>Js giÃºp áº©n hiá»ƒn nÃºt Lưu ảnhkhi áº£nh cÃ³ giÃ¡ trá»‹<==============> -->
+							<!-- <script type="text/javascript">
 								function Mychange1() {
 									if (document.getElementById("filea[0]").value != "") {
 										document.getElementById("submit1").style.display = 'block';
@@ -127,8 +127,8 @@
 									}
 
 								}
-							</script>
-							<!-- <======================>Js giúp thông báo khi ảnh sai định dạng<==============> -->
+							</script> -->
+							<!-- <======================>Js giÃºp thÃ´ng bÃ¡o khi áº£nh sai Ä‘á»‹nh dáº¡ng<==============> -->
 							<script type="text/javascript">
 								$(document)
 										.ready(
@@ -152,23 +152,21 @@
 																	});
 												});
 							</script>
+							
 
-							<!-- <======================>Form giúp lưu ảnh 1<==============> -->
+							<!-- <======================>Form giÃºp Lưu ảnh1<==============> -->
 							<form th:object="${imageproducts}" id="formanh1"
 								enctype="multipart/form-data" th:action="@{/manager/upload1}"
 								method="POST">
 								<input type="hidden" th:field="*{image_id}" /> <input
 									type="hidden" id="product.productid" name="product.productid"
 									th:value="${idproduct}" /> <input type="hidden"
-									th:field="*{image1}" /> <input type="hidden"
-									th:field="*{image2}" /> <input type="hidden"
-									th:field="*{image3}" /> <input type="hidden"
-									th:field="*{image4}" />
+									th:field="*{image1}" />
 								<div class="col-sm-3">
 									<input type="file" name="filea[0]" id="filea[0]"
 										class="form-control" placeholder="Select-image"
 										onchange="Mychange1()"
-										accept="image/gif, image/jpeg, image/png" />
+										accept="image/gif, image/jpeg, image/png"  />
 									<button type="submit" class="btn btn-primary"
 										style="display: none;" id="submit1">
 										<i class="fa fa-save"></i>Lưu ảnh 1
@@ -189,17 +187,14 @@
 								</div>
 
 							</form>
-								<!-- <======================>Form giúp lưu ảnh 2<==============> -->
+								<!-- <======================>Form giÃºp Lưu Ảnh<==============> -->
 							<form action="#" th:action="@{/manager/upload2}" id="formanh2"
 								th:object="${imageproducts}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{image_id}" /> <input
 									type="hidden" id="product.productid" name="product.productid"
-									th:value="${idproduct}" /> <input type="hidden"
-									th:field="*{image1}" /> <input type="hidden"
-									th:field="*{image2}" /> <input type="hidden"
-									th:field="*{image3}" /> <input type="hidden"
-									th:field="*{image4}" />
+									th:value="${idproduct}" />  <input type="hidden"
+									th:field="*{image2}" /> 
 								<div class="col-sm-3">
 									<input type="file" name="fileb[0]" id="fileb[0]"
 										class="form-control" placeholder="Select-image"
@@ -207,7 +202,7 @@
 										accept="image/gif, image/jpeg, image/png" />
 									<button type="submit" class="btn btn-primary"
 										style="display: none;" id="submit2">
-										<i class="fa fa-save"></i>Lưu ảnh 2
+										<i class="fa fa-save"></i>Lưu Ảnh 2
 									</button>
 
 									<div th:each="imageproducts : ${imageproduct}">
@@ -224,17 +219,14 @@
 									</div>
 								</div>
 							</form>
-							<!-- <======================>Form giúp lưu ảnh 3<==============> -->
+							<!-- <======================>Form giÃºp Lưu ảnh3<==============> -->
 							<form action="#" th:action="@{/manager/upload3}" id="formanh3"
 								th:object="${imageproducts}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{image_id}" /> <input
 									type="hidden" id="product.productid" name="product.productid"
-									th:value="${idproduct}" /> <input type="hidden"
-									th:field="*{image1}" /> <input type="hidden"
-									th:field="*{image2}" /> <input type="hidden"
-									th:field="*{image3}" /> <input type="hidden"
-									th:field="*{image4}" />
+									th:value="${idproduct}" />  <input type="hidden"
+									th:field="*{image3}" />
 								<div class="col-sm-3">
 									<input type="file" name="filec[0]" id="filec[0]"
 										class="form-control" placeholder="Select-image"
@@ -259,16 +251,13 @@
 									</div>
 								</div>
 							</form>
-							<!-- <======================>Form giúp lưu ảnh 4<==============> -->
+							<!-- <======================>Form giÃºp Lưu ảnh4<==============> -->
 							<form action="#" th:action="@{/manager/upload4}" id="formanh4"
 								th:object="${imageproducts}" enctype="multipart/form-data"
 								method="POST">
 								<input type="hidden" th:field="*{image_id}" /> <input
 									type="hidden" id="product.productid" name="product.productid"
-									th:value="${idproduct}" /> <input type="hidden"
-									th:field="*{image1}" /> <input type="hidden"
-									th:field="*{image2}" /> <input type="hidden"
-									th:field="*{image3}" /> <input type="hidden"
+									th:value="${idproduct}" />  <input type="hidden"
 									th:field="*{image4}" />
 								<div class="col-sm-3">
 									<input type="file" name="filed[0]" id="filed[0]"
@@ -294,12 +283,12 @@
 									</div>
 								</div>
 							</form>
-							<!-- <======================>Div lightbox nơi chứa hình ảnh hiển thị cho JS trên<==============> -->
+							<!-- <======================>Div lightbox nÆ¡i chá»©a hÃ¬nh áº£nh hiá»ƒn thá»‹ cho JS trÃªn<==============> -->
 							<div id="lightbox" class="modal fade" tabindex="-1" role="dialog"
 								aria-labelledby="myLargeModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<button type="button" class="close hidden" data-dismiss="modal"
-										aria-hidden="true">×</button>
+										aria-hidden="true">X</button>
 									<div class="modal-content">
 										<div class="modal-body">
 											<img src="" alt="" />
@@ -313,9 +302,14 @@
 					</div>
 					<!-- /.col-sm-12 -->
 				</div>
-				<!-- <======================>Sử dụng onclick để click các nút submit các form gửi qua AJAX postmain.js<==============> -->
-				<button class="btn btn-primary" onclick="myClickButton()">Upload Nhiều ảnh</button>
+				<!-- <======================>Sá»­ dá»¥ng onclick Ä‘á»ƒ click cÃ¡c nÃºt submit cÃ¡c form gá»­i qua AJAX postmain.js<==============> -->
+				<div class="col-sm-12" style="text-align: center">
+				<button class="btn btn-primary" onclick="myClickButton()">Reupload ảnh</button>
+				<a style="margin: 3px" th:href="@{/manager/product/page/1}"
+					class="btn btn-success">Back</a>
+				</div>
 				<!-- /.row -->
+				
 			</div>
 			<!-- /#page-wrapper -->
 		</div>

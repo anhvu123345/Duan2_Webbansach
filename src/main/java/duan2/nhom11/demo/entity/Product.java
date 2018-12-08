@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,7 +56,9 @@ public class Product{
 	@Column(name = "date_published")
 	private Date datePublished;
 	
-
+	@OneToOne(mappedBy="product")
+	private ImageProduct imageProduct;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_upload", columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
 	private Date dateUpload;
@@ -63,7 +66,13 @@ public class Product{
 	@OneToMany(mappedBy = "product", cascade = { CascadeType.ALL })
 	private List<OrderDetail> orderDetail;
 
-	
+	public ImageProduct getImageProduct() {
+		return imageProduct;
+	}
+
+	public void setImageProduct(ImageProduct imageProduct) {
+		this.imageProduct = imageProduct;
+	}
 
 	public Product(Long productid, Catagory catagory, String bookName, double price, int quantity,
 			String author, String publisher, String description, Date datePublished, Date dateUpload,

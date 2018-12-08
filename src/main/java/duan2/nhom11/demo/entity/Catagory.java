@@ -12,8 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catagory")
@@ -26,9 +24,8 @@ public class Catagory  {
 	private Long catagoryid;
 	
 	
-	@NotNull(message="không được để trống")
-	@Size(max=20, message="Không vượt quá 20 kí tự")
 
+	@Column(name = "catagory_name")
 	private String catagoryName;
 
 	@OneToMany(mappedBy = "catagory", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)

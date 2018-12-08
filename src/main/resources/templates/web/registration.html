@@ -5,35 +5,91 @@
 <title>Đăng kí tài khoản</title>
 <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
 	rel="stylesheet" />
+<style type="text/css">
+   input::-webkit-input-placeholder {
+color: red !important;
+text-align:right;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: red !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: red !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: red !important;  
+}
+</style>
 </head>
-<body>
-<div class="container" style="width: 600px; padding: 50px">
-<h2>Tạo Tài Khoản</h2>
-<form action="#" th:action="@{/user/sign}" th:object="${user}" method="POST">
-	                    	 <input type="hidden" th:field="*{userid}"/>
-	                        <div class="form-group">
-	                         <div class="form-group">
-	                            <label>Họ<span class="required">*</span></label>
-	                            <input type="text" class="form-control" th:field="*{fristname}"/> 
-						        <span  class="error"></span>
-	                       
-	                         <div class="form-group">
-	                            <label>Tên<span class="required">*</span></label>
-	                            <input type="text" class="form-control" th:field="*{fullname}"/> 
-						        <span  class="error"></span>
-	                        </div>
-	                         </div>
-	                            <label>Email<span class="required">*</span></label>
-	                            <input type="text" class="form-control" th:field="*{email}"/> 
-						        <span  class="error"></span>
-	                        </div>
-	                         <div class="form-group">
-	                            <label>Password<span class="required">*</span></label>
-	                            <input type="password" class="form-control"th:field="*{password}" /> 
-						        <span  class="error"></span>
-	                        </div>
-	                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Đăng Kí</button>
-	                    </form>
-	                    </div>
+<body onload="myError()">
+	<script type="text/javascript">
+	
+		function myError(){
+			var errorfistname = document.getElementById('firstname1');
+			var errorfullname = document.getElementById('fullname1');
+			var erroremail = document.getElementById('email1');
+			var errorpassword = document.getElementById('password1');
+			if(errorfistname.textContent.length > 0){
+				document.getElementById('fristname').placeholder = document.getElementById('firstname1').textContent;
+				
+			}
+			if(errorfullname.textContent.length > 0){
+				document.getElementById('fullname').placeholder = document.getElementById('fullname1').textContent;
+				
+			}
+			if(erroremail.textContent.length > 0){
+				document.getElementById('email').placeholder = document.getElementById('email1').textContent;
+				
+			}
+			if(errorpassword.textContent.length > 0){
+				document.getElementById('password').placeholder = document.getElementById('password1').textContent;
+				
+			}
+			
+		}
+	</script>
+	
+	<div class="container" style="width: 600px; padding: 50px">
+		<h2>Tạo Tài Khoản</h2>
+		<form action="#" th:action="@{/user/sign}" th:object="${user}"
+			method="POST">
+			<input type="hidden" th:field="*{userid}" />
+			<div class="form-group">
+				<div class="form-group">
+					<label>Họ<span class="required">*</span></label> <input type="text"
+						 class="form-control"
+						th:field="*{fristname}" placeholder="First Name....."/> <span  id="firstname1"><span 
+						style="display: none" th:if="${#fields.hasErrors('fristname')}"
+						th:errors="*{fristname}">Name Error</span></span>
+
+					<div class="form-group">
+						<label>Tên<span class="required">*</span></label> <input
+							 type="text" class="form-control"
+							th:field="*{fullname}"  placeholder="Full Name....."/><span id="fullname1"><span  style="display: none" 
+							th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}">Name
+							Error</span></span>
+					</div>
+				</div>
+				<label>Email<span class="required">*</span></label> <input placeholder="Email @....."
+					type="text" class="form-control"
+					th:field="*{email}" /> <span id="email1"> <span  style="display: none" 
+					th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name
+					Error</span></span>
+			</div>
+			<div class="form-group">
+				<label>Password<span class="required">*</span></label> <input placeholder="Password....."
+				 type="password" class="form-control"
+					th:field="*{password}" /> <span id="password1"> <span  style="display: none" 
+					th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name
+					Error</span></span>
+			</div>
+			<button type="submit" class="btn btn-primary">
+				<i class="fa fa-save"></i>Đăng Kí
+			</button>
+		</form>
+	</div>
 </body>
 </html>

@@ -27,7 +27,7 @@
 <link th:href="@{/css/admin/custom.css}" rel="stylesheet" />
 <link th:href="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.css}"
 	rel="stylesheet" />
-	
+
 <!-- Custom Fonts -->
 <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"
 	rel="stylesheet" type="text/css" />
@@ -37,7 +37,8 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-<script th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"></script>
 <!-- Metis Menu Plugin JavaScript -->
 <script th:src="@{/webjars/metisMenu/1.1.3/metisMenu.min.js}"></script>
 
@@ -54,9 +55,11 @@
 <script th:src="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.js}"></script>
 <script th:src="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.js}"></script>
 
-<style type="text/css">
-/* <=====================>css hiển thị cho thông báo kiểu swal<=====================================> */
 
+
+<style type="text/css">
+
+/* <=====================>css hiển thị cho thông báo kiểu swal<=====================================> */
 .navbar-top-links .dropdown-user {
 	right: 0;
 	left: 0 !important;
@@ -215,6 +218,7 @@
 	left: 120px;
 	/* Note: left: 50%; doesn't transition in WebKit */
 }
+
 .switch-input:checked+.switch-label-mid ~ .switch-selection {
 	left: 60px;
 	/* Note: left: 50%; doesn't transition in WebKit */
@@ -277,10 +281,27 @@
 
 	<div id="wrapper">
 
+		<div th:fragment="quanly">
+			<div class="modal fade" id="myModaluser" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+
+				<div class="modal-dialog" style="padding-top: 15%">
+					<div class="modal-content">
+
+						<p>sdvdsvsdvds</p>
+
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+
+			</div>
+		</div>
 		<!-- Navigation -->
 		<nav th:fragment="sidebar"
 			class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
+
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target=".navbar-collapse">
@@ -299,7 +320,9 @@
 						class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
-
+						<li><a data-toggle="modal" data-target="#myModaluser"> <i
+								class=" glyphicon glyphicon-user "></i> Quản lý tài khoản
+						</a></li>
 						<li><a th:href="@{/logout}"> <i
 								class="fa fa-sign-out fa-fw"></i> Đăng xuất
 						</a></li>
