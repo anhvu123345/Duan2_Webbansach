@@ -78,19 +78,20 @@
 											id="dataTables-example">
 											<thead>
 												<tr>
-													<th width="">STT</th>
+												
 													<th width="">Mã</th>
 													<th width="">Ảnh đại diện</th>
 													<th width="">Email</th>
 													<th width="">Họ</th>
 													<th width="">Tên</th>
 													<th width="">Loại tài khoản</th>
+													<th width="">trạng thái tài khoản</th>
 													<th width="">Tùy chọn</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr th:each="user, lister :  ${Listuser.pageList}">
-													<td th:text="${lister.count}"></td>
+											
 													<td th:text="${user.userid}"></td>
 													<td ><a href="#" data-toggle="modal"
 													data-target="#lightbox"><img
@@ -125,8 +126,15 @@
 																class="switch-selection"></span>
 														</div>
 													</td>
+													<td  class="custom-control-input" th:text="${user.active}"></td>
 													<!-- <=================================================================================================================> -->
-
+													<td style="text-align: center; vertical-align: middle">
+													  <label class="custom-control custom-checkbox">
+                                                       <input type="checkbox"  class="custom-control-input" th:name="${'listuser[' + lister.index +'].active'}" th:checked="${user.active == true}" value="1">
+                                                           <span class="custom-control-indicator"></span>
+                                                       <input type="hidden" class="custom-control-input" th:name="${'listuser[' + lister.index +'].active'}"  th:checked="${user.active == false}"  value="0">
+                                                          </label>
+													</td>
 
 													<!-- <=============<td> áº©n nÃºt input giÃ¡ trá»‹ Ä‘á»ƒ save tÃ i khoáº£n giÃºp thay Ä‘á»•i ROLE khÃ´ng máº¥t dá»¯ liá»‡u===============> -->
 													<td style="display: none"><input type="hidden"
