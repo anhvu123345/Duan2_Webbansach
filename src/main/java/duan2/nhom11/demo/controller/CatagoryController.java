@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -159,6 +161,16 @@ public class CatagoryController {
     @GetMapping(value = "/manager/catagory/{id}/delete")
     public String cataDelete(@PathVariable Long id) {
 	catagoryService.delete(id);
+	return "redirect:/manager/catagory/list";
+    }
+    
+    @PostMapping(value = "/manager/catagory/delete")
+    public String cataDeleteall(HttpServletRequest request,ModelMap model) {
+    	
+    	for(String catagoryid : request.getParameterValues("CatagoryId")) {
+    		catagoryService.delete(Long.parseLong(catagoryid));
+    	}
+	
 	return "redirect:/manager/catagory/list";
     }
     

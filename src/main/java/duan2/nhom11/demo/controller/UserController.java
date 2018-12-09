@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -86,6 +87,14 @@ public class UserController {
 		return "admin/listUser";
 	}
 
+	 @PostMapping(value = "/user/setrole", params="action=xoa")
+	    public String userdelete(HttpServletRequest request,ModelMap model ) {
+	    	for(String userId : request.getParameterValues("userId")) {
+	    		userSerive.delete(Long.parseLong(userId));
+	    	}
+		return "redirect:/admin/userlist";
+	    }
+	
 	@GetMapping(value = "/user/registrantion")
 	public String useradd( Model model) {
 		
@@ -180,9 +189,11 @@ public class UserController {
 		model.setViewName("redirect:/admin/userlist");
 		return model;
 	}
+	
+
 
 	/*===========================Lấy user từ list để thêm lần lượt===========================*/
-	@PostMapping(value = "/user/setrole")
+	@PostMapping(value = "/user/setrole", params="action=setrole")
 	public ModelAndView setRole(@ModelAttribute("listtt") ListRoleUser listtt) {
 		ModelAndView model = new ModelAndView();
 

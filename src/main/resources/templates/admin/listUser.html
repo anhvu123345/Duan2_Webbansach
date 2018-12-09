@@ -31,8 +31,8 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading" style="height: 70px;">
 							Quản lý tài khoản
-							<form action="#"
-								th:action="@{/admin/userlist/search/1}" method="GET">
+							<form action="#" th:action="@{/admin/userlist/search/1}"
+								method="GET">
 								<input style="width: 90%; float: left;"
 									class="form-control round-form" type="text" id="myInput"
 									onkeyup="myFunction()" name="s" placeholder="Tìm Kiếm...." />
@@ -64,6 +64,61 @@
 										}
 									}
 								}
+
+								$(document)
+										.ready(
+												function() {
+													document
+															.getElementById("submitdelete").disabled = true;
+
+													$('#checkBoxAll')
+															.click(
+																	function() {
+																		if ($(
+																				this)
+																				.is(
+																						":checked"))
+																			$(
+																					'.chkCheckBoxId')
+																					.prop(
+																							'checked',
+																							true);
+																		if (!$(
+																				this)
+																				.is(
+																						":checked"))
+																			$(
+																					'.chkCheckBoxId')
+																					.prop(
+																							'checked',
+																							false);
+
+																		if ($(
+																				this)
+																				.is(
+																						":checked"))
+																			document
+																					.getElementById("submitdelete").disabled = false;
+																		else
+																			document
+																					.getElementById("submitdelete").disabled = true;
+																	});
+
+													$('.chkCheckBoxId')
+															.click(
+																	function() {
+																		if ($(
+																				'.chkCheckBoxId')
+																				.is(
+																						":checked"))
+																			document
+																					.getElementById("submitdelete").disabled = false;
+
+																		else
+																			document
+																					.getElementById("submitdelete").disabled = true;
+																	});
+												});
 							</script>
 							<th:block th:if="${#lists.isEmpty(Listuser.pageList)}">
 								<h3>Chưa có dữ liệu</h3>
@@ -78,7 +133,11 @@
 											id="dataTables-example">
 											<thead>
 												<tr>
-												
+													<th><div
+															class="checkbox checkbox-danger checkbox-circle">
+															<input type="checkbox" id="checkBoxAll" /><label
+																for="checkbox8"> </label>
+														</div></th>
 													<th width="">Mã</th>
 													<th width="">Ảnh đại diện</th>
 													<th width="">Email</th>
@@ -91,12 +150,18 @@
 											</thead>
 											<tbody>
 												<tr th:each="user, lister :  ${Listuser.pageList}">
-											
+													<td><div
+															class="checkbox checkbox-info checkbox-circle">
+															<input type="checkbox" class="styled chkCheckBoxId"
+																id="checkbox8" name="userId"
+																th:value="${user.userid}" /> <label
+																for="checkbox8"> </label>
+														</div></td>
 													<td th:text="${user.userid}"></td>
-													<td ><a href="#" data-toggle="modal"
-													data-target="#lightbox"><img
-												style="border: black; border-width: 1px; border-style: solid; width: 40px; height: 40px;"
-												th:src="@{~/images/{img}(img=${user.imageUser})}"></img></a></td>
+													<td><a href="#" data-toggle="modal"
+														data-target="#lightbox"><img
+															style="border: black; border-width: 1px; border-style: solid; width: 40px; height: 40px;"
+															th:src="@{~/images/{img}(img=${user.imageUser})}"></img></a></td>
 													<td th:text="${user.email}"></td>
 													<td th:text="${user.fristname}"></td>
 													<td th:text="${user.fullname}"></td>
@@ -126,21 +191,25 @@
 																class="switch-selection"></span>
 														</div>
 													</td>
-													<td  class="custom-control-input" th:text="${user.active}"></td>
+													<td class="custom-control-input" th:text="${user.active}"></td>
 													<!-- <=================================================================================================================> -->
 													<td style="text-align: center; vertical-align: middle">
-													  <label class="custom-control custom-checkbox">
-                                                       <input type="checkbox"  class="custom-control-input" th:name="${'listuser[' + lister.index +'].active'}" th:checked="${user.active == true}" value="1">
-                                                           <span class="custom-control-indicator"></span>
-                                                       <input type="hidden" class="custom-control-input" th:name="${'listuser[' + lister.index +'].active'}"  th:checked="${user.active == false}"  value="0">
-                                                          </label>
+														<label class="custom-control custom-checkbox"> <input
+															type="checkbox" class="custom-control-input"
+															th:name="${'listuser[' + lister.index +'].active'}"
+															th:checked="${user.active == true}" value="1"> <span
+															class="custom-control-indicator"></span> <input
+															type="hidden" class="custom-control-input"
+															th:name="${'listuser[' + lister.index +'].active'}"
+															th:checked="${user.active == false}" value="0">
+													</label>
 													</td>
 
 													<!-- <=============<td> áº©n nÃºt input giÃ¡ trá»‹ Ä‘á»ƒ save tÃ i khoáº£n giÃºp thay Ä‘á»•i ROLE khÃ´ng máº¥t dá»¯ liá»‡u===============> -->
 													<td style="display: none"><input type="hidden"
 														th:name="${'listuser[' + lister.index +'].email'}"
 														th:value="${user.email}" /></td>
-														<td style="display: none"><input type="hidden"
+													<td style="display: none"><input type="hidden"
 														th:name="${'listuser[' + lister.index +'].imageUser'}"
 														th:value="${user.imageUser}" /></td>
 													<td style="display: none"><input type="hidden"
@@ -226,80 +295,87 @@
 									}
 								</script>
 								<script type="text/javascript">
-						$(document)
-								.ready(
-										function() {
-											var $lightbox = $('#lightbox');
+									$(document)
+											.ready(
+													function() {
+														var $lightbox = $('#lightbox');
 
-											$('[data-target="#lightbox"]')
-													.on(
-															'click',
-															function(event) {
-																var $img = $(
-																		this)
-																		.find(
-																				'img'), src = $img
-																		.attr('src'), alt = $img
-																		.attr('alt'), css = {
-																	'maxWidth' : $(
-																			window)
-																			.width() - 100,
-																	'maxHeight' : $(
-																			window)
-																			.height() - 100
-																};
+														$(
+																'[data-target="#lightbox"]')
+																.on(
+																		'click',
+																		function(
+																				event) {
+																			var $img = $(
+																					this)
+																					.find(
+																							'img'), src = $img
+																					.attr('src'), alt = $img
+																					.attr('alt'), css = {
+																				'maxWidth' : $(
+																						window)
+																						.width() - 100,
+																				'maxHeight' : $(
+																						window)
+																						.height() - 100
+																			};
 
-																$lightbox
-																		.find(
-																				'.close')
-																		.addClass(
-																				'hidden');
-																$lightbox
-																		.find(
-																				'img')
-																		.attr(
-																				'src',
-																				src);
-																$lightbox
-																		.find(
-																				'img')
-																		.attr(
-																				'alt',
-																				alt);
-																$lightbox
-																		.find(
-																				'img')
-																		.css(
-																				css);
-															});
+																			$lightbox
+																					.find(
+																							'.close')
+																					.addClass(
+																							'hidden');
+																			$lightbox
+																					.find(
+																							'img')
+																					.attr(
+																							'src',
+																							src);
+																			$lightbox
+																					.find(
+																							'img')
+																					.attr(
+																							'alt',
+																							alt);
+																			$lightbox
+																					.find(
+																							'img')
+																					.css(
+																							css);
+																		});
 
-											$lightbox
-													.on(
-															'shown.bs.modal',
-															function(e) {
-																var $img = $lightbox
-																		.find('img');
+														$lightbox
+																.on(
+																		'shown.bs.modal',
+																		function(
+																				e) {
+																			var $img = $lightbox
+																					.find('img');
 
-																$lightbox
-																		.find(
-																				'.modal-dialog')
-																		.css(
-																				{
-																					'width' : $img
-																							.width()
-																				});
-																$lightbox
-																		.find(
-																				'.close')
-																		.removeClass(
-																				'hidden');
-															});
-										});
-					</script>
+																			$lightbox
+																					.find(
+																							'.modal-dialog')
+																					.css(
+																							{
+																								'width' : $img
+																										.width()
+																							});
+																			$lightbox
+																					.find(
+																							'.close')
+																					.removeClass(
+																							'hidden');
+																		});
+													});
+								</script>
 								<div align="center">
 									<a type="submit" onclick="Myclick()" class="btn btn-primary">
 										<i class="fa fa-save"></i>lưu
-									</a> <input style="display: none" id="submit1" type="submit" />
+									</a>
+									<button style="display: none" id="submit1" type="submit"
+										name="action" value="setrole">setrole</button>
+									<button type="submit" name="action" id="submitdelete" class="btn btn-success"  value="xoa">Xóa</button>
+								
 								</div>
 							</form>
 							<div id="lightbox" class="modal fade" tabindex="-1" role="dialog"
