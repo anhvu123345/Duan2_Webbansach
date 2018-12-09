@@ -18,7 +18,7 @@ public class LoginController {
 		ModelAndView model = new ModelAndView();
 
 		if (ck.getUserPrincipal() != null) {
-			model.setViewName("redirect:/welcome");
+			model.setViewName("redirect:/index");
 			return model;
 		} else {
 			if (error != null) {

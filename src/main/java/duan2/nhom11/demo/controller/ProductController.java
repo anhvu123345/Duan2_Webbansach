@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,7 +59,16 @@ public class ProductController {
 	    redirect.addFlashAttribute("success", model.asMap().get("success").toString());
 	return "redirect:/manager/product/page/1";
     }
-
+    
+    @PostMapping(value = "/manager/product/delete")
+    public String productDelete(HttpServletRequest request,ModelMap model) {
+ 
+    	for(String productid : request.getParameterValues("productId")) {
+    		productService.delete(Long.parseLong(productid));
+    	}
+	return "redirect:/manager/product/list";
+    }
+    
     @GetMapping("/manager/product/page/{pageNumber}")
     public String showEmployeePage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
 	PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("employeelist");

@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import duan2.nhom11.demo.entity.Catagory;
+import duan2.nhom11.demo.entity.User;
 import duan2.nhom11.demo.service.CatagoryService;
+import duan2.nhom11.demo.service.UserSerive;
 
 @Controller
 public class CatagoryController {
@@ -31,6 +35,9 @@ public class CatagoryController {
 	binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
+    @Autowired
+    private UserSerive userService;
+    
     @Autowired
     private CatagoryService catagoryService;
 
@@ -74,6 +81,10 @@ public class CatagoryController {
 	model.addAttribute("catagorys", catagoryService.findAll());
 	model.addAttribute("catagory", catagory);
 	model.addAttribute("catagorys", catagoryService.findAll());
+	model.addAttribute("search", true);
+	 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/catagoryList";
     }
 
@@ -153,6 +164,15 @@ public class CatagoryController {
 	return "redirect:/manager/catagory/list";
     }
     
+    @PostMapping(value = "/manager/catagory/delete")
+    public String cataDeleteall(HttpServletRequest request,ModelMap model) {
+ 
+    	for(String catagoryid : request.getParameterValues("CatagoryId")) {
+    		catagoryService.delete(Long.parseLong(catagoryid));
+    	}
+	return "redirect:/manager/catagory/list";
+    }
+    
     @GetMapping("/manager/catagory/page/{pageNumber}/{id}")
     public String ShowCatagoryEdit(HttpServletRequest request, @PathVariable Long id, @PathVariable int pageNumber, Model model) {
 	PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("employeelist");
@@ -184,6 +204,9 @@ public class CatagoryController {
 	model.addAttribute("catagory", catagoryService.findById(id));
 	model.addAttribute("catagorys", catagoryService.findAll());
 	model.addAttribute("productid", catagoryService.findByCatagory(id));
+	 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/catagoryEditList";
     }
     
@@ -222,6 +245,9 @@ public class CatagoryController {
 	model.addAttribute("ListCatagory", pages);
 	model.addAttribute("catagorys", catagoryService.findAll());
 	model.addAttribute("catagory", new Catagory());
+	 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/catagoryList";
     }
     

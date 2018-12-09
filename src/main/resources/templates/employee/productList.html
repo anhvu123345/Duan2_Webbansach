@@ -125,6 +125,29 @@
 								}
 							}
 						}
+						$(document).ready(function(){
+							document.getElementById("submitdelete").disabled = true;
+							
+							$('#checkBoxAll').click(function(){
+								if($(this).is(":checked"))
+									$('.chkCheckBoxId').prop('checked', true);
+								if(!$(this).is(":checked"))
+									$('.chkCheckBoxId').prop('checked', false);
+								
+								if($(this).is(":checked"))
+									document.getElementById("submitdelete").disabled = false;	
+								else
+									document.getElementById("submitdelete").disabled = true;
+							});
+							
+							$('.chkCheckBoxId').click(function(){	
+								if($('.chkCheckBoxId').is(":checked"))
+								document.getElementById("submitdelete").disabled = false;
+								
+								else
+									document.getElementById("submitdelete").disabled = true;
+							});
+						});
 					</script>
 					<div class="panel panel-primary">
 						<div class="panel-heading" style="height: 70px;">
@@ -144,10 +167,14 @@
 								<h3>Chưa có dữ liệu</h3>
 							</th:block>
 							<th:block th:unless="${#lists.isEmpty(ListProduct.pageList)}">
+							<form th:action="@{/manager/product/delete}" method="POST">
 								<table width="100%" class="table table-striped table-bordered"
 									id="dataTables-example">
 									<thead>
 										<tr>
+										<th><div class="checkbox checkbox-danger checkbox-circle"><input type="checkbox" id="checkBoxAll"/><label for="checkbox8">
+                      
+                        </label></div></th>
 											<th width="">Mã</th>
 											<th width="">Loại sách</th>
 											<th width="">Tên sách</th>
@@ -164,6 +191,11 @@
 									</thead>
 									<tbody>
 										<tr th:each="products : ${ListProduct.pageList}">
+											<td ><div class="checkbox checkbox-info checkbox-circle"><input type="checkbox"  class="styled chkCheckBoxId" id="checkbox8" name="productId" th:value="${products.productid}"  />
+									<label for="checkbox8">
+                      
+                        </label></div></td>
+										
 											<td th:text="${products.productid}"></td>
 											<td th:text="${products.catagory.catagoryName}"></td>
 											<td th:text="${products.bookName}"></td>
@@ -235,7 +267,7 @@
 										</tr>
 									</tbody>
 								</table>
-								<ul class="pagination">
+								<ul class="pagination  col-sm-10">
 									<li
 										th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
 										<a class="page-link" th:href="@{/manager/product/page/1}">First</a>
@@ -265,7 +297,9 @@
 										<a class="page-link"
 										th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
 									</li>
+										<div align="center"><button class="btn btn-success" id="submitdelete" type="submit" >Xóa</button></div>
 								</ul>
+								</form>
 							</th:block>
 							<div id="lightbox" class="modal fade" tabindex="-1" role="dialog"
 								aria-labelledby="myLargeModalLabel" aria-hidden="true">

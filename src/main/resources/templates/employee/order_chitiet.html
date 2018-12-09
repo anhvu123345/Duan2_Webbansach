@@ -32,9 +32,9 @@
 						<div class="panel-heading">Chi Tiết Đơn Hàng</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<h4 th:if="${#lists.isEmpty(orderdetails)}"></h4>
-
-							<table th:unless="${#lists.isEmpty(orderdetails)}" width="100%"
+							<th:block th:if="${#lists.isEmpty(orderdetails)}">Dữ Liệu Trống</th:block>
+						<th:block th:unless="${#lists.isEmpty(orderdetails)}">
+							<table  width="100%"
 								class="table table-striped table-bordered"
 								id="dataTables-example">
 								<thead>
@@ -61,7 +61,7 @@
 										
 									</tr>
 								</tbody>
-							</table>
+							</table></th:block>
 							<!-- /.table-responsive -->
 						</div>
 						<!-- /.panel-body -->
