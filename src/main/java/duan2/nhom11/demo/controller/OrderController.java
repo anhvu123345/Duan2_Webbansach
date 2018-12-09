@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import duan2.nhom11.demo.entity.Order;
 import duan2.nhom11.demo.entity.Product;
+import duan2.nhom11.demo.service.OrderDetailSerive;
 import duan2.nhom11.demo.service.OrderSerive;
 import duan2.nhom11.demo.service.UserSerive;
 
@@ -23,38 +24,30 @@ public class OrderController {
 	private OrderSerive orderservice;
 	
 	@Autowired
-	private UserSerive userservice;
+	private OrderDetailSerive orderDetailSerive;
+
 	
 	@GetMapping(value = "/manager/order/list")
-	public ModelAndView orderList() {
-		ModelAndView model = new ModelAndView();
-		model.addObject("orders", orderservice.findAll());
-		model.setViewName("employee/orderList");
-		return model;
-	}
-
-	@GetMapping(value = "/manager/order/add")
-	public String orderAdd(Model model) {
-		model.addAttribute("user", userservice.findAll());
-		model.addAttribute("order", new Product());
+	public String orderList(Model model) {
+		model.addAttribute("orders", orderservice.findAll());
 		return "employee/orderList";
 	}
 
-	@PostMapping(value = "/manager/order/save")
-	public String orderSave(@Valid Order order, Model model) {
-			
-		orderservice.save(order);
 	
-		return "redirect:/manager/order/list";
-	}
-
-
-
 	@GetMapping(value = "/manager/order/{id}/delete")
 	public String orderDelete(@PathVariable Long id) {
 		orderservice.delete(id);
 		return "redirect:/manager/order/list";
 	}
+	
+	// xem chi tiết hóa đơn
+	@GetMapping(value="/manager/order/{id}/chi-tiet")
+	public String orderdeteails(Model model, @PathVariable Long id) {
+		model.addAttribute("orderdetails", orderDetailSerive.finByOrderID(id));
+		
+		return "employee/order_chitiet";
+	}
+	
 
 
 }

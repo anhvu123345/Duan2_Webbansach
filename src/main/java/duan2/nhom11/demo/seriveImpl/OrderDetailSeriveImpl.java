@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.seriveImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,18 @@ public class OrderDetailSeriveImpl implements OrderDetailSerive{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		orderDetailRepository.deleteById(id);
+	}
+
+	@Override
+	public List<OrderDetail> findByUserIDAndOrderID(Long id) {
+		// TODO Auto-generated method stub
+		return orderDetailRepository.findByUserIDAndOrderID(id);
+	}
+
+	@Override
+	public List<OrderDetail> finByOrderID(Long id) {
+		// TODO Auto-generated method stub
+		return orderDetailRepository.finByOrderID(id);
 	}
 
 }

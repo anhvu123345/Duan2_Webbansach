@@ -1,6 +1,7 @@
 package duan2.nhom11.demo.service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import duan2.nhom11.demo.entity.OrderDetail;
@@ -16,4 +17,8 @@ public interface OrderDetailSerive {
 	Optional<OrderDetail> findById(Long id);
 
 	void delete(Long id);
+	
+	List<OrderDetail> findByUserIDAndOrderID(Long id);
+	
+	List<OrderDetail> finByOrderID(Long id);
 }

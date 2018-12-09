@@ -1,39 +1,147 @@
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Đăng kí tài khoản</title>
-<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
-	rel="stylesheet" />
+<head th:replace="custormer/header :: head">
 </head>
+
 <body>
-<div class="container" style="width: 600px; padding: 50px">
-<h2>Tạo Tài Khoản</h2>
-<form action="#" th:action="@{/user/sign}" th:object="${user}" method="POST">
-	                    	 <input type="hidden" th:field="*{userid}"/>
-	                        <div class="form-group">
-	                         <div class="form-group">
-	                            <label>Họ<span class="required">*</span></label>
-	                            <input type="text" class="form-control" th:field="*{fristname}"/> 
-						        <span  class="error"></span>
-	                       
-	                         <div class="form-group">
-	                            <label>Tên<span class="required">*</span></label>
-	                            <input type="text" class="form-control" th:field="*{fullname}"/> 
-						        <span  class="error"></span>
-	                        </div>
-	                         </div>
-	                            <label>Email<span class="required">*</span></label>
-	                            <input type="text" class="form-control" th:field="*{email}"/> 
-						        <span  class="error"></span>
-	                        </div>
-	                         <div class="form-group">
-	                            <label>Password<span class="required">*</span></label>
-	                            <input type="password" class="form-control"th:field="*{password}" /> 
-						        <span  class="error"></span>
-	                        </div>
-	                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Đăng Kí</button>
-	                    </form>
-	                    </div>
+
+	<div class="super_container">
+
+		<!-- Header -->
+
+		<header th:replace="web/layout :: header"></header>
+
+		<div class="fs_menu_overlay"></div>
+
+		<!-- Hamburger Menu -->
+
+		<div class="hamburger_menu">
+			<div class="hamburger_close">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</div>
+			<div class="hamburger_menu_content text-right">
+				<ul class="menu_top_nav">
+					<li class="menu_item has-children"><a href="#"> usd <i
+							class="fa fa-angle-down"></i>
+					</a>
+						<ul class="menu_selection">
+							<li><a href="#">cad</a></li>
+							<li><a href="#">aud</a></li>
+							<li><a href="#">eur</a></li>
+							<li><a href="#">gbp</a></li>
+						</ul></li>
+					<li class="menu_item has-children"><a href="#"> English <i
+							class="fa fa-angle-down"></i>
+					</a>
+						<ul class="menu_selection">
+							<li><a href="#">French</a></li>
+							<li><a href="#">Italian</a></li>
+							<li><a href="#">German</a></li>
+							<li><a href="#">Spanish</a></li>
+						</ul></li>
+					<li class="menu_item has-children"><a href="#"> Tài Khoản
+							<i class="fa fa-angle-down"></i>
+					</a>
+						<ul class="menu_selection">
+							<li><a href="#"><i class="fa fa-sign-in"
+									aria-hidden="true"></i>Đăng Nhập</a></li>
+							<li><a href="#"><i class="fa fa-user-plus"
+									aria-hidden="true"></i>Đăng Ký</a></li>
+						</ul></li>
+					<li class="menu_item"><a href="index.html">Trang Chủ</a></li>
+					<li class="menu_item"><a href="categories.html">Mua Sắm</a></li>
+
+
+					<li class="menu_item"><a href="contact.html">Liên Hệ</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="container product_section_container">
+			<div class="row">
+				<div class="col product_section clearfix">
+
+
+
+
+
+
+					<!-- Main Content -->
+
+					<div class="main_content">
+
+						<!-- Products -->
+
+						<div class="products_iso">
+							<div class="row">
+								<div class="col">
+									<div class="container" style="width: 600px; padding: 50px">
+										<h2>Tạo Tài Khoản</h2>
+										<form action="#" th:action="@{/user/sign}" th:object="${user}"
+											method="POST">
+											<input type="hidden" th:field="*{userid}" />
+											<div class="form-group">
+												<div class="form-group">
+													<label>Họ<span class="required">*</span></label> <input
+														type="text" class="form-control" th:field="*{fristname}" th:required="required"/>
+													<span class="error"></span>
+
+													<div class="form-group">
+														<label>Tên<span class="required">*</span></label> <input
+															type="text" class="form-control" th:field="*{fullname}" th:required="required"/>
+														<span class="error"></span>
+													</div>
+												</div>
+												<label>Email<span class="required">*</span>  </label> <input
+													type="text" class="form-control" th:field="*{email}" th:required="required"/>
+													<span  class="error"
+													 th:text="${emailerror}"></span>
+											</div>
+											<div class="form-group">
+												<label>Password<span class="required">*</span></label> <input
+													type="password" class="form-control" th:field="*{password}" th:required="required"/>
+												<span class="error"></span>
+											</div>
+											<button type="submit" class="btn btn-primary">
+												</i>Đăng Kí
+											</button>
+										</form>
+									</div>
+
+
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- Newsletter -->
+
+
+
+		<!-- Footer -->
+
+		<footer th:replace="custormer/footer :: 
+	footer"></footer>
+
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="styles/bootstrap4/popper.js"></script>
+	<script src="styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+	<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="plugins/easing/easing.js"></script>
+	<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	<script src="js/categories_custom.js"></script>
 </body>
+
 </html>

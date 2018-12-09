@@ -8,7 +8,7 @@
 	<div id="wrapper">
 
 		<nav th:replace="employee/layout :: sidebar"></nav>
-
+			<nav th:replace="employee/layout :: quanly"></nav>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-sm-12">
@@ -34,7 +34,7 @@
 						<div class="panel-body">
 							<h4 th:if="${#lists.isEmpty(orders)}"></h4>
 
-							<table th:unless="${#lists.isEmpty(orders)}" width="100%"
+						<table th:unless="${#lists.isEmpty(orders)}" width="100%"
 								class="table table-striped table-bordered"
 								id="dataTables-example">
 								<thead>
@@ -46,22 +46,24 @@
 										<th width="">Ghi chú</th>
 										<th width="">Số điện thoại</th>
 										<th width="">Địa Chỉ</th>
-										<th width="">Mã mua hàng</th>
 										<th>Tùy chọn</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="order : ${orders}">
+									<tr th:each="order : ${orders}" th:if="${order.orderid} != 0">
 										<td th:text="${order.orderid}"></td>
 										<td th:text="${order.custormerEmail}"></td>
 										<td th:text="${order.custormerName}"></td>
-										<td
-											th:text="${#dates.format(order.date, 'dd/MM/yyyy HH:mm:ss')}"></td>
+										<td th:text="${order.date}"></td>
 										<td th:text="${order.note}"></td>
 										<td th:text="${order.phone}"></td>
 										<td th:text="${order.address}"></td>
-										<td th:text="${order.orderDetail.id}"></td>
-										</tr>
+										<td><a class="btn btn-danger" th:href="@{/manager/order/{id}/chi-tiet(id=${order.orderid})}"
+										>
+											Xem </a> | <a class="btn btn-danger" th:href="@{/manager/order/{id}/delete(id=${order.orderid})}"
+										>
+											Xóa </a></td>
+									</tr>
 								</tbody>
 							</table>
 							<!-- /.table-responsive -->
@@ -80,3 +82,5 @@
 
 </body>
 </html>
+
+

@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import duan2.nhom11.demo.entity.ImageProduct;
 import duan2.nhom11.demo.entity.Multipartfile;
+import duan2.nhom11.demo.entity.User;
 import duan2.nhom11.demo.service.ImageProductService;
 import duan2.nhom11.demo.service.ProductService;
+import duan2.nhom11.demo.service.UserSerive;
 
 @Controller
 public class UploadFileController {
@@ -29,15 +33,22 @@ public class UploadFileController {
 	private ImageProductService imageProductService;
 	
 	@Autowired
+	private UserSerive userSerive;
+	
+	@Autowired
 	private ProductService productService;
 	
 	private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
 	
 	@GetMapping(value="/manager/{id}/upload")
-	public String uploadImgae(Model model,@PathVariable Long id) {
+	public String uploadImgae(HttpServletRequest request, Model model,@PathVariable Long id) {
 		model.addAttribute("imageproducts", imageProductService.findByProduct(id));
 		model.addAttribute("imageproduct", imageProductService.findByProductid(id));
 		model.addAttribute("idproduct", productService.findByIdProduct(id));
+		model.addAttribute("search", true);
+		 User listt = userSerive.findByEmail1(request.getUserPrincipal().getName());
+		 model.addAttribute("user1", listt);
+		 model.addAttribute("userinfo", listt);
 		return "employee/UploadImage";
 	}
 	
@@ -49,47 +60,15 @@ public class UploadFileController {
 			
 			File dir = new File(saveDirectory);
 			if (!dir.exists()) {
-				dir.mkdirs();
-			}	
-			if(imageproduct == null) {
-				System.out.println("123214");
-				String filename = files[0].getOriginalFilename();
-				String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-				String newFileName = System.currentTimeMillis() + fileExtension;
-				String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-				File serverFile = new File(fileSource);
-				stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-				stream4.write(bytes);
-				stream4.close();
-				imageproduct.setImage1(newFileName);
-				imageProductService.saveAndFlush(imageproduct);
+					dir.mkdirs();
 			}
-			if(imageproduct.getImage1().equals("")) {
-			System.out.println("abc");
-			String filename = files[0].getOriginalFilename();
-			String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-			String newFileName = System.currentTimeMillis() + fileExtension;
-			String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-			File serverFile = new File(fileSource);
-			stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-			stream4.write(bytes);
-			stream4.close();
-			imageproduct.setImage1(newFileName);
-			System.out.println(imageproduct.getProduct().getProductid());
-			imageProductService.saveAndFlush(imageproduct);
-			}
-			else{
-			System.out.println("cde");
-			String fileSource1 = dir.getAbsolutePath() + File.separator + imageproduct.getImage1();
-			File serverFile1 = new File(fileSource1);
-		 stream4 = new BufferedOutputStream(new FileOutputStream(serverFile1));
-		stream4.write(bytes);
-		stream4.close();
-		
-			}
-		
-			return "redirect:/manager/product/list";
-		
+					System.out.println("cde");
+					String fileSource1 = dir.getAbsolutePath() + File.separator + imageproduct.getImage1();
+					File serverFile1 = new File(fileSource1);
+						 stream4 = new BufferedOutputStream(new FileOutputStream(serverFile1));
+						stream4.write(bytes);
+						stream4.close();
+		return "redirect:/manager/product/list";
 	}
 	
 	@PostMapping(value="/manager/upload2")
@@ -102,43 +81,13 @@ public class UploadFileController {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}	
-		if(imageproduct == null) {
-			System.out.println("123214");
-			String filename = files[0].getOriginalFilename();
-			String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-			String newFileName = System.currentTimeMillis() + fileExtension;
-			String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-			File serverFile = new File(fileSource);
-			stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-			stream4.write(bytes);
-			stream4.close();
-			imageproduct.setImage2(newFileName);
-			imageProductService.saveAndFlush(imageproduct);
-		}
-		if(imageproduct.getImage2().equals("")) {
-		System.out.println("abc");
-		String filename = files[0].getOriginalFilename();
-		String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-		String newFileName = System.currentTimeMillis() + fileExtension;
-		String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-		File serverFile = new File(fileSource);
-		stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-		stream4.write(bytes);
-		stream4.close();
-		imageproduct.setImage2(newFileName);
-		System.out.println(imageproduct.getProduct().getProductid());
-		imageProductService.saveAndFlush(imageproduct);
-		}
-		else{
+		
 		System.out.println("cde");
 		String fileSource1 = dir.getAbsolutePath() + File.separator + imageproduct.getImage2();
 		File serverFile1 = new File(fileSource1);
 	 stream4 = new BufferedOutputStream(new FileOutputStream(serverFile1));
 	stream4.write(bytes);
 	stream4.close();
-	
-		}
-	
 		return "redirect:/manager/product/list";
 	}
 	@PostMapping(value="/manager/upload3")
@@ -151,43 +100,13 @@ public class UploadFileController {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}	
-		if(imageproduct == null) {
-			System.out.println("123214");
-			String filename = files[0].getOriginalFilename();
-			String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-			String newFileName = System.currentTimeMillis() + fileExtension;
-			String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-			File serverFile = new File(fileSource);
-			stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-			stream4.write(bytes);
-			stream4.close();
-			imageproduct.setImage3(newFileName);
-			imageProductService.saveAndFlush(imageproduct);
-		}
-		if(imageproduct.getImage3().equals("")) {
-		System.out.println("abc");
-		String filename = files[0].getOriginalFilename();
-		String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-		String newFileName = System.currentTimeMillis() + fileExtension;
-		String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-		File serverFile = new File(fileSource);
-		stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-		stream4.write(bytes);
-		stream4.close();
-		imageproduct.setImage3(newFileName);
-		System.out.println(imageproduct.getProduct().getProductid());
-		imageProductService.saveAndFlush(imageproduct);
-		}
-		else{
+		
 		System.out.println("cde");
 		String fileSource1 = dir.getAbsolutePath() + File.separator + imageproduct.getImage3();
 		File serverFile1 = new File(fileSource1);
 	 stream4 = new BufferedOutputStream(new FileOutputStream(serverFile1));
 	stream4.write(bytes);
 	stream4.close();
-	
-		}
-	
 		return "redirect:/manager/product/list";
 	}
 	@PostMapping(value="/manager/upload4")
@@ -200,34 +119,8 @@ public class UploadFileController {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}	
-		if(imageproduct == null) {
-			System.out.println("123214");
-			String filename = files[0].getOriginalFilename();
-			String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-			String newFileName = System.currentTimeMillis() + fileExtension;
-			String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-			File serverFile = new File(fileSource);
-			stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-			stream4.write(bytes);
-			stream4.close();
-			imageproduct.setImage4(newFileName);
-			imageProductService.saveAndFlush(imageproduct);
-		}
-		if(imageproduct.getImage4().equals("")) {
-		System.out.println("abc");
-		String filename = files[0].getOriginalFilename();
-		String fileExtension = filename.substring(filename.lastIndexOf("."), filename.length());
-		String newFileName = System.currentTimeMillis() + fileExtension;
-		String fileSource = dir.getAbsolutePath() + File.separator + newFileName;
-		File serverFile = new File(fileSource);
-		stream4 = new BufferedOutputStream(new FileOutputStream(serverFile));
-		stream4.write(bytes);
-		stream4.close();
-		imageproduct.setImage4(newFileName);
-		System.out.println(imageproduct.getProduct().getProductid());
-		imageProductService.saveAndFlush(imageproduct);
-		}
-		else{
+		
+		
 		System.out.println("cde");
 		String fileSource1 = dir.getAbsolutePath() + File.separator + imageproduct.getImage4();
 		File serverFile1 = new File(fileSource1);
@@ -235,9 +128,9 @@ public class UploadFileController {
 	stream4.write(bytes);
 	stream4.close();
 	
-		}
-	
+		
 		return "redirect:/manager/product/list";
+	
 	}
 	@GetMapping(value="/image")
 	@ResponseBody
@@ -249,3 +142,4 @@ public class UploadFileController {
 
 	
 }
+

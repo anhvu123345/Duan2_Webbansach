@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,12 +48,9 @@ public class Order {
 	@Column(name = "note")
 	private String note;
 
+	@OneToMany(mappedBy = "orders",cascade = { CascadeType.ALL })
+	private List<OrderDetail> orderDetail;
 
-	@ManyToOne
-	@JoinColumn(name = "id",referencedColumnName="id" )
-	private OrderDetail orderDetail;
-
-	
 	public Order() {
 		super();
 	}
@@ -65,6 +61,14 @@ public class Order {
 
 	public void setOrderid(Long orderid) {
 		this.orderid = orderid;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getCustormerName() {
@@ -115,22 +119,13 @@ public class Order {
 		this.note = note;
 	}
 
-	
-
-	public OrderDetail getOrderDetail() {
+	public List<OrderDetail> getOrderDetail() {
 		return orderDetail;
 	}
 
-	public void setOrderDetail(OrderDetail orderDetail) {
+	public void setOrderDetail(List<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	
 }

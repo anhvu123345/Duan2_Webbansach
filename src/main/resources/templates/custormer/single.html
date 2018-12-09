@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Single Product</title>
+<title>Thông Tin Sản Phẩm</title>
 <meta charset="utf-8">
 <meta name="description" content="Colo Shop Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,38 +41,14 @@
 
 								<!-- Currency / Language / My Account -->
 
-								<li class="currency">
-									<a href="#">
-										usd
-										<i class="fa fa-angle-down"></i>
-									</a>
-									<ul class="currency_selection">
-										<li><a href="#">cad</a></li>
-										<li><a href="#">aud</a></li>
-										<li><a href="#">eur</a></li>
-										<li><a href="#">gbp</a></li>
-									</ul>
-								</li>
-								<li class="language">
-									<a href="#">
-										English
-										<i class="fa fa-angle-down"></i>
-									</a>
-									<ul class="language_selection">
-										<li><a href="#">French</a></li>
-										<li><a href="#">Italian</a></li>
-										<li><a href="#">German</a></li>
-										<li><a href="#">Spanish</a></li>
-									</ul>
-								</li>
 								<li class="account">
 									<a href="#">
-										Tài Khoản
+										<span th:utext="${#request.userPrincipal.name}"></span>
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a th:href="@{/login}"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Nhập</a></li>
-										<li><a th:href="@{/user/registrantion}"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Ký</a></li>
+									
+										<li><a th:href="@{/logout}"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Xuất</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -89,31 +65,22 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="#">KHANG VIET<span>Book</span></a>
+							<a th:href="@{/index}">KHANG VIET<span>Book</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="#">Trang Chủ</a></li>
-								<li><a href="categories.html">Mua Sắm</a></li>
-								
-								
-								<li><a href="#">Tin Tức</a></li>
-								<li><a th:href="@{/lien-he}">Liên Hệ</a></li>
+								<li><a th:href="@{/index}">Trang Chủ</a></li>
+								<li><a th:href="@{/mua-sam}">Sản Phẩm</a></li>
+								<li  th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}" th:value="${user.userid}">
+									<a   th:href="@{/cart/info?(id=${user.userid})}">Giỏ Hàng</a></li>																														
+								<li><a th:href="@{/index/lien-he}">Liên Hệ</a></li>
 							</ul>
 							<ul class="navbar_user">
 								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-								<li class="checkout">
-									<a href="#" data-toggle="modal"
-		data-target="#exampleModal">
-										<i class="fa fa-shopping-cart" aria-hidden="true" ></i>
-										<span id="checkout_items" class="checkout_items"></span>
-									</a>
-								</li>
+								
 							</ul>
-							<div class="hamburger_container">
-								<i class="fa fa-bars" aria-hidden="true"></i>
-							</div>
+							
 						</nav>
 					</div>
 				</div>
@@ -127,30 +94,8 @@
 		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
 		<div class="hamburger_menu_content text-right">
 			<ul class="menu_top_nav">
-				<li class="menu_item has-children">
-					<a href="#">
-						usd
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">cad</a></li>
-						<li><a href="#">aud</a></li>
-						<li><a href="#">eur</a></li>
-						<li><a href="#">gbp</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						Tiếng Việt
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">English</a></li>
-						<li><a href="#">Italian</a></li>
-						<li><a href="#">German</a></li>
-						<li><a href="#">Spanish</a></li>
-					</ul>
-				</li>
+				
+				
 				<li class="menu_item has-children">
 					<a href="#">
 						Tài Khoản
@@ -213,7 +158,7 @@
 					</ul>
 				</li>
 				<li class="menu_item"><a href="#">Trang Chủ</a></li>
-				<li class="menu_item"><a href="#">Mua Sắm</a></li>
+				<li class="menu_item"><a th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}"  th:href="@{/cart/info?}">Giỏ Hàng</a></li>
 				<li class="menu_item"><a href="#">Tin Tức</a></li>
 				
 				<li class="menu_item"><a href="#">Liên Hệ</a></li>
@@ -268,8 +213,8 @@
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 						<span class="ti-truck"></span><span th:text="${giohang}"></span>
 					</div>
-					<div class="original_price" th:text="${product.price} +50 +VNĐ"></div>
-					<div class="product_price" th:text="${product.price} +VNĐ"></div>
+					<div class="original_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 150 +' VNĐ'"></div>
+					<div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +' VNĐ'"></div>
 					<ul class="star_rating">
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -281,7 +226,7 @@
 								th:object="${cart}" method="POST">							
 								<div class="form-group">
 									<label>Số Lượng<span class="required">*</span></label> <input
-										type="number" class="form-control" th:field="*{quantity}" />
+										type="number" min="1" class="form-control" th:field="*{quantity}" />
 							  
 								</div>
 								<div style="display: none">
@@ -307,7 +252,7 @@
 									</div>
 									
 									<div class="form-group">
-										<select  th:field="*{Order}" class="form-control" 
+										<select  th:field="*{orders}" class="form-control" 
 											id="exampleFormControlSelect1">
 											<option   th:value="0"></option>
 										</select>

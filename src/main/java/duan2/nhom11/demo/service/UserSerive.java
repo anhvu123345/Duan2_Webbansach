@@ -17,8 +17,14 @@ public interface UserSerive {
 	Optional<User> findById(Long id);
 
 	void delete(Long id);
-	
-	 Optional<User> findByToken(String token);
-	 
-	 void saverole(User user);
+
+	Optional<User> findByToken(String token);
+
+	void saverole(User user);
+
+	List<User> search(String q);
+
+	User findByEmail1(String email);
+
+	void save1(User user);
 }

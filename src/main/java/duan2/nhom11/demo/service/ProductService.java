@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import duan2.nhom11.demo.entity.Product;
@@ -16,5 +17,9 @@ public interface ProductService {
 	void delete(Long id);
 	
 	Long findByIdProduct(Long id);
+	
+	List<Product> search(String q);
+	
+	Iterable<Product> findByIdCategory(Long id);
 	
 }
