@@ -1,5 +1,9 @@
 package duan2.nhom11.demo.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +20,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import duan2.nhom11.demo.entity.ImageProduct;
 import duan2.nhom11.demo.entity.ListRoleUser;
+import duan2.nhom11.demo.entity.Multipartfile;
 import duan2.nhom11.demo.entity.User;
 import duan2.nhom11.demo.service.UserSerive;
 
@@ -34,8 +41,12 @@ public class UserController {
 		request.getSession().setAttribute("employeelist", null);
 		if(mm.asMap().get("success") != null)
 			redirect.addFlashAttribute("success",mm.asMap().get("success").toString());
+		
 		return "redirect:/admin/userlist/page/1";
 	}
+	
+	
+		
 	
 	@GetMapping("/admin/userlist/page/{pageNumber}")
 	public String showEmployeePage(HttpServletRequest request, 
@@ -67,6 +78,11 @@ public class UserController {
 		model.addAttribute("baseUrl", baseUrl);
 		model.addAttribute("Listuser", pages);
 		model.addAttribute("userRole", new User());
+		model.addAttribute("search", true);
+		 User listt = userSerive.findByEmail1(request.getUserPrincipal().getName());
+		 model.addAttribute("user1", listt);
+		 model.addAttribute("userinfo", listt);
+		
 		return "admin/listUser";
 	}
 
@@ -101,9 +117,61 @@ public class UserController {
 		
 		user.setActive(true);
 		user.setRole("ROLE_USER");
+		user.setImageUser(System.currentTimeMillis() + ".jpg");
 		userSerive.save(user);
 		return "redirect:/login";
 	}
+	
+	private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
+	
+	@PostMapping(value = "/user/sign1")
+	public String useredit(@ModelAttribute @Valid User user, Multipartfile multipart, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {	
+		System.out.println(user.getPassword());
+
+		MultipartFile[] files = multipart.getFilea();
+		BufferedOutputStream stream4;
+		byte[] bytes = files[0].getBytes();
+		File dir = new File(saveDirectory);
+		if (!dir.exists()) {
+				dir.mkdirs();
+		}
+				System.out.println("cde");
+				String fileSource1 = dir.getAbsolutePath() + File.separator + user.getImageUser();
+				File serverFile1 = new File(fileSource1);
+					 stream4 = new BufferedOutputStream(new FileOutputStream(serverFile1));
+					stream4.write(bytes);
+					stream4.close();
+			user.setActive(true);
+			userSerive.save1(user);
+		return "redirect:/login";
+	}
+	
+	@PostMapping(value = "/user/sign2")
+	public String useredit1(@ModelAttribute @Valid User user, Multipartfile multipart,BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {	
+		System.out.println(user.getPassword());
+		MultipartFile[] files = multipart.getFilea();
+		BufferedOutputStream stream4;
+		byte[] bytes = files[0].getBytes();
+		
+		File dir = new File(saveDirectory);
+		if (!dir.exists()) {
+				dir.mkdirs();
+		}
+				System.out.println("cde");
+				String fileSource1 = dir.getAbsolutePath() + File.separator + user.getImageUser();
+				File serverFile1 = new File(fileSource1);
+					 stream4 = new BufferedOutputStream(new FileOutputStream(serverFile1));
+					stream4.write(bytes);
+					stream4.close();
+			user.setActive(true);
+			userSerive.save(user);
+		
+		
+		return "redirect:/login";
+	}
+	
+	
+
 
 	@GetMapping(value = "/admin/user/{id}/delete")
 	public ModelAndView userDelete(@PathVariable Long id) {
@@ -177,7 +245,10 @@ public class UserController {
 		model.addAttribute("baseUrl", baseUrl);
 		model.addAttribute("Listuser", pages);
 		model.addAttribute("userRole", new User());
-
+		 User listt = userSerive.findByEmail1(request.getUserPrincipal().getName());
+		 model.addAttribute("user1", listt);
+		 model.addAttribute("userinfo", listt);
+		
 		return "admin/listUser";
 	}
 }

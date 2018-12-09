@@ -48,6 +48,9 @@ public class User {
 
     @Column(name = "token", length = 300)
     private String token;
+    
+    @Column(name = "image_user", length = 300)
+    private String imageUser;
 
 //	quan he 1-n, noi bang user vs bang order
     @OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
@@ -57,7 +60,25 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = { CascadeType.ALL })
     private List<OrderDetail> OrderDetail;
 
-    public User() {
+    
+    
+    public String getImageUser() {
+		return imageUser;
+	}
+
+	public void setImageUser(String imageUser) {
+		this.imageUser = imageUser;
+	}
+
+	public List<Order> getOrder() {
+		return Order;
+	}
+
+	public void setOrder(List<Order> order) {
+		Order = order;
+	}
+
+	public User() {
 	super();
     }
 

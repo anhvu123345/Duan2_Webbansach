@@ -29,15 +29,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import duan2.nhom11.demo.entity.Catagory;
 import duan2.nhom11.demo.entity.ImageProduct;
 import duan2.nhom11.demo.entity.Product;
+import duan2.nhom11.demo.entity.User;
 import duan2.nhom11.demo.service.CatagoryService;
 import duan2.nhom11.demo.service.ImageProductService;
 import duan2.nhom11.demo.service.ProductService;
+import duan2.nhom11.demo.service.UserSerive;
 
 @Controller
 public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private UserSerive userSerivce;
+    
     @Autowired
     private ImageProductService imageProductService;
 
@@ -82,13 +87,21 @@ public class ProductController {
 	model.addAttribute("totalPageCount", totalPageCount);
 	model.addAttribute("baseUrl", baseUrl);
 	model.addAttribute("ListProduct", pages);
+	model.addAttribute("search", true);
+	 User listt = userSerivce.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/productList";
     }
 
     @GetMapping(value = "/manager/product/add")
-    public String productAdd(Model model) {
+    public String productAdd(Model model, HttpServletRequest request) {
 	model.addAttribute("catagory", catagoryService.findAll());
 	model.addAttribute("product", new Product());
+	model.addAttribute("search", true);
+	 User listt = userSerivce.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/productform";
     }
 
@@ -225,9 +238,13 @@ public class ProductController {
     }
 
     @GetMapping(value = "/manager/product/{id}/edit")
-    public String productEdit(Model model, @PathVariable Long id) {
+    public String productEdit(Model model, @PathVariable Long id, HttpServletRequest request) {
 	model.addAttribute("catagory", catagoryService.findAll());
 	model.addAttribute("product", productService.findById(id));
+	model.addAttribute("search", true);
+	 User listt = userSerivce.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/productform";
     }
 
@@ -277,6 +294,10 @@ public class ProductController {
 	model.addAttribute("totalPageCount", totalPageCount);
 	model.addAttribute("baseUrl", baseUrl);
 	model.addAttribute("ListProduct", pages);
+	model.addAttribute("search", true);
+	 User listt = userSerivce.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/productList";
     }
 

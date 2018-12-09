@@ -1,5 +1,7 @@
 package duan2.nhom11.demo.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,10 +29,13 @@ public class PageWelcomeController {
   
   
   @GetMapping(value = "/welcome")
-	public String welcome(Model model) {
+	public String welcome(Model model, HttpServletRequest request) {
 	 model.addAttribute("user", userService.count());
 	 model.addAttribute("cate", categoryService.count());
 	 model.addAttribute("product", productService.count());
+	 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+		model.addAttribute("userinfo", listt);
 	 return "employee/welcome";
 	}
 }

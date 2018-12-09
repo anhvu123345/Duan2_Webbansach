@@ -1,5 +1,6 @@
 package duan2.nhom11.demo.seriveImpl;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,6 @@ public class UserServiceImpl implements UserSerive {
     public void save(User user) {
 	user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 	userRepository.save(user);
-
     }
 
     @Override
@@ -76,6 +76,17 @@ public class UserServiceImpl implements UserSerive {
 	// TODO Auto-generated method stub
 	return userRepository.findByEmailContaining(q);
     }
+
+	@Override
+	public User findByEmail1(String email) {
+		// TODO Auto-generated method stub
+		return userRepository.findByEmail1(email);
+	}
+	@Override
+	public void save1(User user) {
+		// TODO Auto-generated method stub
+		userRepository.save(user);
+	}
 
     
 }

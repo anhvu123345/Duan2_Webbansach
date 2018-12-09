@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import duan2.nhom11.demo.entity.Catagory;
+import duan2.nhom11.demo.entity.User;
 import duan2.nhom11.demo.service.CatagoryService;
+import duan2.nhom11.demo.service.UserSerive;
 
 @Controller
 public class CatagoryController {
@@ -31,6 +33,9 @@ public class CatagoryController {
 	binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
+    @Autowired
+    private UserSerive userService;
+    
     @Autowired
     private CatagoryService catagoryService;
 
@@ -74,6 +79,10 @@ public class CatagoryController {
 	model.addAttribute("catagorys", catagoryService.findAll());
 	model.addAttribute("catagory", catagory);
 	model.addAttribute("catagorys", catagoryService.findAll());
+	model.addAttribute("search", true);
+	 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/catagoryList";
     }
 
@@ -184,6 +193,9 @@ public class CatagoryController {
 	model.addAttribute("catagory", catagoryService.findById(id));
 	model.addAttribute("catagorys", catagoryService.findAll());
 	model.addAttribute("productid", catagoryService.findByCatagory(id));
+	 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/catagoryEditList";
     }
     
@@ -222,6 +234,9 @@ public class CatagoryController {
 	model.addAttribute("ListCatagory", pages);
 	model.addAttribute("catagorys", catagoryService.findAll());
 	model.addAttribute("catagory", new Catagory());
+	 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
+	 model.addAttribute("user1", listt);
+	 model.addAttribute("userinfo", listt);
 	return "employee/catagoryList";
     }
     

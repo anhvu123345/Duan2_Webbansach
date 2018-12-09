@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import duan2.nhom11.demo.entity.ImageProduct;
 import duan2.nhom11.demo.entity.Multipartfile;
+import duan2.nhom11.demo.entity.User;
 import duan2.nhom11.demo.service.ImageProductService;
 import duan2.nhom11.demo.service.ProductService;
+import duan2.nhom11.demo.service.UserSerive;
 
 @Controller
 public class UploadFileController {
@@ -29,15 +33,22 @@ public class UploadFileController {
 	private ImageProductService imageProductService;
 	
 	@Autowired
+	private UserSerive userSerive;
+	
+	@Autowired
 	private ProductService productService;
 	
 	private String saveDirectory = ".\\src\\main\\resources\\static\\images\\";
 	
 	@GetMapping(value="/manager/{id}/upload")
-	public String uploadImgae(Model model,@PathVariable Long id) {
+	public String uploadImgae(HttpServletRequest request, Model model,@PathVariable Long id) {
 		model.addAttribute("imageproducts", imageProductService.findByProduct(id));
 		model.addAttribute("imageproduct", imageProductService.findByProductid(id));
 		model.addAttribute("idproduct", productService.findByIdProduct(id));
+		model.addAttribute("search", true);
+		 User listt = userSerive.findByEmail1(request.getUserPrincipal().getName());
+		 model.addAttribute("user1", listt);
+		 model.addAttribute("userinfo", listt);
 		return "employee/UploadImage";
 	}
 	
