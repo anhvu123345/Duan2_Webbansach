@@ -14,5 +14,7 @@ public interface OrderSerive {
 	Optional<Order> findById(Long id);
 
 	void delete(Long id);
+	
+	Iterable<Order> findByUserId(Long id);
 }
 

@@ -243,6 +243,10 @@
 						<li><a href="#" data-toggle="modal" data-target="#myModaluser"> <i
 								class=" glyphicon glyphicon-user "></i> Quản lý tài khoản
 						</a></li>
+						<li th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}" th:value="${user.userid}">
+						<a th:href="@{/lich-su/{id}(id=${user.userid})}"><i
+								class=" glyphicon glyphicon-user "></i> Lịch sử Giao Dịch
+						</a></li>
 						<li><a th:href="@{/logout}"> <i
 								class="fa fa-sign-out fa-fw"></i> Đăng xuất
 						</a></li>

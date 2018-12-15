@@ -43,14 +43,20 @@ public class PageCustomerController {
 	}
 	
 	
+	// hiển thị danh sách sản phẩm
 	@GetMapping(value="/mua-sam")
 	public String muasam(Model model, HttpServletRequest request) {
+	   // lấy ra danh sách sản phầm
 		model.addAttribute("products", productService.findAll());
+		//lấy ra danh sách người dùng 
 		model.addAttribute("user", userService.findAll());
+		// lấy ra danh sách loại sách
 		model.addAttribute("cate", catagoryService.findAll());
+		// tìm user theo email 
 		 User listt = userService.findByEmail1(request.getUserPrincipal().getName());
 		 model.addAttribute("user1", listt);
 		 model.addAttribute("userinfo", listt);
+		 // trả về tràng mua sắm sản phẩm
 		return "custormer/home";
 	}
 	

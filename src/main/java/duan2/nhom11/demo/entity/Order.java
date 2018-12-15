@@ -50,6 +50,9 @@ public class Order {
 
 	@OneToMany(mappedBy = "orders",cascade = { CascadeType.ALL })
 	private List<OrderDetail> orderDetail;
+	
+	@Column(name = "xacnhan", length = 1)
+    private boolean xacnhan ;
 
 	public Order() {
 		super();
@@ -126,6 +129,17 @@ public class Order {
 	public void setOrderDetail(List<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
+
+	public boolean isXacnhan() {
+		return xacnhan;
+	}
+
+	public void setXacnhan(boolean xacnhan) {
+		this.xacnhan = xacnhan;
+	}
+
+	
+	
 
 	
 }

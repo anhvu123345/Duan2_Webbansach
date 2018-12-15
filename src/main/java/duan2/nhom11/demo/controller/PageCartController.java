@@ -118,6 +118,7 @@ public class PageCartController {
 	// lưu đơn hàng
 	@PostMapping(value = "/mua-hang/save")
 	public String savemuaHang(@Valid Order order, Model model,RedirectAttributes redirectAttributes) {
+		order.setXacnhan(false);
 		orderSerive.save(order);
 		List<OrderDetail> od = orderDetailSerive.findByUserIDAndOrderID(order.getUser().getUserid());
 		for (OrderDetail op : od) {
@@ -126,6 +127,29 @@ public class PageCartController {
 		}
 		redirectAttributes.addFlashAttribute("muahang", "Bạn đã mua hàng thành công thành công hệ thống của chúng tôi");
 		return "redirect:/mua-hang";
+	}
+	
+	
+	//xem lịch sử đặt hàng
+	@GetMapping(value="/lich-su/{id}")
+	public String lichsu(Model model, @PathVariable Long id, HttpServletRequest request) {
+		model.addAttribute("history", orderSerive.findByUserId(id));
+		model.addAttribute("user", userSerive.findAll());
+		User listt = userSerive.findByEmail1(request.getUserPrincipal().getName());
+		model.addAttribute("user1", listt);
+		model.addAttribute("userinfo", listt);
+		return "custormer/lichsu";
+	}
+	
+	// xem chi tiết đơn hàng
+	@GetMapping(value="order/{id}/chi-tiet")
+	public String xemchitiet(Model model,@PathVariable Long id, HttpServletRequest request) {
+		model.addAttribute("chitiet", orderDetailSerive.finByOrderID(id));
+		model.addAttribute("user", userSerive.findAll());
+		User listt = userSerive.findByEmail1(request.getUserPrincipal().getName());
+		model.addAttribute("user1", listt);
+		model.addAttribute("userinfo", listt);
+		return "custormer/lichsu_chitiet";
 	}
 
 }

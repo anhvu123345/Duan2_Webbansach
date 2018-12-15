@@ -1,411 +1,472 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Thông Tin Sản Phẩm</title>
 <meta charset="utf-8">
 <meta name="description" content="Colo Shop Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}"/>
-<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}"/>
-<link rel="stylesheet" th:href="@{/plugins/themify-icons/themify-icons.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{/styles/single_styles.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{/styles/single_responsive.css}"/>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/styles/bootstrap4/bootstrap.min.css}" />
+<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}" />
+<link rel="stylesheet"
+	th:href="@{/plugins/themify-icons/themify-icons.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/styles/single_styles.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/styles/single_responsive.css}" />
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 </head>
 
 <body>
 
-<div class="super_container">
+	<div class="super_container">
 
-	<!-- Header -->
+		<!-- Header -->
 
-	<header class="header trans_300">
+		<header class="header trans_300">
 
-		<!-- Top Navigation -->
-
-		
-		<div class="top_nav">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="top_nav_left">Miễn phí vận chuyển cho đơn hàng trên 500K</div>
-					</div>
-					<div class="col-md-6 text-right">
-						<div class="top_nav_right">
-							<ul class="top_nav_menu">
-
-								<!-- Currency / Language / My Account -->
-
-								<li class="account">
-									<a href="#">
-										<span th:utext="${#request.userPrincipal.name}"></span>
-										<i class="fa fa-angle-down"></i>
-									</a>
-									<ul class="account_selection">
-									
-										<li><a th:href="@{/logout}"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Xuất</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Main Navigation -->
-
-		<div class="main_nav_container">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 text-right">
-						<div class="logo_container">
-							<a th:href="@{/index}">KHANG VIET<span>Book</span></a>
-						</div>
-						<nav class="navbar">
-							<ul class="navbar_menu">
-								<li><a th:href="@{/index}">Trang Chủ</a></li>
-								<li><a th:href="@{/mua-sam}">Sản Phẩm</a></li>
-								<li  th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}" th:value="${user.userid}">
-									<a   th:href="@{/cart/info?(id=${user.userid})}">Giỏ Hàng</a></li>																														
-								<li><a th:href="@{/index/lien-he}">Liên Hệ</a></li>
-							</ul>
-							<ul class="navbar_user">
-								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-								
-							</ul>
-							
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
-	<div class="fs_menu_overlay"></div>
-	<div class="hamburger_menu">
-		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-		<div class="hamburger_menu_content text-right">
-			<ul class="menu_top_nav">
-				
-				
-				<li class="menu_item has-children">
-					<a href="#">
-						Tài Khoản
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Nhập</a></li>
-						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Ký</a></li>
-					</ul>
-				</li>
-				<li class="menu_item"><a href="#">home</a></li>
-				<li class="menu_item"><a href="#">shop</a></li>
-				<li class="menu_item"><a href="#">promotion</a></li>
-				<li class="menu_item"><a href="#">pages</a></li>
-				<li class="menu_item"><a href="#">blog</a></li>
-				<li class="menu_item"><a href="#">contact</a></li>
-			</ul>
-		</div>
-	</div>
+			<!-- Top Navigation -->
 
 
-	<!-- Hamburger Menu -->
-
-	<div class="hamburger_menu">
-		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-		<div class="hamburger_menu_content text-right">
-			<ul class="menu_top_nav">
-				<li class="menu_item has-children">
-					<a href="#">
-						usd
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">cad</a></li>
-						<li><a href="#">aud</a></li>
-						<li><a href="#">eur</a></li>
-						<li><a href="#">gbp</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						English
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">French</a></li>
-						<li><a href="#">Italian</a></li>
-						<li><a href="#">German</a></li>
-						<li><a href="#">Spanish</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						Tài Khoản
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Nhập</a></li>
-						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng Ký</a></li>
-					</ul>
-				</li>
-				<li class="menu_item"><a href="#">Trang Chủ</a></li>
-				<li class="menu_item"><a th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}"  th:href="@{/cart/info?}">Giỏ Hàng</a></li>
-				<li class="menu_item"><a href="#">Tin Tức</a></li>
-				
-				<li class="menu_item"><a href="#">Liên Hệ</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="container single_product_container">
-		<div class="row">
-			<div class="col">
-
-				<!-- Breadcrumbs -->
-
-				<div class="breadcrumbs d-flex flex-row align-items-center">
-					<ul>
-						<li><a href="index.html">Trang Chủ</a></li>
-						<li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản Phẩm</a></li>
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Chi Tiết Sản Phẩm</a></li>
-					</ul>
-				</div>
-
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-7">
-				<div class="single_product_pics">
+			<div class="top_nav">
+				<div class="container">
 					<div class="row">
-						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
-							<div class="single_product_thumbnails">
-								<ul>
-									<li><img th:src="@{~/images/{img}(img=${product.imageProduct.image1})}" alt="" data-image="images/single_1.jpg"></li>
-									<li class="active"><img th:src="@{~/images/{img}(img=${product.imageProduct.image2})}" alt="" data-image="images/single_2.jpg"></li>
-									<li><img th:src="@{~/images/{img}(img=${product.imageProduct.image3})}" alt="" data-image="images/single_3.jpg"></li>
+						<div class="col-md-6">
+							<div class="top_nav_left">Miễn phí vận chuyển cho đơn hàng
+								trên 500K</div>
+						</div>
+						<div class="col-md-6 text-right">
+							<div class="top_nav_right">
+								<ul class="top_nav_menu">
+
+									<!-- Currency / Language / My Account -->
+
+									<li class="account"><a href="#"> <span
+											th:utext="${#request.userPrincipal.name}"></span> <i
+											class="fa fa-angle-down"></i>
+									</a>
+										<ul class="account_selection">
+											<li th:each="user : ${user}"
+												th:if="${user.email} == ${#request.userPrincipal.name}"
+												th:value="${user.userid}"><a
+												th:href="@{/lich-su/{id}(id=${user.userid})}"><i
+													class=" glyphicon glyphicon-user "></i> Lịch sử Giao Dịch </a></li>
+											<li><a th:href="@{/logout}"><i
+													class="fa fa-user-plus" aria-hidden="true"></i>Đăng Xuất</a></li>
+										</ul></li>
 								</ul>
 							</div>
 						</div>
-						<div class="col-lg-9 image_col order-lg-2 order-1">
-							<div class="single_product_image">
-								<div class="single_product_image_background"><img th:src="@{~/images/{img}(img=${product.imageProduct.image4})}" alt="" data-image="images/single_1.jpg" style="width: 400px; height: 532px"></div>
+					</div>
+				</div>c
+			</div>
+
+			<!-- Main Navigation -->
+
+			<div class="main_nav_container">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-right">
+							<div class="logo_container">
+								<a th:href="@{/index}">KHANG VIET<span>Book</span></a>
+							</div>
+							<nav class="navbar">
+								<ul class="navbar_menu">
+									<li><a th:href="@{/index}">Trang Chủ</a></li>
+									<li><a th:href="@{/mua-sam}">Sản Phẩm</a></li>
+									<li th:each="user : ${user}"
+										th:if="${user.email} == ${#request.userPrincipal.name}"
+										th:value="${user.userid}"><a
+										th:href="@{/cart/info?(id=${user.userid})}">Giỏ Hàng</a></li>
+									<li><a th:href="@{/index/lien-he}">Liên Hệ</a></li>
+								</ul>
+								<ul class="navbar_user">
+									<li><a href="#"><i class="fa fa-search"
+											aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-user"
+											aria-hidden="true"></i></a></li>
+
+								</ul>
+
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</header>
+
+		<div class="fs_menu_overlay"></div>
+		<div class="hamburger_menu">
+			<div class="hamburger_close">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</div>
+			<div class="hamburger_menu_content text-right">
+				<ul class="menu_top_nav">
+
+
+					<li class="menu_item has-children"><a href="#"> Tài Khoản
+							<i class="fa fa-angle-down"></i>
+					</a>
+						<ul class="menu_selection">
+							<li><a href="#"><i class="fa fa-sign-in"
+									aria-hidden="true"></i>Đăng Nhập</a></li>
+							<li><a href="#"><i class="fa fa-user-plus"
+									aria-hidden="true"></i>Đăng Ký</a></li>
+						</ul></li>
+					<li class="menu_item"><a href="#">home</a></li>
+					<li class="menu_item"><a href="#">shop</a></li>
+					<li class="menu_item"><a href="#">promotion</a></li>
+					<li class="menu_item"><a href="#">pages</a></li>
+					<li class="menu_item"><a href="#">blog</a></li>
+					<li class="menu_item"><a href="#">contact</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+		<!-- Hamburger Menu -->
+
+		<div class="hamburger_menu">
+			<div class="hamburger_close">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</div>
+			<div class="hamburger_menu_content text-right">
+				<ul class="menu_top_nav">
+					<li class="menu_item has-children"><a href="#"> usd <i
+							class="fa fa-angle-down"></i>
+					</a>
+						<ul class="menu_selection">
+							<li><a href="#">cad</a></li>
+							<li><a href="#">aud</a></li>
+							<li><a href="#">eur</a></li>
+							<li><a href="#">gbp</a></li>
+						</ul></li>
+					<li class="menu_item has-children"><a href="#"> English <i
+							class="fa fa-angle-down"></i>
+					</a>
+						<ul class="menu_selection">
+							<li><a href="#">French</a></li>
+							<li><a href="#">Italian</a></li>
+							<li><a href="#">German</a></li>
+							<li><a href="#">Spanish</a></li>
+						</ul></li>
+					<li class="menu_item has-children"><a href="#"> Tài Khoản
+							<i class="fa fa-angle-down"></i>
+					</a>
+						<ul class="menu_selection">
+							<li><a href="#"><i class="fa fa-sign-in"
+									aria-hidden="true"></i>Đăng Nhập</a></li>
+							<li><a href="#"><i class="fa fa-user-plus"
+									aria-hidden="true"></i>Đăng Ký</a></li>
+						</ul></li>
+					<li class="menu_item"><a href="#">Trang Chủ</a></li>
+					<li class="menu_item"><a th:each="user : ${user}"
+						th:if="${user.email} == ${#request.userPrincipal.name}"
+						th:href="@{/cart/info?}">Giỏ Hàng</a></li>
+					<li class="menu_item"><a href="#">Tin Tức</a></li>
+
+					<li class="menu_item"><a href="#">Liên Hệ</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="container single_product_container">
+			<div class="row">
+				<div class="col">
+
+					<!-- Breadcrumbs -->
+
+					<div class="breadcrumbs d-flex flex-row align-items-center">
+						<ul>
+							<li><a href="index.html">Trang Chủ</a></li>
+							<li><a href="categories.html"><i
+									class="fa fa-angle-right" aria-hidden="true"></i>Sản Phẩm</a></li>
+							<li class="active"><a href="#"><i
+									class="fa fa-angle-right" aria-hidden="true"></i>Chi Tiết Sản
+									Phẩm</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="single_product_pics">
+						<div class="row">
+							<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+								<div class="single_product_thumbnails">
+									<ul>
+										<li><img
+											th:src="@{~/images/{img}(img=${product.imageProduct.image1})}"
+											alt="" data-image="images/single_1.jpg"></li>
+										<li class="active"><img
+											th:src="@{~/images/{img}(img=${product.imageProduct.image2})}"
+											alt="" data-image="images/single_2.jpg"></li>
+										<li><img
+											th:src="@{~/images/{img}(img=${product.imageProduct.image3})}"
+											alt="" data-image="images/single_3.jpg"></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-lg-9 image_col order-lg-2 order-1">
+								<div class="single_product_image">
+									<div class="single_product_image_background">
+										<img
+											th:src="@{~/images/{img}(img=${product.imageProduct.image4})}"
+											alt="" data-image="images/single_1.jpg"
+											style="width: 400px; height: 532px">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<div class="product_details">
+						<div class="product_details_title">
+							<h2 th:text="${product.bookName}"></h2>
+							<p th:text="${product.description}"></p>
+						</div>
+						<div
+							class="free_delivery d-flex flex-row align-items-center justify-content-center">
+							<span class="ti-truck"></span><span th:text="${giohang}"></span>
+						</div>
+						<div class="original_price"
+							th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 150 +' VNĐ'"></div>
+						<div class="product_price"
+							th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +' VNĐ'"></div>
+						<ul class="star_rating">
+							<li><i class="fa fa-star" aria-hidden="true"></i></li>
+							<li><i class="fa fa-star" aria-hidden="true"></i></li>
+							<li><i class="fa fa-star" aria-hidden="true"></i></li>
+							<li><i class="fa fa-star" aria-hidden="true"></i></li>
+							<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+						</ul>
+						<form action="#" th:action="@{/save/cart}" th:object="${cart}"
+							method="POST">
+							<div class="form-group">
+								<label>Số Lượng<span class="required">*</span></label> <input
+									type="number" min="1" class="form-control"
+									th:field="*{quantity}" />
+
+							</div>
+							<div style="display: none">
+								<div class="form-group">
+									<select th:field="*{intoMoney}" class="form-control"
+										id="exampleFormControlSelect1">
+										<option th:value="${product.price}" th:text="${product.price}"></option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<select th:field="*{product}" class="form-control"
+										id="exampleFormControlSelect1">
+										<option th:value="${product.productid}"
+											th:text="${product.productid}"></option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<select th:field="*{user}" class="form-control"
+										id="exampleFormControlSelect1">
+										<option th:each="user : ${user}"
+											th:if="${user.email} == ${#request.userPrincipal.name}"
+											th:value="${user.userid}"
+											th:text="${#request.userPrincipal.name}"></option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<select th:field="*{orders}" class="form-control"
+										id="exampleFormControlSelect1">
+										<option th:value="0"></option>
+									</select>
+								</div>
+							</div>
+							<button type="submit" id="submit" class="btn btn-primary">
+								Thêm vào giỏ hàng</button>
+
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Tabs -->
+
+
+
+		<!-- Tab Description -->
+
+
+
+		<!-- Tab Additional Info -->
+
+
+		<!-- Tab Reviews -->
+
+
+		<!-- User Review -->
+
+
+
+		<!-- User Review -->
+
+
+
+		<!-- Add Review -->
+
+
+		<!-- Benefit -->
+		<div class="benefit">
+			<div class="container">
+				<div class="row benefit_row">
+					<div class="col-lg-3 benefit_col">
+						<div class="benefit_item d-flex flex-row align-items-center">
+							<div class="benefit_icon">
+								<i class="fa fa-truck" aria-hidden="true"></i>
+							</div>
+							<div class="benefit_content">
+								<h6>Miễn Phí Vận Chuyển</h6>
+								<p>Bị thay đổi trong một số hình thức</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 benefit_col">
+						<div class="benefit_item d-flex flex-row align-items-center">
+							<div class="benefit_icon">
+								<i class="fa fa-money" aria-hidden="true"></i>
+							</div>
+							<div class="benefit_content">
+								<h6>Thanh Toán Khi Giao Hàng</h6>
+								<p>Bạn có thể thanh toán trước</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 benefit_col">
+						<div class="benefit_item d-flex flex-row align-items-center">
+							<div class="benefit_icon">
+								<i class="fa fa-undo" aria-hidden="true"></i>
+							</div>
+							<div class="benefit_content">
+								<h6>Đổi Trả Trong 30 Ngày</h6>
+								<p>Nếu sản phẩm là lỗi của nhà sản xuất</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 benefit_col">
+						<div class="benefit_item d-flex flex-row align-items-center">
+							<div class="benefit_icon">
+								<i class="fa fa-clock-o" aria-hidden="true"></i>
+							</div>
+							<div class="benefit_content">
+								<h6>Mở Cửa Cả Tuần</h6>
+								<p>8AM - 09PM</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5">
-				<div class="product_details">
-					<div class="product_details_title">
-						<h2 th:text="${product.bookName}"></h2>
-						<p th:text="${product.description}"></p>
+		</div>
+		<!-- Newsletter -->
+
+		<div class="newsletter">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div
+							class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+							<h4>Bản tin</h4>
+							<p>Theo dõi bản tin của chúng tôi và được giảm giá 20% cho
+								lần mua hàng đầu tiên của bạn</p>
+						</div>
 					</div>
-					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
-						<span class="ti-truck"></span><span th:text="${giohang}"></span>
+					<div class="col-lg-6">
+						<form action="post">
+							<div
+								class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+								<input id="newsletter_email" type="email"
+									placeholder="Emai của bạn" required="required"
+									data-error="Valid email is required.">
+								<button id="newsletter_submit" type="submit"
+									class="newsletter_submit_btn trans_300" value="Submit">Theo
+									Giõi</button>
+							</div>
+						</form>
 					</div>
-					<div class="original_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + 150 +' VNĐ'"></div>
-					<div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +' VNĐ'"></div>
-					<ul class="star_rating">
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-					</ul>
-				<form action="#" th:action="@{/save/cart}"
-								th:object="${cart}" method="POST">							
-								<div class="form-group">
-									<label>Số Lượng<span class="required">*</span></label> <input
-										type="number" min="1" class="form-control" th:field="*{quantity}" />
-							  
-								</div>
-								<div style="display: none">
-								<div class="form-group">
-										<select th:field="*{intoMoney}" class="form-control" 
-											id="exampleFormControlSelect1">
-											<option th:value="${product.price}" th:text="${product.price}"></option>
-										</select>
-									</div>
-									
-									<div class="form-group">
-										<select th:field="*{product}" class="form-control" 
-											id="exampleFormControlSelect1">
-											<option th:value="${product.productid}" th:text="${product.productid}"></option>
-										</select>
-									</div>
-									
-									<div class="form-group">
-										<select th:field="*{user}" class="form-control" 
-											id="exampleFormControlSelect1">
-											<option  th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}" th:value="${user.userid}" th:text="${#request.userPrincipal.name}" ></option>
-										</select>
-									</div>
-									
-									<div class="form-group">
-										<select  th:field="*{orders}" class="form-control" 
-											id="exampleFormControlSelect1">
-											<option   th:value="0"></option>
-										</select>
-									</div> 
-									</div>
-								<button type="submit" id="submit" class="btn btn-primary">
-									Thêm vào giỏ hàng
-								</button>
-								
-							</form>
 				</div>
 			</div>
 		</div>
+
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div
+							class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+							<ul class="footer_nav">
+								<li><a href="#">Trang Chủ</a></li>
+								<li><a href="#">Tin Tức</a></li>
+								<li><a href="contact.html">Liên Hệ</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div
+							class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook"
+										aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"
+										aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-instagram"
+										aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-skype"
+										aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-pinterest"
+										aria-hidden="true"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="footer_nav_container">
+							<div class="cr">
+								KhangVietbook- Mua Bán Sách Uy Tín<i class="fa fa-heart-o"
+									aria-hidden="true"></i> Desigh by <a href="#">Châu Ngọc</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
 
 	</div>
 
-	<!-- Tabs -->
-
-	
-
-					<!-- Tab Description -->
-
-					
-
-					<!-- Tab Additional Info -->
-
-
-					<!-- Tab Reviews -->
-
-
-								<!-- User Review -->
-
-								
-
-								<!-- User Review -->
-
-								
-
-							<!-- Add Review -->
-
-
-	<!-- Benefit -->
-<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Miễn Phí Vận Chuyển</h6>
-							<p>Bị thay đổi trong một số hình thức</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Thanh Toán Khi Giao Hàng</h6>
-							<p>Bạn có thể thanh toán trước</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Đổi Trả Trong 30 Ngày</h6>
-							<p>Nếu sản phẩm là lỗi của nhà sản xuất</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Mở Cửa Cả Tuần</h6>
-							<p>8AM - 09PM</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Newsletter -->
-
-	<div class="newsletter">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-						<h4>Bản tin</h4>
-						<p>Theo dõi bản tin của chúng tôi và được giảm giá 20% cho lần mua hàng đầu tiên của bạn</p>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<form action="post">
-						<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-							<input id="newsletter_email" type="email" placeholder="Emai của bạn" required="required" data-error="Valid email is required.">
-							<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Theo Giõi</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Footer -->
-<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
-						<ul class="footer_nav">
-							<li><a href="#">Trang Chủ</a></li>
-							<li><a href="#">Tin Tức</a></li>
-							<li><a href="contact.html">Liên Hệ</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
-						<ul>
-							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="footer_nav_container">
-						<div class="cr">KhangVietbook- Mua Bán Sách Uy Tín<i class="fa fa-heart-o" aria-hidden="true"></i> Desigh by <a href="#">Châu Ngọc</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-</div>
-
-<script src="/js/jquery-3.2.1.min.js"></script>
-<script src="/styles/bootstrap4/popper.js"></script>
-<script src="/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="/plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="/plugins/easing/easing.js"></script>
-<script src="/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="/js/single_custom.js"></script>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script src="/styles/bootstrap4/popper.js"></script>
+	<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="/plugins/Isotope/isotope.pkgd.min.js"></script>
+	<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="/plugins/easing/easing.js"></script>
+	<script src="/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	<script src="/js/single_custom.js"></script>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -419,7 +480,7 @@
 				</div>
 				<div class="modal-body">
 					<form method="get" th:action="@{/search-chothue}">
-						<div class="form-group" >
+						<div class="form-group">
 
 							<select class="form-control" name="huong">
 								<option value="hg">Hướng</option>
@@ -464,7 +525,7 @@
 						<button type="submit" class="btn btn-primary">Tìm kiếm</button>
 					</form>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

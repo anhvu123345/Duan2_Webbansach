@@ -46,4 +46,10 @@ public class OrderServiceImpl implements OrderSerive {
 
 	}
 
+	@Override
+	public Iterable<Order> findByUserId(Long id) {
+		// TODO Auto-generated method stub
+		return orderReposiory.findByUserId(id);
+	}
+
 }

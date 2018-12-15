@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="custormer/header :: head">
+<meta charset="utf-8" />
 </head>
 
 <body>
@@ -10,7 +11,7 @@
 		<!-- Header -->
 
 		<header th:replace="custormer/header :: header"></header>
-				<header th:replace="custormer/header :: quanly"></header>
+		<header th:replace="custormer/header :: quanly"></header>
 		<div class="fs_menu_overlay"></div>
 
 		<!-- Hamburger Menu -->
@@ -39,20 +40,25 @@
 							<li><a href="#">German</a></li>
 							<li><a href="#">Spanish</a></li>
 						</ul></li>
-					<li class="menu_item has-children"><a href="#"> TÃ i Khoáº£n
-							<i class="fa fa-angle-down"></i>
+					<li class="menu_item has-children"><a href="#"> TĂƒÂ i
+							KhoĂ¡ÂºÂ£n <i class="fa fa-angle-down"></i>
 					</a>
 						<ul class="menu_selection">
 							<li><a href="#"><i class="fa fa-sign-in"
-									aria-hidden="true"></i>Ä�Äƒng Nháº­p</a></li>
+									aria-hidden="true"></i>Ă„ï¿½Ă„Æ’ng NhĂ¡ÂºÂ­p</a></li>
 							<li><a href="#"><i class="fa fa-user-plus"
-									aria-hidden="true"></i>Ä�Äƒng KÃ½</a></li>
+									aria-hidden="true"></i>Ă„ï¿½Ă„Æ’ng KĂƒÂ½</a></li>
 						</ul></li>
-					<li class="menu_item"><a href="index.html">Trang Chá»§</a></li>
-					<li class="menu_item"><a href="categories.html">Mua Sáº¯m</a></li>
-					<li class="menu_item"><a th:each="user : ${user}" th:if="${user.email} == ${#request.userPrincipal.name}" th:value="${user.userid}" th:href="@{/cart/info?id(id=${user.userid})}">Gio Hang</a></li>
+					<li class="menu_item"><a href="index.html">Trang Chủ</a></li>
+					<li class="menu_item"><a href="categories.html">Mua
+							SĂ¡ÂºÂ¯m</a></li>
+					<li class="menu_item"><a th:each="user : ${user}"
+						th:if="${user.email} == ${#request.userPrincipal.name}"
+						th:value="${user.userid}"
+						th:href="@{/cart/info?id(id=${user.userid})}">Gio Hang</a></li>
 
-					<li class="menu_item"><a href="contact.html">LiÃªn Há»‡</a></li>
+					<li class="menu_item"><a href="contact.html">LiĂƒÂªn
+							HĂ¡Â»â€¡</a></li>
 				</ul>
 			</div>
 		</div>
@@ -65,7 +71,7 @@
 
 					<div class="breadcrumbs d-flex flex-row align-items-center">
 						<ul>
-							<li><a th:href="@{/index}">Trang Chá»§</a></li>
+							<li><a th:href="@{/index}">Trang Chủ</a></li>
 
 						</ul>
 					</div>
@@ -75,10 +81,11 @@
 					<div class="sidebar">
 						<div class="sidebar_section">
 							<div class="sidebar_title">
-								<h5>Danh Má»¥c</h5>
+								<h5>Danh Mục</h5>
 							</div>
 							<ul class="sidebar_categories" th:each="cate : ${cate}">
-								<li><a th:href="@{/danh-muc/{id}(id=${cate.catagoryid})}" th:text="${cate.catagoryName}"></a></li>								
+								<li><a th:href="@{/danh-muc/{id}(id=${cate.catagoryid})}"
+									th:text="${cate.catagoryName}"></a></li>
 							</ul>
 						</div>
 
@@ -106,18 +113,18 @@
 									<div
 										class="product_sorting_container product_sorting_container_top">
 										<ul class="product_sorting">
-											<li><span class="type_sorting_text">PhÃ¢n Loáº¡i</span> <i
+											<li><span class="type_sorting_text">Phân Loại</span> <i
 												class="fa fa-angle-down"></i>
 												<ul class="sorting_type">
 													<li class="type_sorting_btn"
-														data-isotope-option='{ "sortBy": "original-order" }'><span>Xáº¿p
-															Theo TÃªn</span></li>
+														data-isotope-option='{ "sortBy": "original-order" }'><span>Xếp
+															Theo Tên</span></li>
 													<li class="type_sorting_btn"
-														data-isotope-option='{ "sortBy": "price" }'><span>Xáº¿p
-															Theo GiÃ¡</span></li>
-													
+														data-isotope-option='{ "sortBy": "price" }'><span>Xếp
+															Theo Giá</span></li>
+
 												</ul></li>
-											<li><span>Hiá»ƒn Thá»‹</span> <span class="num_sorting_text">6</span>
+											<li><span>Hiển Thị</span> <span class="num_sorting_text">6</span>
 												<i class="fa fa-angle-down"></i>
 												<ul class="sorting_num">
 													<li class="num_sorting_btn"><span>6</span></li>
@@ -151,11 +158,13 @@
 
 										<!-- Product 1 -->
 
-										<div class="product-item men" th:each="product : ${products}" style="margin-right: 15px">
+										<div class="product-item men" th:each="product : ${products}"
+											style="margin-right: 15px">
 											<div class="product discount product_filter">
 												<div class="product_image">
-													<img th:src="@{~/images/{img}(img=${product.imageProduct.image1})}"
-														alt="khÃ´ng hiá»ƒn thá»‹">
+													<img
+														th:src="@{~/images/{img}(img=${product.imageProduct.image1})}"
+														alt="khĂƒÂ´ng hiĂ¡Â»Æ’n thĂ¡Â»â€¹">
 												</div>
 												<div class="favorite favorite_left"></div>
 												<div
@@ -166,13 +175,14 @@
 													<h6 class="product_name">
 														<a href="single.html" th:text="${product.bookName}"></a>
 													</h6>
-													<div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +' VNÄ�'"></div>
+													<div class="product_price"
+														th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +' VNĐ'"></div>
 												</div>
 											</div>
 											<div class="red_button add_to_cart_button">
 												<a
 													th:href="@{/chi-tiet-san-pham/{id}(id=${product.productid})}">Xem
-													Chi Tiáº¿t</a>
+													Chi Tiết</a>
 											</div>
 										</div>
 
@@ -183,8 +193,9 @@
 									<div
 										class="product_sorting_container product_sorting_container_bottom clearfix">
 										<ul class="product_sorting">
-											<li><span>Hiá»ƒn Thá»‹</span> <span class="num_sorting_text">04</span>
-												<i class="fa fa-angle-down"></i>
+											<li><span>Hiển Thị</span> <span
+												class="num_sorting_text">04</span> <i
+												class="fa fa-angle-down"></i>
 												<ul class="sorting_num">
 													<li class="num_sorting_btn"><span>01</span></li>
 													<li class="num_sorting_btn"><span>02</span></li>
@@ -192,8 +203,8 @@
 													<li class="num_sorting_btn"><span>04</span></li>
 												</ul></li>
 										</ul>
-										<span class="showing_results">Hiá»ƒn Thá»‹ 1-3, cá»§a 12 sáº£n
-											pháº©m</span>
+										<span class="showing_results">Hiển Thị 1-3, của 12 sản
+											phẩm 1 của 3 </span>
 										<div class="pages d-flex flex-row align-items-center">
 											<div class="page_current">
 												<span>1</span>
@@ -204,7 +215,7 @@
 												</ul>
 											</div>
 											<div class="page_total">
-												<span>cá»§a</span> 3
+												<span>Hiển Thị</span> 3
 											</div>
 											<div id="next_page_1" class="page_next">
 												<a href="#"><i class="fa fa-long-arrow-right"
